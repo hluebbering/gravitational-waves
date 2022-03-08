@@ -11,7 +11,7 @@ The main goal of the Riroriro package is to simulate, detect, and analyze contin
 ## To Do
 
 - [ ] README.md file that gives an overview of the project
-- [ ] LICENSE file
+- [x] LICENSE file
 - [ ] setup.py file that initializes the project after it has been cloned
 - [ ] doc folder that contains documentation (including the functional specification, the design specification, and the final project presentation or poster)
 - [ ] python package folder (with the same name as the repository) that is structured as one or more python modules (e.g., with init.py files) and test files that begin with “test_”.
