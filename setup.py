@@ -4,9 +4,17 @@
 from distutils.core import setup
 
 setup(
-  name = 'gravitational-waves', # Must be unique if published to PyPI
-  version = '0.1dev', # Keeps track of different project releases
-  packages = ['gravitational-waves',], # Describes where the Python source code is within project
-  license = 'Creative Commons Attribution-Noncommercial-Share Alike license', # Includes information about the license 
-  long_description = open('README.md').read(), # Re-uses README file for long_description field
+    name = 'gravitational-waves',
+    version = '0.0.0', # '0.1dev'
+    packages = ['gravitational-waves',], # Describes where the Python source code is within project
+    license = 'MIT',
+    long_description = open('README.md').read(),
+    url='https://github.com/hluebbering/gravitational-waves',
+    install_requires=[
+        'numpy',
+        'scipy',
+        'pandas',
+        'pytest',
+        'matplotlib'
+    ],
 )
