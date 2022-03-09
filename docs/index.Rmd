@@ -1,0 +1,251 @@
+---
+title: "Gravitational Wave Analysis in Python"
+subtitle: "CSE 515: Software Design For Data Science"
+author: "Hannah Luebbering"
+output:
+  html_document: 
+    css: assets/main.css
+    toc: yes
+    toc_float: yes
+bibliography: static/references.bib
+nocite: '@*'
+# knit: pagedown::chrome_print
+knit: (function(inputFile, encoding) {
+  rmarkdown::render(inputFile, encoding = encoding, output_dir = ".") })
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+```
+
+
+
+## Introduction
+
+
+
+
+
+`GravPy`: A Python package for gravitational-wave simulation, analysis, and detectability
+
+
+
+GravPy is a Python package to simulate the gravitational waveforms of binary mergers of black holes and/or neutron stars, and calculate several properties of these mergers and waveforms, specifically relating to their observability by gravitational wave detectors.
+
+
+GravPy is a Python package designed to simulate, detect, and analyze continuous gravitational wave-forms. In addition to creating simulations of gravitational waves, GravPy also takes in observed data from gravitational wave detectors, such as the Laser Interferometer Space Antenna (LISA), to predict detection rates for stellar-origin binaries.
+
+
+
+
+### Background
+
+
+
+--------------------
+
+
+The Laser Interferometer Space Antenna is a proposed space probe to detect and accurately measure gravitational waves—tiny ripples in the fabric of spacetime—from astronomical sources. LISA would be the first dedicated space-based gravitational wave detector.
+
+
+
+What are Gravitational Waves?
+
+Gravitational waves were first theorized by Albert Einstein. They are created during events such as supermassive black hole mergers, or collisions between two black holes that are billion times bigger than our Sun. These collisions are so powerful that they create distortions in spacetime, known as gravitational waves.
+
+
+Gravitational waves detectable by the LISA mission could also come from other distant systems including smaller stellar mass black holes orbiting supermassive black holes, known as Extreme Mass Ratio Inspirals (EMRIs).
+
+What do Gravitational Waves tell us?
+There are many astrophysical phenomena that are either very dim or completely invisible in any form of light that astronomy has relied on for 400 years. Gravitational waves are a powerful new probe of the Universe that uses gravity instead of light to take measure of dynamical astrophysical phenomena. Studying gravitational waves gives enormous potential for discovering the parts of the universe that are invisible by other means, such as black holes, the Big Bang, and other, as yet unknown, objects. LISA will complement our knowledge about the beginning, evolution and structure of our universe.
+
+
+LISA's Size and Precision are Out of this World
+LISA consists of three spacecraft that are separated by millions of miles and trailing tens of millions of miles, more than one hundred times the distance to the Moon, behind the Earth as we orbit the Sun. These three spacecraft relay laser beams back and forth between the different spacecraft and the signals are combined to search for gravitational wave signatures that come from distortions of spacetime. We need a giant detector bigger than the size of Earth to catch gravitational waves from orbiting black holes millions of times more massive than our sun. NASA is a major collaborator in the European Space Agency (ESA)-led mission, which is scheduled to launch in the early 2030s and we are getting ready for it now!
+
+
+https://lisa.nasa.gov/
+
+
+
+A gravitational wave is an invisible (yet incredibly fast) ripple in space. Gravitational waves travel at the speed of light (186,000 miles per second). These waves squeeze and stretch anything in their path as they pass by.
+
+https://www.nature.com/articles/d41586-018-04157-6
+
+
+
+
+Simple Newtonian mechanics, specifically Kepler’s third
+law of planetary motion, allow us to directly determine
+the masses of stars in some BINARY STAR systems.
+
+‘Double-lined’ spectroscopic binaries are stars
+whose spectra show the signature of two stars. The
+orbital periods of these systems are usually a few days or
+months, and the line-of-sight (radial) velocities of each
+component can be directly measured as the DOPPLER
+EFFECT causes the spectral lines of one star to first appear
+blueshifted and then redshifted relative to the lines’
+average position.
+
+Knowing the distribution of stellar masses that is
+obtained when stars form from clouds of gas and dust in
+space is important for two reasons. First, because the
+light observed from star clusters and galaxies is
+dominated by a few of the brightest stars (the tip), it is
+important to know how many low-mass stars are
+associated with the iceberg as a whole. Indeed, in a
+stellar system such as our own Milky Way galaxy, most
+of the observed luminosity comes from stars greater than
+10M⊙, while most of the mass is locked up in stars with
+masses below 1M⊙. Secondly, the distribution of stellar
+masses at birth (the initial mass function (IMF)) provides
+clues to the processes of stellar formation. Changes in the
+shape of this distribution function with mass provide
+evidence for the critical scales associated with the star
+formation process.
+
+
+
+
+The gravitational wave background (also GWB and stochastic background) is a random gravitational-wave signal potentially detectable by gravitational wave detection experiments. Since the background is supposed[by whom?] to be statistically random, it has yet been researched only in terms of such statistical descriptors as the mean, the variance, etc.
+
+
+
+The gravitational wave background is formed by many different overlapping gravitational-wave signals emitted from the cosmic population of supermassive binary black holes (i.e. two supermassive black holes orbiting each other and eventually merging) -- similar to background noise from the many overlapping voices in a crowded hall.
+
+
+The gravitational-wave background is usually defined as the superposition of weak
+independent sources that cannot be resolved individually [67]. When people gave this definition of the gravitational-wave background, they were
+essentially thinking of the primordial background from inflation where a very large number
+of events overlap when they reach our detectors. In this case, even if you had perfect
+detectors, sensitive enough to observe the small amplitude of faint and distant events, you
+will still never be able to resolve them individually because of the overlap. For this reason
+the gravitational-wave background is historically called stochastic. However, we do not
+have perfect detectors so that faint and distant sources buried in the instrumental noise are
+also unresolved and participate to the gravitational-wave background, even if they do not
+overlap. 
+
+
+https://www.mdpi.com/2073-8994/14/2/270/htm
+
+
+Inspiral gravitational waves are generated during the end-of-life stage of binary systems where the two objects merge into one.  These systems are usually two neutron stars, two black holes, or a neutron star and a black hole whose orbits have degraded to the point that the two masses are about to coalesce.  As the two masses rotate around each other, their orbital distances decrease and their speeds increase, much like a spinning figure skater who draws his or her arms in close to their body.  This causes the frequency of the gravitational waves to increase until the moment of coalescence.  The sound these gravitational waves would produce is a chirp sound (much like when increasing the pitch rapidly on a slide whistle) since the binary system’s orbital frequency is increasing (any increase in frequency corresponds to an increase in pitch).
+
+
+
+A binary black hole (BBH) is a system consisting of two black holes in close orbit around each other. Like black holes themselves, binary black holes are often divided into stellar binary black holes, formed either as remnants of high-mass binary star systems or by dynamic processes and mutual capture; and binary supermassive black holes, believed to be a result of galactic mergers.
+
+
+
+Binary black hole mergers would be one of the strongest known sources of gravitational waves in the Universe, and thus offer a good chance of directly detecting such waves. 
+
+--------------------
+
+
+
+
+
+
+
+
+
+
+The space-based gravitational wave detector LISA presents a new view of gravitational waves by focusing on lower frequencies $\left( 10^{−5} \lt f / \mathrm{Hz} \lt 10^{-1} \right)$ than ground-based detectors. This enables the study of many new source classes including mergers of supermassive black holes, extreme mass ratio inspirals, and cosmological GW backgrounds. The lower frequency level is also of interest for the detection of local stellar-mass binaries during their inspiral phase. LISA is expected to detect Galactic stellar-origin binaries containing combinations of white dwarfs, neutron stars, and black holes, ranging from the numerous double white dwarf population, to the rare but loud double black hole population. 
+
+Specifically, we implement the expressions for the *evolution* of binary orbits due to the emission of gravitational waves, equations for the strain amplitudes and signal-to-noise ratios of binaries, and approximations for the LISA *sensitivity* curves.
+
+
+
+
+GravPy represents an implementation of gravitational wave tools, focusing on an optimized approach for specific spectrums and source classes. With this package, it's possible to evolve the orbits of binaries and calculate their *strain* amplitudes given any range of frequency harmonics. The package also provides a way to compute the sensitivity curve for gravitational wave detectors, and consequently use the curve to calculate the signal-to-noise ratio of a collection of sources. Furthermore, the package provides tools and plotting functions for visualizing all of the results.
+
+
+- Simulating the gravitational waveform signal from a binary merger of two black holes, two neutron stars or a black hole and a neutron star and outputting the data of this signal in terms of frequency and strain amplitude.
+- Using a gravitational wave output and given a detector noise spectrum (such spectra are made publicly available by LIGO), calculating the signal-to-noise ratio (SNR) of the signal at a given distance assuming optimal alignment.
+
+
+- Calculating the horizon distance (maximum distance at which an event could be observed) for a gravitational wave model and a given detector.
+- Given the optimal-alignment SNR of an event, evaluating its detectability, the probability that the event would be detected with a SNR above the commonly used threshold of 8, if the alignment would be arbitrary. These results could then be combined with population synthesis calculations to estimate how many of the predicted mergers would be detected.
+
+
+
+
+
+
+
+The gravitational waveform simulation of Riroriro is based on a computational implementation of an earlier theoretical gravitational waveform model, using post-Newtonian expansions and an approximation called the implicit rotating source to simplify the Einstein field equations and simulate gravitational waves. 
+
+Observations of gravitational waves from binary mergers can provide unique information about their progenitors and stellar populations, especially when combined with electromagnetic observations in the field called multi-messenger astronomy. A major factor in the successful detection and analysis of gravitational wave signals is the creation of simulations of such signals which observed data can be compared to. Because of this, multiple gravitational wave models have been created over the years. In particular, the gravitational wave observatories LIGO and Virgo have created their own models to use as templates in gravitational wave searches, with the main software for this being LALSuite (LIGO Scientific Collaboration, 2018). Various research groups have created waveform models, with some examples of recent sophisticated waveform models being IMRPhenomXPHM (Pratten et al., 2020) and SEOBNRv4PHM (Ossokine et al., 2020), which are both also available in LALSuite.
+
+
+
+
+
+------------------------------
+
+### Data Description
+
+What data did you use? How was it obtained? What are its limitations?
+
+------------------------------
+
+
+### Use Cases
+
+How users will interact with your system in a way that addresses the problem area.
+
+------------------------------
+
+
+### Demo
+
+Demonstrate your software.
+
+
+------------------------------
+
+
+## Design 
+
+Describe the components and how they interact to accomplish the use cases.
+
+------------------------------
+
+
+### Project Structure
+
+Show the structure of your github repository.
+
+
+------------------------------
+
+
+## Discussion
+
+
+### Lessons learned 
+
+
+
+
+------------------------------
+
+
+
+### Future work
+
+
+Focus on software engineering lessons.
+
+
+------------------------------
+
+
+
+
+## References 
+
+
+
