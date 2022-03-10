@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&display=swap');
+@import url("https://use.typekit.net/bbp6pmz.css");
+
+/** CUSTOM CSS **/
+
+
+.remark-slide-content {
+    background-color: #404040;
+    color: #f0f0f0;
+}
+
+
+h1 {
+    font-family: Roboto;
+    color: #ffffff;
+    font-size: 39pt !important;
+    font-weight: 800;
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    border-bottom: 4px solid #68c5db;
+    padding: 10px 0;
+    display: inline-flex;
+    text-shadow: 0 0.5px 0 #ccc, 0 1px 0 #c9c9c9, 0 1.5px 0 #bbb, 0 2px 0 #b9b9b9, 0 2.5px 0 #aaa, 0 3px 0.5px rgb(0 0 0 / 10%), 5px -5px 2.5px rgb(0 0 0 / 10%), 0 0.5px 1.5px rgb(0 0 0 / 30%), 0 1.5px 2.5px rgb(0 0 0 / 20%), 0 2.5px 5px rgb(0 0 0 / 25%), 0 5px 5px rgb(0 0 0 / 20%), 0 10px 10px rgb(0 0 0 / 15%);
+}
+
+h1::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 160pt;
+    height: 108pt;
+    background-image: url(static/galaxy1.svg);
+    background-size: cover;
+    margin-left: -208px;
+    margin-right: 10px;
+    margin-top: -40px;
+}
+
+h2 {
+    font-size: 26pt !important;
+    font-weight: 500;
+    font-family: 'roboto';
+    letter-spacing: 1px;
+    color: #ad7cca;
+    margin-top: 16px;
+    margin-bottom: 10px;
+    text-align: center;
+    text-shadow: 0.75px 0.75px 2px black, 1px 1px 4px hsl(283deg 54% 43% / 65%);
+}
+
+h2#gravitational-wave-analysis-in-python::after {
+    content: "";
+    background-size: cover;
+    display: block;
+    position: absolute;
+    width: 110pt;
+    height: 210pt;
+    margin-left: 468pt;
+    margin-top: -17pt;
+    background-image: url(static/shuttle2.svg);
+}
+
+h3 {
+    font-family: 'roboto';
+    font-size: 16pt;
+    color: #7783b0;
+    letter-spacing: 1px;
+    font-weight: 300;
+    margin-top: 0px;
+    text-shadow: 0.75px 0.75px 2px #000, 1px 1px 4px rgb(0 0 128 / 50%);
+    margin-top: 10pt !important;
+    margin-bottom: -5pt !important;
+    font-size: 25pt !important;
+}
+
+h3#hannah-luebbering::after {
+    content: "";
+    background-size: cover;
+    display: block;
+    position: absolute;
+    width: 129pt;
+    height: 130pt;
+    margin-left: 430pt;
+    margin-top: -290pt;
+    background-image: url(static/comet1.svg);
+}
+
+h4 {
+  font-family: proxima-nova, sans-serif;
+  font-size: 14pt;
+  color: #313132;
+  font-weight: 600;
+}
+
+h5 {
+  font-weight: 700;
+  font-size: 13pt;
+  font-family: proxima-nova, sans-serif;
+  color: #1cca59;
+  display: block;
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+
+blockquote {
+    background: #eaeaea;
+    padding: 2px 15px;
+    margin: 0px;
+    border-radius: 15px;
+    /* line-height: 20pt; */
+    box-shadow: 0.75px 0.5px 2.5px 1.5px #000;
+    color: black;
+    box-shadow: -1px -1px 1px 0 rgb(255 255 255 / 4%), 1px 1px 1px 0 rgb(0 0 0);
+}
+
+blockquote2 {
+    background: #282828;
+    padding: 2px 15px;
+    margin: 0px;
+    border-radius: 15px;
+    color: black;
+    box-shadow: inset -2px -2px 5px hsl(0deg 0% 0% / 20%), inset 3px 3px 5px rgb(0 0 0 / 50%);
+}
+
+.hljs-default .hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 10px;
+    background: #17191e;
+    color: white;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%) !important;
+}
+
+
+.hljs-default .hljs-keyword {
+    font-weight: bold;
+    color: #2a9292;
+}
+
+.hljs-default .hljs-number {
+    color: #74af4c;
+    font-weight: 400;
+}
+
+body {
+  font-family: 'Source Serif Pro', serif;
+  margin: 30.6px;
+  font-size: 12pt;
+}
+
+
+code {
+  font-family: 'Roboto Condensed', sans-serif;
+  box-shadow: 1px 1px 1px 0px #ddd inset, -1px -1px 1px 0px #e6e6e6 inset;
+}
+
+pre {
+    box-shadow: inset 2px 2px 2px 0px rgb(255 255 255 / 30%), 2px 2px 8px 0px rgb(0 0 0 / 20%), 2px 2px 2.5px 0px rgb(0 0 0 / 10%);
+    border: none;
+    border-radius: 10px;
+    font-family: "Source Code Pro";
+    font-weight: 300;
+    padding: 8pt;
+    background: #131419;
+}
+
+pre code {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+a {
+  color: #1055cc;
+}
+
+img {
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+}
+
+
+h2#use-cases::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 102pt;
+    height: 161pt;
+    margin-left: -38pt;
+    margin-top: 275pt;
+    background-size: cover;
+    background-image: url(static/astro.svg);
+}
+
+h2#future-work::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 275pt;
+    height: 159pt;
+    margin-left: 320pt;
+    margin-top: 236pt;
+    background-image: url(static/blackhole.svg);
+    background-size: cover;
+}
+
+strong {
+    font-family: 'roboto';
+    font-weight: 800;
+    color: white;
+    text-shadow: 0.75px 0.75px 2px black;
+}
