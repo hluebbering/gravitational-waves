@@ -8,7 +8,7 @@
 
 # Import libraries 
 import numpy as np
-import riroriro.inspiralfuns as ins
+import GravPy.inspiral as ins
 
 
 # -----------------------------------------
