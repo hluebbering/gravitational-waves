@@ -1,0 +1,73 @@
+---
+title: "Gravitational Wave Analysis in Python"
+subtitle: "CSE 515: Software Design For Data Science"
+author: "Hannah Luebbering"
+output:
+  html_document: 
+    css: assets/main.css
+    toc: yes
+    toc_float: yes
+bibliography: static/references.bib
+nocite: '@*'
+# knit: pagedown::chrome_print
+knit: (function(inputFile, encoding) {
+  rmarkdown::render(inputFile, encoding = encoding, output_dir = ".") })
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+
+```
+
+
+
+WRITTEN REPORT OF FINAL PROJECT	Component Weight
+
+## Introduction
+
+
+--------------------------------------------
+
+## Description of user / use cases
+
+(a.k.a., functional spec)
+
+--------------------------------------------
+
+
+## Description of software modules / components
+
+(a.k.a., component spec)	
+
+The above should definitely include modules and classes, but detailed function explanation optional depending on size of project
+
+
+
+
+--------------------------------------------
+
+## Discussion
+
+
+ of at least two design decisions made and why you made them
+
+--------------------------------------------
+
+## Comparison 
+
+Comparison to the design of some existing software library	
+
+
+--------------------------------------------
+
+## Discussion of extensibility
+
+
+Discussion of extensibility of your software (i.e., how difficult is it to extend?)	
+
+
+--------------------------------------------
+
+
+
+## References 

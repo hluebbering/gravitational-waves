@@ -3,7 +3,7 @@ title: "Gravitational-Waves"
 subtitle: "Gravitational Wave Analysis in Python"
 author: "Hannah Luebbering"
 output:
-  # html_document: 
+  # html_document:
   #   css: assets/main.css
   #   toc: yes
   #   toc_float: yes
@@ -15,24 +15,24 @@ knit: (function(inputFile, encoding) {
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
-
+library(kableExtra)
 ```
 
 
 
-## Background
+## Background. <span class="m22"> Gravitational Waves </span>
 
-> `GravityPy` is a Python package designed to simulate, detect, and analyze continuous gravitational wave-forms. 
+**Definition.** Gravitational waves are invisible distortions in spacetime, caused by massive events such as collisions between two black holes or neutron stars.
 
-**Definition.** Gravitational waves are invisible distortions in spacetime, caused by massive events such as collisions between two black holes or neutron stars, that travel at the speed of light. 
-
-These waveforms are important to study because they use gravity to take measure of dynamical astrophysical phenomena, giving enormous potential for discovering parts of the universe that are invisible to our eyes, such as black holes and other unknown objects.
+The importance of studying gravitational waveforms stems from the idea of detecting and using gravity to estimate other dynamical astrophysical phenomena, giving enormous potential for discovering parts of the universe that are invisible to the eye, such as black holes and other unknowns. 
 
 
-`GravityPy` is a Python package to simulate the gravitational waveforms of binary mergers of black holes and neutron stars, and calculate several properties of these mergers and waveforms, specifically relating to their detectability by gravitational wave detectors.
+#### GravityPy
 
-In addition, GravityPy also takes in observed data from gravitational wave detectors, such as the Laser Interferometer Space Antenna (LISA), to compare data and predict detection rates.
+> GravityPy is a Python package designed to simulate, detect, and analyze continuous gravitational wave-forms. 
 
+
+GravityPy is a Python package for simulating the gravitational waveforms of binary mergers of black holes and neutron stars, computing several properties of these mergers and waveforms, and evaluating their detectability. In addition, GravityPy also takes in observed data from gravitational wave detectors to compare data and predict detection rates. 
 
 
 
@@ -43,17 +43,49 @@ In addition, GravityPy also takes in observed data from gravitational wave detec
 ## Data Description
 
 
-> What data did you use? How was it obtained? What are its limitations?
+> GravityPy uses simulated data for gravitational waves and observations from detectors such as the Laser Interferometer Space Antenna (LISA).
 
 
-This package uses both simulated data of gravitational waves and observed data from gravitational wave detectors, such as the Laser Interferometer Space Antenna (LISA).
+#### Simulated Data 
 
-A major factor in the successful detection and analysis of gravitational wave signals is the creation of simulations of such signals which observed data can be compared to.
+We obtain the simulated data by implementing the package functions for constructing simulations of gravitational waveform signals from a binary merger of two black holes or two neutron stars and outputting the data of such signals in terms of frequency and strain amplitude. 
 
-We obtain the simulated data by implementing functions in the package that create simulations of gravitational waveform signals from a binary merger of two blacks holes or neutron stars, and outputting the data of such signals in terms of frequency and strain amplitude. The observed data is pre-loaded LISA verification binaries, which was obtained from the Kupfer study. 
+```python
+i_amp = ins.inspiral_strain_amplitude(i_Aorth, i_Adiag)
+i_freq = mat.frequency_SI_units(i_m_omega, M)
+```
 
-The limitations of this data include that both simulated and observed calculations apply low-order post-Newtonian descriptions of gravitational wave emissions, which means that any higher order effects are not accounted for in the data. Hence, GravityPy may not be representative of the true SNR for sources that depend on these higher order effects or have masses over a few tens of solar masses.
 
+```{r, fig.cap="Simulated Data Example"}
+df <- read.csv("assets/data/out.csv")
+kable(head(df, 8), col.names = c("Strain Amplitude", "Frequency"), escape = FALSE) %>%
+  kable_styling(full_width = FALSE, font_size = 15, html_font = "Roboto Condensed", bootstrap_options = c("striped", "hover"))
+```
+
+
+
+
+---
+
+#### Observed Data
+
+The observed data contains LISA-validated binaries obtained from Kupfer et al. 2018 Tables 1 and 2. These observations are preloaded to the package and used to help generate the Source class based on these provided binaries.
+
+
+```{r, fig.cap=c("Table 1. Physical properties of the known verification binaries", "Table 2. Measured EM properties and derived GW parameters"), out.width="25%", fig.show='hold'}
+knitr::include_graphics("assets/static/table1.png")
+knitr::include_graphics("assets/static/table2.png")
+
+```
+
+
+
+
+
+**Limitations:** Both simulated and observed calculations apply a low-order post-Newtonian description of gravitational wave emission, meaning that the data do not account for higher-order effects.
+
+
+https://academic.oup.com/mnras/article/480/1/302/5037945
 
 
 ---
@@ -61,10 +93,18 @@ The limitations of this data include that both simulated and observed calculatio
 
 ## Use Cases
 
-> How users will interact with your system in a way that addresses the problem area.
+With this package, users can
 
 
-GravityPy is designed to provide users with quick estimates of the signal-to-noise ratio of stellar-mass sources of gravitational waves. Users can then use these calculations to study and predict the behavior of gravitational waves and plot functions for visualizing all of the results in the package. For example, the package's LISA simulator tools helps users determine which sources in a large population containing millions of binaries will be potentially detectable by LISA.
+- Simulate the gravitational waveform signal from the binary merger of two black holes or two neutron stars, and output the frequency and strain amplitude data for that signal.
+
+- Evolve the orbits of binaries and calculate their strain amplitudes given any range of frequency harmonics.
+
+- Calculate the sensitivity curve of a gravitational wave detector, which can calculate the signal-to-noise ratio (SNR) of the source ensemble.
+
+- Calculate the horizon distance (maximum distance at which an event could be observed) for a gravitational wave model and a given detector.
+
+
 
 
 
@@ -73,16 +113,11 @@ GravityPy is designed to provide users with quick estimates of the signal-to-noi
 ---
 
 
-## Demo
-
-> Demonstrate your software.
+## Demo 1. <span class="m22"> Single source SNR calculation </span>
 
 
+The most basic use case for GravityPy is to calculate the signal-to-noise ratio of a single stellar-mass binary system. Using the package's source module, we first generate a source class and then calculate its SNR (for a 4-year mission by default).
 
-## Single source SNR calculation
-
-
-The most basic use case of GravityPy is to calculate the signal-to-noise ratio for a single stellar-mass binary system. Using the package's source module, a high level interface for all package functionality, we first generate a source class and then calculate its SNR (for a 4-year LISA mission by default).
 
 ```python
 import GravityPy as gp
@@ -98,30 +133,21 @@ source = gp.source.Source(m_1 = 10 * u.Msun,
 source.get_snr()
 ```
 
-For this example, GravityPy checks whether the source is eccentric/circular and evolving/stationary and picks the fastest way to calculate the SNR accurately, returning the value `array([4.49])`. 
+For this example, GravityPy checks whether the source is eccentric/circular and evolving/stationary, and chooses the fastest method to accurately calculate the SNR, returning the value `array([4.49])`. 
 
 
 ---
 
-## Multiple source SNR calculate
+## Demo 2. <span class="m22"> Multiple source SNR calculate</span>
 
-In the next example, we use GravityPy to calculate the detectability of a collection of sources.
+In the next example, we use GravityPy to calculate the detectability of a collection of sources. We first import the package, then create a random set of possible LISA sources.
 
-We begin by importing the source and visualization modules of GravityPy and some other common packages.
 
 ```python
-import legwork.source as source
-import legwork.visualisation as vis
-
+import GravityPy.source as source
 import numpy as np
 import astropy.units as u
-import matplotlib.pyplot as plt
-```
 
-
-Next we create a random collection of possible LISA sources in order to assess their detectability.
-
-```python
 # create a random collection of sources
 n_values = 1500
 m_1 = np.random.uniform(0, 10, n_values) * u.Msun
@@ -131,9 +157,8 @@ f_orb = 10**(-5 * np.random.power(3, n_values)) * u.Hz
 ecc = 1 - np.random.power(5, n_values)
 ```
 
----
 
-Using these random sources, we can instantiate a Source class to analyse the population.
+Using these random sources, we can instantiate a Source class.
 
 ```python
 sources = source.Source(m_1 = m_1, m_2 = m_2, ecc = ecc, dist = dist, f_orb = f_orb)
@@ -141,7 +166,7 @@ sources = source.Source(m_1 = m_1, m_2 = m_2, ecc = ecc, dist = dist, f_orb = f_
 
 ---
 
-Now, we can calculate the SNR (signal-to-noise ratio) for these sources. This function will split the sources based on whether they are stationary/evolving and circular/eccentric and use one of 4 SNR functions for each subpopulation.
+Now, we can calculate the SNR (signal-to-noise ratio) for these sources. This function splits the sources based on whether they are stationary/evolving and circular/eccentric.
 
 
 ```python
@@ -170,9 +195,6 @@ print("{} of the {} sources are detectable".format(len(sources.snr[detectable_so
 585 of the 1500 sources are detectable
 
 
-Hence, now we know the number of detectable sources. In addition, the Source class also has methods for calculating strains, visualizing populations and more. 
-
-
 
 
 
@@ -182,15 +204,36 @@ Hence, now we know the number of detectable sources. In addition, the Source cla
 
 ## Design 
 
-> Describe the components (modules, classes, and functions) and how they interact to accomplish the use cases.
+The GravityPy package consists of four modules, each focusing on a specific aspect of computation related to gravitational wave sources that can be simulated or detected by space-based detectors. 
 
 
 
-### Modules:
 
-1. **utils.py**
+#### Modules:
 
-The utils.py module contains several functions that compute and return the following:
+
+
+1. **source.py**
+
+The source module is the central module of the package, which provides a simple interface to the functions in the remaining modules. This module contains the Source class for analyzing a generic set of gravitational wave sources, stationary/evolving and circular/eccentric. 
+
+
+```python
+class Source():
+    """Class for generic GW sources"""
+
+    def __init__(self, m_1, m_2, ecc, dist, n_proc = 1, 
+    f_orb = None, a = None, position = None, polarisation = None, inclination = None, weights = None, gw_lum_tol = 0.05, stat_tol = 1e-2, interpolate_g=True, interpolate_sc = True, sc_params = {}): 
+    
+    ## Code goes here
+    
+```
+
+---
+
+2. **utils.py**
+
+The utils module is a collection of miscellaneous utility functions, such as conversions between variables, chirp mass, orbital frequency, and constants and expressions from the Peters equation (1964).
 
 - Chirp mass (m_c) 
 - Relative power of gravitational radiation at nth harmonic (g(n, e) from Peters and Matthews (1963) Eq. 20)
@@ -198,9 +241,9 @@ The utils.py module contains several functions that compute and return the follo
 - Orbital frequency (f_orb)
                 
                 
-2. **vis.py**
+3. **vis.py**
 
-The vis.py module enables matplotlib based visualizations of the results, containing several functions that plot the following:
+The visualization module contains several wrappers, such as matplotlib, for plotting 1- and 2-dimensional distributions with histograms, scatter plots, and more for quick analysis of a collection of sources. In addition, it plots the LISA sensitivity curve.
 
 - 1D distribution of source
 - 2D distribution of source
@@ -208,21 +251,6 @@ The vis.py module enables matplotlib based visualizations of the results, contai
     
      
      
-3. **source.py**
-
-The source.py module provides a simple interface to the functions in all other modules. The module contains the generic gravitational wave class: **class Source()**. 
-
-- This class is for analyzing a generic set of sources that may be stationary/evolving and circular/eccentric. 
-
-```python
-def __init__(self, m_1, m_2, ecc, dist, n_proc = 1, f_orb = None, 
-             a = None, position = None, polarisation = None, 
-             inclination = None, weights = None, gw_lum_tol = 0.05, 
-             stat_tol = 1e-2, interpolate_g=True, interpolate_sc=True,
-             sc_params={}):
-             
-             
-```
 
 
 
@@ -232,10 +260,33 @@ def __init__(self, m_1, m_2, ecc, dist, n_proc = 1, f_orb = None,
 
 ## Project Structure
 
-> Show the structure of your github repository.
-
-
 The structure of the GravityPy github repository is as follows:
+
+
+* [docs/](.\gravitational-waves\docs)
+  * [index.html](.\gravitational-waves\docs\index.html)
+  * [present.Rmd](.\gravitational-waves\docs\present.Rmd)
+* [examples/](.\gravitational-waves\examples)
+  * [01_simulate_gravitational_waves.py](.\gravitational-waves\examples\01_simulate_gravitational_waves.py)
+  * [02_calculate_SNR.py](.\gravitational-waves\examples\02_calculate_SNR.py)
+  * [03_horizon_distance.py](.\gravitational-waves\examples\03_horizon_distance.py)
+* [gravitational-waves/](.\gravitational-waves\gravitational-waves)
+  * [tests/](.\gravitational-waves\gravitational-waves\tests)
+    * [test_inspiral.py](.\gravitational-waves\gravitational-waves\tests\test_inspiral.py)
+    * [test_source.py](.\gravitational-waves\gravitational-waves\tests\test_source.py)
+    * [test_utils.py](.\gravitational-waves\gravitational-waves\tests\test_utils.py)
+    * [test_visualization.py](.\gravitational-waves\gravitational-waves\tests\test_visualization.py)
+    * [__init__.py](.\gravitational-waves\gravitational-waves\tests\__init__.py)
+  * [inspiral.py](.\gravitational-waves\gravitational-waves\inspiral.py)
+  * [source.py](.\gravitational-waves\gravitational-waves\source.py)
+  * [utils.py](.\gravitational-waves\gravitational-waves\utils.py)
+  * [visualization.py](.\gravitational-waves\gravitational-waves\visualization.py)
+  * [__init__.py](.\gravitational-waves\gravitational-waves\__init__.py)
+* [LICENSE](.\gravitational-waves\LICENSE)
+* [README.md](.\gravitational-waves\README.md)
+* [setup.py](.\gravitational-waves\setup.py)
+
+
 
 - **README.md** : file gives an overview of the project
 - **LICENSE** : open source MIT License
@@ -253,36 +304,38 @@ The structure of the GravityPy github repository is as follows:
     - 03_horizon_distance.py
 
 
-
-
+README.rst
+LICENSE
+setup.py
+requirements.txt
+sample/__init__.py
+sample/core.py
+sample/helpers.py
+docs/conf.py
+docs/index.rst
+tests/test_basic.py
+tests/test_advanced.py
 
 ---
 
 
 ## Lessons learned 
 
-
-Focus on software engineering lessons.
-
-
-
-Package your code to share it with other developers. For example, to share a library for other developers to use in their application, or for development tools like ‘py.test’.
-
-An advantage of this method of distribution is its well established ecosystem of tools such as PyPI and pip, which make it easy for other developers to download and install your package either for casual experiments, or as part of large, professional systems.
-
-It is a well-established convention for Python code to be shared this way. If your code isn’t packaged on PyPI, then it will be harder for other developers to find it and to use it as part of their existing process. They will regard such projects with substantial suspicion of being either badly managed or abandoned.
-
-The downside of distributing code like this is that it relies on the recipient understanding how to install the required version of Python, and being able and willing to use tools such as pip to install your code’s other dependencies. This is fine when distributing to other developers, but makes this method unsuitable for distributing applications to end-users.
-
-The Python Packaging Guide provides an extensive guide on creating and maintaining Python packages.
+Overall, this project taught me how to structure a Python project. Structuring GravityPy means making decisions about how the project can best achieve its goals: simulating, analyzing, and detecting gravitational waves. In other words, the structure requires writing clean code, with clear logic and dependencies, and organizing files and folders in the file system. Writing clean code with clear logic is part of the architectural task of building out the different components of a project and their interactions. Organizing a project requires making decisions, such as which features should go into a module, how data should flow through the project, and which features and functionality should be grouped together. 
 
 
 
-LEGWORK (LISA Evolution and Gravitational Wave ORbit Kit) is a python package designed to calculate signal-to-noise ratios for GWs emitted from inspiraling binary systems that are potentially observable by LISA.
+By structuring the Python project, I learned how to divide the code base into clean, efficient modules using packages. This step requires building modules as an abstraction layer to divide the code into sections containing related data and functionality. For example, this project separates the layers that deal with plotting results from the layers that deal with miscellaneous utility functions by grouping all plotting functions in the visualization module and all utility functions in the utils module. Overall, the straightforward module importing model and packaging system provided in Python makes it notably easier to structure a Python package. 
 
-LEGWORK also contains a plotting module so you can show off those detectable GW sources of yours and treats any and all kinds of stellar-origin inspiralling binaries. Circular and stationary? No problem! Eccentric and chirping? We've got you covered!
 
-Want to determine if your favorite source is detectable by LISA? Let LEGWORK do the legwork and keep the LISA literature free from spurious factors of 2!
+
+
+
+
+
+
+
+
 
 ---
 
@@ -291,7 +344,7 @@ Want to determine if your favorite source is detectable by LISA? Let LEGWORK do 
 ## Future work
 
 
-Overall, GravityPy is designed to help calculate binary sources of gravitational-waves, either simulated or like LISA. The goal of this package is to allow ways to study and better understand the detectability of such compact-object binaries. Future work includes adding more functions, equations, and modules to the package to implement and analyze gravitational-wave emission, gravitational wave strain, SNR, and visualization modules, and see these implementations effect on orbital evolution. This would require adding more modules and functions to calculate higher-level linear-algebra based equations and mathematical models.
+Overall, GravityPy is designed to help calculate binary sources of gravitational waves, whether simulated or LISA-like. This package aims to provide a way to study and better understand the detectability of such compact object binaries. Future work includes adding more functions, equations, and modules to the package to implement and analyze gravitational-wave emission, gravitational wave strain, SNR, and visualization modules, and see these implementations' effect on orbital evolution. This will require adding more modules and functions to compute higher-level linear algebra-based equations and mathematical models.
 
 
 

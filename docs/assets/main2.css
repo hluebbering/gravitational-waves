@@ -13,14 +13,16 @@
 h1 {
     font-family: Roboto;
     color: #ffffff;
-    font-size: 39pt !important;
-    font-weight: 800;
+    font-weight: 900;
     margin-top: 5px !important;
     margin-bottom: 5px !important;
-    border-bottom: 4px solid #68c5db;
+    border-bottom: 4px solid #7783b0;
     padding: 10px 0;
     display: inline-flex;
     text-shadow: 0 0.5px 0 #ccc, 0 1px 0 #c9c9c9, 0 1.5px 0 #bbb, 0 2px 0 #b9b9b9, 0 2.5px 0 #aaa, 0 3px 0.5px rgb(0 0 0 / 10%), 5px -5px 2.5px rgb(0 0 0 / 10%), 0 0.5px 1.5px rgb(0 0 0 / 30%), 0 1.5px 2.5px rgb(0 0 0 / 20%), 0 2.5px 5px rgb(0 0 0 / 25%), 0 5px 5px rgb(0 0 0 / 20%), 0 10px 10px rgb(0 0 0 / 15%);
+    letter-spacing: 1px;
+    font-size: 30pt !important;
+    text-transform: uppercase;
 }
 
 h1::before {
@@ -41,12 +43,22 @@ h2 {
     font-weight: 500;
     font-family: 'roboto';
     letter-spacing: 1px;
-    color: #ad7cca;
+    color: hsl(277deg 97% 78%);
     margin-top: 16px;
     margin-bottom: 10px;
-    text-align: center;
     text-shadow: 0.75px 0.75px 2px black, 1px 1px 4px hsl(283deg 54% 43% / 65%);
 }
+
+span.m22 {
+    font-weight: 200;
+    font-size: 18pt;
+    color: #aaaaaa;
+    font-family: 'roboto';
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding-left: 5px;
+}
+
 
 h2#gravitational-wave-analysis-in-python::after {
     content: "";
@@ -63,11 +75,11 @@ h2#gravitational-wave-analysis-in-python::after {
 h3 {
     font-family: 'roboto';
     font-size: 16pt;
-    color: #7783b0;
+    color: #4cbbcf;
     letter-spacing: 1px;
     font-weight: 300;
     margin-top: 0px;
-    text-shadow: 0.75px 0.75px 2px #000, 1px 1px 4px rgb(0 0 128 / 50%);
+    text-shadow: 0.75px 0.75px 2px #000, 1px 1px 4px rgb(70 165 184 / 50%);
     margin-top: 10pt !important;
     margin-bottom: -5pt !important;
     font-size: 25pt !important;
@@ -86,39 +98,47 @@ h3#hannah-luebbering::after {
 }
 
 h4 {
-  font-family: proxima-nova, sans-serif;
-  font-size: 14pt;
-  color: #313132;
-  font-weight: 600;
+    font-family: 'roboto';
+    font-size: 16pt !important;
+    color: #4cbbcf;
+    text-shadow: 0.75px 0.75px 2px #000, 1px 1px 4px hsl(189deg 58% 55% / 50%);
+    letter-spacing: 1px;
+    font-weight: 300;
+    margin-bottom: -10pt !important;
+    font-size: 18pt !important;
 }
 
 h5 {
-  font-weight: 700;
-  font-size: 13pt;
-  font-family: proxima-nova, sans-serif;
-  color: #1cca59;
-  display: block;
-  margin-top: 8px;
-  margin-bottom: 4px;
+    font-family: 'roboto';
+    font-size: 14pt !important;
+    color: #94abeb;
+    letter-spacing: 1px;
+    font-weight: 300;
+    text-shadow: 0.75px 0.75px 2px #000, 1px 1px 4px rgb(134 154 208 / 50%);
+    /* margin-top: 10pt !important; */
+    margin-bottom: 10pt !important;
+    font-size: 18pt !important;
 }
 
 blockquote {
     background: #eaeaea;
-    padding: 2px 15px;
-    margin: 0px;
+    padding: 0.25px 15px;
     border-radius: 15px;
     /* line-height: 20pt; */
     box-shadow: 0.75px 0.5px 2.5px 1.5px #000;
     color: black;
     box-shadow: -1px -1px 1px 0 rgb(255 255 255 / 4%), 1px 1px 1px 0 rgb(0 0 0);
+    margin-right: 0;
+    margin-left: 0;
 }
 
-blockquote2 {
-    background: #282828;
-    padding: 2px 15px;
+.blockquote2 {
+    font-family: monospace;
+    background: #5e5e5e;
+    padding: 5px 15px;
     margin: 0px;
     border-radius: 15px;
-    color: black;
+    color: #222222;
     box-shadow: inset -2px -2px 5px hsl(0deg 0% 0% / 20%), inset 3px 3px 5px rgb(0 0 0 / 50%);
 }
 
