@@ -7,50 +7,48 @@ __all__ = ['chirp_mass', 'peters_g', 'peters_f', 'get_a_from_f_orb', 'get_f_orb_
            'beta', 'c_0', 'fn_dot', 'ensure_array', 'D_plus_squared',
            'D_cross_squared', 'D_plus_D_cross', 'F_plus_squared', 'F_cross_squared']
 
-# Converts orbital frequency to semi-major axis using Kepler's third law
+
 def get_a_from_f_orb(f_orb, m_1, m_2):
-    """
-    Parameters
-    f_orb : `float/array` Orbital frequency
-    m_1 : `float/array` Primary mass
-    m_2 : `float/array` Secondary mass
-    Returns
-    a : `float/array` Semi-major axis
+    """Converts orbital frequency to semi-major axis using Kepler's third law
+    Parameters:
+        f_orb (float/array): Orbital frequency
+        m_1 (float/array): Primary mass
+        m_2 (float/array): Secondary mass
+    Returns:
+        a (float/array): Semi-major axis
     """
     a = (c.G * (m_1 + m_2) / (2 * np.pi * f_orb)**2)**(1/3)
-
     # simplify units if present
     if isinstance(a, u.quantity.Quantity):
         a = a.to(u.AU)
 
     return a
 
-# Converts semi-major axis to orbital frequency using Kepler's third law
+
 def get_f_orb_from_a(a, m_1, m_2):
-    """
-    Parameters
-    a : `float/array` Semi-major axis
-    m_1 : `float/array` Primary mass
-    m_2 : `float/array` Secondary mass
-    Returns
-    f_orb : `float/array` Orbital frequency
+    """Converts semi-major axis to orbital frequency using Kepler's third law
+    Parameters:
+        a (float/array): Semi-major axis
+        m_1 (float/array): Primary mass
+        m_2 (float/array): Secondary mass
+    Returns:
+        f_orb (float/array): Orbital frequency
     """
     f_orb = ((c.G * (m_1 + m_2) / a**3))**(0.5) / (2 * np.pi)
-
     # simplify units if present
     if isinstance(f_orb, u.quantity.Quantity):
         f_orb = f_orb.to(u.Hz)
 
     return f_orb
 
-# Convert arguments to numpy arrays
+
 def ensure_array(*args):
-    """
-    Parameters
-    args : `any` Supply any number of arguments of any type
-    Returns
-    array_args : `any` Args converted to numpy arrays
-    any_not_arrays : `bool` Whether any arg is not a list or None or a numpy array
+    """Convert arguments to numpy arrays
+    Parameters:
+        args (any): Supply any number of arguments of any type
+    Returns:
+        array_args (any): Args converted to numpy arrays
+        any_not_arrays (bool): Whether any arg is not a list or None or a numpy array
     """
     array_args = [None for i in range(len(args))]
     any_not_arrays = False
@@ -76,14 +74,14 @@ def ensure_array(*args):
             array_args[i] = args[i]
     return array_args, any_not_arrays
 
-# Computes chirp mass of binaries
+
 def chirp_mass(m_1, m_2):
-    """ 
+    """Computes chirp mass of binaries
     Parameters: 
-        m_1 : Primary mass (`float/array`)
-        m_2 : Secondary mass (`float/array`)
+        m_1 (float/array): Primary mass
+        m_2 (float/array): Secondary mass
     Returns:
-        m_c : Chirp mass (`float/array`)
+        m_c (float/array): Chirp mass
     """
     m_c = (m_1 * m_2)**(3/5) / (m_1 + m_2)**(1/5)
 
@@ -93,17 +91,15 @@ def chirp_mass(m_1, m_2):
 
     return m_c
 
-# Compute g(n, e) from Peters and Mathews (1963) Eq.20
-# Gives relative power of gravitational radiation at the nth harmonic
-def peters_g(n, e):
-    """
-    Parameters
-    n : `int/array` Harmonic(s) of interest
-    e : `float/array` Eccentricity
-    Returns
-    g : `array` g(n, e) from Peters and Mathews (1963) Eq. 20
-    """
 
+def peters_g(n, e):
+    """Compute g(n, e) from Peters and Mathews (1963) Eq.20
+    Parameters:
+        n (int/array): Harmonic(s) of interest
+        e (float/array): Eccentricity
+    Returns:
+        g (array): Relative power of gravitational radiation at the nth harmonic
+    """
     bracket_1 = jv(n-2, n*e) - 2*e*jv(n-1, n*e) + 2/n*jv(n, n*e) + 2*e*jv(n+1, n*e) - jv(n+2, n*e)
     bracket_2 = jv(n-2, n*e) - 2*jv(n, n*e) + jv(n+2, n*e)
     bracket_3 = jv(n, n*e)
@@ -112,19 +108,17 @@ def peters_g(n, e):
 
     return g
 
-# f(e) from Peters and Mathews (1963) Eq.17
-# Gives integrated enhancement factor of gravitational radiation from eccentric source compared to circular source
+
 def peters_f(e):
-    """
-    Parameters
-    e : `float/array` Eccentricity
-    Returns
-    f : `float/array` Enhancement factor
-    """
-    
+    """Compute f(e) from Peters and Mathews (1963) Eq.17
+    Parameters:
+        e (float/array): Eccentricity
+    Returns:
+        f (float/array): Enhancement factor of gravitational radiation
+    """ 
     numerator = 1 + (73/24)*e**2 + (37/96)*e**4
     denominator = (1 - e**2)**(7/2)
-
+    
     f = numerator / denominator
 
     return f

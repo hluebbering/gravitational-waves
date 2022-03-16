@@ -1,4 +1,4 @@
-# Functions to compute various power spectral densities for sensitivity curves
+"""Module contains functions to compute various power spectral densities for sensitivity curves."""
 
 import numpy as np
 import astropy.units as u
@@ -9,9 +9,14 @@ from importlib import resources
 __all__ = ['load_response_function', 'approximate_response_function', 'power_spectral_density',
            'lisa_psd', 'get_confusion_noise', 'get_confusion_noise_robson19']
 
-# Load in LISA response function from file and interpolate values for a range of frequencies.
-# Adapted from https://github.com/eXtremeGravityInstitute/LISA_Sensitivity
 def load_response_function(f, fstar=19.09e-3):
+    """Load in LISA response function from file and interpolate values for a range of frequencies.
+    Parameters:
+        f ([type]): [description]
+        fstar (float, optional): [description]. Defaults to 19.09e-3.
+    Returns:
+        R (function): LISA response function at each frequency.
+    """    
     # try to load the values for interpolating R
     try:
         with resources.path(package="legwork", resource="R.npy") as path:
@@ -25,14 +30,28 @@ def load_response_function(f, fstar=19.09e-3):
 
     # use interpolated curve to get R values for supplied f values
     R = splev(f, R_data, der=0)
-    return R # LISA response function at each frequency
+    return R
 
-# Approximate LISA response function
 def approximate_response_function(f, fstar):
+    """Approximate LISA response function
+    Parameters:
+        f ([type]): [description]
+        fstar ([type]): [description]
+    """    
     return (3 / 10) / (1 + 0.6 * (f / fstar)**2)
 
-# Calculates the effective LISA power spectral density sensitivity curve
+
 def lisa_psd(f, t_obs=4 * u.yr, L=2.5e9 * u.m, approximate_R=False, confusion_noise="robson19"):
+    """Calculates the effective LISA power spectral density sensitivity curve
+    Parameters:
+        f ([type]): [description]
+        t_obs ([type], optional): [description]. Defaults to 4*u.yr.
+        L ([type], optional): [description]. Defaults to 2.5e9*u.m.
+        approximate_R (bool, optional): [description]. Defaults to False.
+        confusion_noise (str, optional): [description]. Defaults to "robson19".
+    Returns:
+        [type]: [description]
+    """    
     # convert frequency from Hz to float for calculations
     f = f.to(u.Hz).value
 
@@ -63,21 +82,31 @@ def lisa_psd(f, t_obs=4 * u.yr, L=2.5e9 * u.m, approximate_R=False, confusion_no
         cn = get_confusion_noise(f=f * u.Hz, t_obs=t_obs, model=confusion_noise).value
     else:
         cn = confusion_noise(f, t_obs).value
-
+        
     L = L.to(u.m).value
 
     # calculate sensitivity curve
     psd = (1 / (L**2) * (Poms(f) + 4 * Pacc(f) / (2 * np.pi * f)**4)) / R + cn
-
-    # replace values for bad frequencies (set to extremely high value)
     psd = np.where(np.logical_and(f >= MIN_F, f <= MAX_F), psd, np.inf)
+    
     return psd / u.Hz
 
 
 
-# Calculates the effective power spectral density for all instruments.
 def power_spectral_density(f, instrument="LISA", custom_psd=None, t_obs="auto", L="auto",
                            approximate_R=False, confusion_noise="auto"):
+    """Calculates the effective power spectral density for all instruments.
+    Parameters:
+        f ([type]): [description]
+        instrument (str, optional): [description]. Defaults to "LISA".
+        custom_psd ([type], optional): [description]. Defaults to None.
+        t_obs (str, optional): [description]. Defaults to "auto".
+        L (str, optional): [description]. Defaults to "auto".
+        approximate_R (bool, optional): [description]. Defaults to False.
+        confusion_noise (str, optional): [description]. Defaults to "auto".
+    Returns:
+        [type]: [description]
+    """    
     if instrument == "LISA":
         # update any auto values to be instrument specific
         L = 2.5e9 * u.m if L == "auto" else L
@@ -92,8 +121,15 @@ def power_spectral_density(f, instrument="LISA", custom_psd=None, t_obs="auto", 
 
     return psd
 
-# Calculate the confusion noise using the model from Robson+19 Eq. 14 and Table 1
+
 def get_confusion_noise_robson19(f, t_obs=4 * u.yr):
+    """Calculate the confusion noise using the model from Robson+19 Eq. 14 and Table 1
+    Parameters:
+        f ([type]): [description]
+        t_obs ([type], optional): [description]. Defaults to 4*u.yr.
+    Returns:
+        confusion_noise (float): [description]
+    """    
     # erase the units for speed
     f = f.to(u.Hz).value
 
@@ -111,11 +147,19 @@ def get_confusion_noise_robson19(f, t_obs=4 * u.yr):
     confusion_noise = 9e-45 * f**(-7 / 3.) * np.exp(-f**(alpha[ind]) + beta[ind]
                                                     * f * np.sin(kappa[ind] * f))\
         * (1 + np.tanh(gamma[ind] * (fk[ind] - f))) * u.Hz**(-1)
+    
     return confusion_noise
 
 
-# Calculate the confusion noise for a particular model
 def get_confusion_noise(f, model, t_obs="auto"):
+    """Calculate the confusion noise for a particular model
+    Parameters:
+        f (_type_): _description_
+        model (_type_): _description_
+        t_obs (str, optional): _description_. Defaults to "auto".
+    Returns:
+        get_confusion_noise_robson19 (float): confusion noise
+    """
     if model == "robson19":
         t_obs = 4 * u.yr if t_obs == "auto" else t_obs
         return get_confusion_noise_robson19(f=f, t_obs=t_obs)

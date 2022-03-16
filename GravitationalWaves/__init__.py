@@ -1,1 +1,1 @@
-from . import strain, psd, source, utils, visualization, gwsim
+from . import strain, psd, source, utils, visualization, wavesim
