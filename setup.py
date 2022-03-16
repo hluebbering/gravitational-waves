@@ -17,4 +17,4 @@ setup(
 
 # Dependencies 
 
-# numpy, units, astropy, importlib, scipy, legwork, matplotlib, seaborn
+# numpy, units, astropy, importlib, scipy, legwork, matplotlib, seaborn, pandas
