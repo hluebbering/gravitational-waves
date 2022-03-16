@@ -72,12 +72,16 @@ kable(head(df, 8), col.names = c("Strain Amplitude", "Frequency"), escape = FALS
 The observed data contains LISA-validated binaries obtained from Kupfer et al. 2018 Tables 1 and 2. These observations are preloaded to the package and used to help generate the Source class based on these provided binaries.
 
 
-```{r, fig.cap=c("Table 1. Physical properties of the known verification binaries", "Table 2. Measured EM properties and derived GW parameters"), out.width="25%", fig.show='hold'}
+```{r, fig.cap=c("Table 1. Physical properties of the known verification binaries", "Table 2. Measured EM properties and derived GW parameters"), out.width="40%", fig.show='hold'}
 knitr::include_graphics("assets/static/table1.png")
 knitr::include_graphics("assets/static/table2.png")
-
 ```
 
+```{r}
+table1 <- read.csv("assets/data/table1.csv")
+table2 <- read.csv("assets/data/table2.csv")
+
+```
 
 
 
@@ -192,7 +196,9 @@ detectable_sources = sources.snr > 7
 print("{} of the {} sources are detectable".format(len(sources.snr[detectable_sources]), n_values))
 ```
 
+<div class="blockquote2">
 585 of the 1500 sources are detectable
+</div>
 
 
 
@@ -263,28 +269,28 @@ The visualization module contains several wrappers, such as matplotlib, for plot
 The structure of the GravityPy github repository is as follows:
 
 
-* [docs/](.\gravitational-waves\docs)
-  * [index.html](.\gravitational-waves\docs\index.html)
-  * [present.Rmd](.\gravitational-waves\docs\present.Rmd)
-* [examples/](.\gravitational-waves\examples)
-  * [01_simulate_gravitational_waves.py](.\gravitational-waves\examples\01_simulate_gravitational_waves.py)
-  * [02_calculate_SNR.py](.\gravitational-waves\examples\02_calculate_SNR.py)
-  * [03_horizon_distance.py](.\gravitational-waves\examples\03_horizon_distance.py)
-* [gravitational-waves/](.\gravitational-waves\gravitational-waves)
-  * [tests/](.\gravitational-waves\gravitational-waves\tests)
-    * [test_inspiral.py](.\gravitational-waves\gravitational-waves\tests\test_inspiral.py)
-    * [test_source.py](.\gravitational-waves\gravitational-waves\tests\test_source.py)
-    * [test_utils.py](.\gravitational-waves\gravitational-waves\tests\test_utils.py)
-    * [test_visualization.py](.\gravitational-waves\gravitational-waves\tests\test_visualization.py)
-    * [__init__.py](.\gravitational-waves\gravitational-waves\tests\__init__.py)
-  * [inspiral.py](.\gravitational-waves\gravitational-waves\inspiral.py)
-  * [source.py](.\gravitational-waves\gravitational-waves\source.py)
-  * [utils.py](.\gravitational-waves\gravitational-waves\utils.py)
-  * [visualization.py](.\gravitational-waves\gravitational-waves\visualization.py)
-  * [__init__.py](.\gravitational-waves\gravitational-waves\__init__.py)
-* [LICENSE](.\gravitational-waves\LICENSE)
-* [README.md](.\gravitational-waves\README.md)
-* [setup.py](.\gravitational-waves\setup.py)
+* docs/
+  * index.html
+  * present.Rmd
+* examples/
+  * 01_simulate_gravitational_waves.py
+  * 02_calculate_SNR.py
+  * 03_horizon_distance.py
+* gravitational-waves/
+  * tests/
+    * test_inspiral.py
+    * test_source.py
+    * test_utils.py
+    * test_visualization.py
+    * __init__.py
+  * inspiral.py
+  * source.py
+  * utils.py
+  * visualization.py
+  * __init__.py
+* LICENSE
+* README.md
+* setup.py
 
 
 
@@ -319,7 +325,7 @@ tests/test_advanced.py
 ---
 
 
-## Lessons learned 
+## Lessons Learned 
 
 Overall, this project taught me how to structure a Python project. Structuring GravityPy means making decisions about how the project can best achieve its goals: simulating, analyzing, and detecting gravitational waves. In other words, the structure requires writing clean code, with clear logic and dependencies, and organizing files and folders in the file system. Writing clean code with clear logic is part of the architectural task of building out the different components of a project and their interactions. Organizing a project requires making decisions, such as which features should go into a module, how data should flow through the project, and which features and functionality should be grouped together. 
 

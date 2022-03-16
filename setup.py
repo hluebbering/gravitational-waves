@@ -4,9 +4,9 @@
 from distutils.core import setup
 
 setup(
-    name = 'gravitational-waves',
+    name = 'GravitationalWaves',
     version = '0.0.1', 
-    packages = ['gravitational-waves',], # Describes where the Python source code is within project
+    packages = ['GravitationalWaves',], # Describes where the Python source code is within project
     license = 'MIT',
     author = "Hannah Luebbering",
     author_email = "luebhr@gmail.com",
