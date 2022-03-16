@@ -114,9 +114,11 @@ def snr_circ_evolving(m_1, m_2, f_orb_i, dist, t_obs, n_step,
     t_evol = np.minimum(t_merge - (1 * u.s), t_obs)
 
     # get f_orb evolution
-    f_orb_evol = evol.evol_circ(t_evol=t_evol, n_step=n_step, m_1=m_1, m_2=m_2, f_orb_i=f_orb_i)
+    f_orb_evol = evol.evol_circ(
+        t_evol=t_evol, n_step=n_step, m_1=m_1, m_2=m_2, f_orb_i=f_orb_i)
 
-    maxes = np.where(f_orb_evol == 1e2 * u.Hz, -1 * u.Hz, f_orb_evol).max(axis=1)
+    maxes = np.where(f_orb_evol == 1e2 * u.Hz, -1 *
+                     u.Hz, f_orb_evol).max(axis=1)
     for source in range(len(f_orb_evol)):
         f_orb_evol[source][f_orb_evol[source] == 1e2 * u.Hz] = maxes[source]
 
@@ -152,7 +154,8 @@ def snr_ecc_evolving(m_1, m_2, f_orb_i, dist, ecc, harmonics_required, t_obs, n_
 
     # calculate minimum of observation time and merger time
     if t_merge is None:
-        t_merge = evol.get_t_merge_ecc(m_1=m_1, m_2=m_2, f_orb_i=f_orb_i, ecc_i=ecc)
+        t_merge = evol.get_t_merge_ecc(
+            m_1=m_1, m_2=m_2, f_orb_i=f_orb_i, ecc_i=ecc)
 
     t_before = 0.1 * u.yr
 

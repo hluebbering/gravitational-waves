@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 import astropy.units as u
-import legwork.psd as psd
+import GravitationalWaves.psd as psd
 from astropy.visualization import quantity_support
 
 # set the default font and fontsize
@@ -25,10 +25,7 @@ __all__ = ['plot_1D_dist', 'plot_2D_dist', 'plot_sensitivity_curve',
 def plot_1D_dist(x, weights=None, disttype="hist", fig=None, ax=None, xlabel=None, ylabel=None,
                  xlim=None, ylim=None, color=None, show=True, **kwargs):
     """plot a 1D distribution of ``x``.
-    This function is a wrapper for :func:`matplotlib.pyplot.hist`, :func:`seaborn.kdeplot`
-    and :func:`seaborn.ecdfplot`.
     Parameters
-    ----------
     x : `float/int array`
         Variable to plot, should be a 1D array
     weights : `float/int array`
@@ -62,7 +59,6 @@ def plot_1D_dist(x, weights=None, disttype="hist", fig=None, ax=None, xlabel=Non
         Include values for any of `stat, complementary, log_scale, legend, label, linewidth, linestyle` or
         more. See :func:`seaborn.edcfplot` for more details.
     Returns
-    -------
     fig : `matplotlib Figure`
         The figure on which the distribution is plotted
     ax : `matplotlib Axis`

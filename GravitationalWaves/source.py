@@ -3,9 +3,9 @@ from astropy.coordinates import SkyCoord
 import numpy as np
 from importlib import resources
 from scipy.interpolate import interp1d, interp2d
-from legwork import strain, evol, psd
+from legwork import evol
 
-from GravitationalWaves import utils
+from GravitationalWaves import utils, psd, strain
 import GravitationalWaves.snr as sn
 import GravitationalWaves.visualization as vis
 

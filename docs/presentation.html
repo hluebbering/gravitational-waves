@@ -125,6 +125,15 @@ The observed data contains LISA-validated binaries obtained from Kupfer et al. 2
 
 https://academic.oup.com/mnras/article/480/1/302/5037945
 
+6 mo 1 yr 2 yr 4 yr
+α 0.133 0.171 0.165 0.138
+β 243 292 299 -221
+κ 482 1020 611 521
+γ 917 1680 1340 1680
+fk 0.00258 0.00215 0.00173 0.00113
+
+Table 1. Parameters of the analytic fit the Galactic confusion noise as described by
+equation (14). The amplitude A has been fixed to 9 × 10−45
 
 ---
 
@@ -259,15 +268,12 @@ The source module is the central module of the package, which provides a simple 
 
 
 ```python
+# Class for generic GW sources
 class Source():
-    """Class for generic GW sources"""
 
-    def __init__(self, m_1, m_2, ecc, dist, n_proc = 1, 
-                 f_orb = None, a = None, position = None, 
-                 polarisation = None, inclination = None, 
-                 weights = None, gw_lum_tol = 0.05, 
-                 stat_tol = 1e-2, interpolate_g=True, 
-                 interpolate_sc = True, sc_params = {}): 
+    def __init__(self, m_1, m_2, ecc, dist, n_proc=1, f_orb=None, a=None, position=None, polarisation=None,
+                 inclination=None, weights=None, gw_lum_tol=0.05, stat_tol=1e-2, interpolate_g=True,
+                 interpolate_sc=True, sc_params={}): 
     
     ## ...
     
@@ -277,31 +283,32 @@ class Source():
 
 2. **utils.py**
 
-The utils module is a collection of miscellaneous utility functions, such as conversions between variables, chirp mass, orbital frequency, and constants and expressions from the Peters equation (1964).
+The utils module is a collection of miscellaneous utility functions for computing conversions between variables, the chirp mass of binaries, and expressions from the Peters equation (Peters and Mathews 1963), such as the relative power of gravitational radiation and enhancement factor.
 
-- Chirp mass (m_c) 
-- Relative power of gravitational radiation at nth harmonic (g(n, e) from Peters and Matthews (1963) Eq. 20)
-- Enhancement factor (f(e) from Peters and Mathews (1963) Eq.17)
-- Orbital frequency (f_orb)
                 
                 
 3. **visualization.py**
 
-The visualization module contains several wrappers, such as matplotlib, for plotting 1- and 2-dimensional distributions with histograms, scatter plots, and more for quick analysis of a collection of sources. In addition, it plots the LISA sensitivity curve.
+The visualization module uses matplotlib and seaborn to plot quick visuals for analyzing of a collection of sources. The plots include 1- and 2-dimensional distributions and the LISA sensitivity curve.
 
-- 1D distribution of source
-- 2D distribution of source
-- LISA sensitivity curve
     
      
 4. **snr.py**
 
-
-5. **gwsim.py**
-
+The snr module uses functions from `LEGWORK` to calculate signal-to-noise ratio of sources based on four different cases. For the different cases, the module contains four functions that cover whether a source is circular-stationary, circular-evolving, eccentric-stationary, or eccentric-evolving.
 
 
-                 
+5. **psd.py**
+
+The psd module evaluates the effective noise power spectral density of a detector at different frequencies. The module contains the LISA sensitivity curve that can be tweaked by adjusting parameters such as the observation time, response function, and the arm length. For the Galactic confusion noise, the module uses the Robert et al. 2019 model.
+
+
+6. **gwsim.py**
+
+
+The gwsim module contains functions for simulating gravitational waves from binary black holes. The procedure includes parts for simulating the inspiral portions, pre-matching and post-matching parts for simulating the merger/ringdown portions, and parts for matching together the inspiral and merger/ringdown portions. 
+
+
 ---
 
 
@@ -351,17 +358,7 @@ The structure of the GravityPy github repository is as follows:
     - 03_horizon_distance.py
 
 
-README.rst
-LICENSE
-setup.py
-requirements.txt
-sample/__init__.py
-sample/core.py
-sample/helpers.py
-docs/conf.py
-docs/index.rst
-tests/test_basic.py
-tests/test_advanced.py
+
 
 ---
 

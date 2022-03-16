@@ -61,6 +61,20 @@ kable(table2, escape = FALSE) %>% kable_styling(font_size = 9) %>%
 ```
 
 
+
+```{r, fig.cap="Parameters of the analytic fit the Galactic confusion noise as described by equation (14). The amplitude A has been fixed to $9 \\times 10^{−45}$."}
+gcn <- data.frame("6 mo" = c(0.133, 243, 482, 917, 0.00258),
+                  "1 yr" = c(0.171, 292, 1020, 1680, 0.00215),
+                  "2 yr" = c(0.165, 299, 611, 1340, 0.00173),
+                  "4 yr" = c(0.138, -221, 521, 1680, 0.00113),
+                  row.names = c("$\\alpha$", "$\\beta$", "$\\kappa$",
+                                "$\\gamma$", "$f_\\kappa$"))
+
+kable(gcn, escape = FALSE, col.names = c("6 mo", "1 yr", "2 yr", "4 yr"))
+```
+
+
+
 --------------------------------------------
 
 ## Description of user / use cases
