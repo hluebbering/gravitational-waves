@@ -6,7 +6,7 @@ from scipy.interpolate import interp1d, interp2d
 from legwork import strain, evol, psd
 
 from GravitationalWaves import utils
-import GravitationalWaves.snr as sn # Functions calculate SNR ratio in four different cases
+import GravitationalWaves.snr as sn
 import GravitationalWaves.visualization as vis
 
 __all__ = ['Source']
@@ -109,7 +109,7 @@ class Source():
         self.m_c = utils.chirp_mass(m_1, m_2)  # Chirp mass. (`float/array`)
         self.n_sources = len(m_1)  # Number of sources in class (`int`)
         self.snr = None  # Signal-to-noise ratio. (`float/array`)
-        self.max_snr_harmonic = None # Harmonic with the maximum snr. (`int/array`)
+        self.max_snr_harmonic = None # Harmonic with the maximum sn. (`int/array`)
         self.t_merge = None
         self.merged = np.repeat(False, self.n_sources)
         self.set_sc()
@@ -406,10 +406,7 @@ class Source():
 
             # otherwise warn the user that they are making a mistake
             else:
-                print("WARNING: Current `sc_params` are different from what was passed to this function.",
-                      "Either set `re_interpolate_sc=True` to re-interpolate the sensitivity curve on the",
-                      "fly or update your `sc_params` with Source.update_sc_params() to make sure your",
-                      "interpolated curve matches")
+                print("Set `re_interpolate_sc=True` to re-interpolate the sensitivity curve.")
 
         if verbose:
             n_snr = len(

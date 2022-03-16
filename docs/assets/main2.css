@@ -170,8 +170,14 @@ body {
 
 
 code {
-  font-family: 'Roboto Condensed', sans-serif;
-  box-shadow: 1px 1px 1px 0px #ddd inset, -1px -1px 1px 0px #e6e6e6 inset;
+    font-family: 'Roboto Condensed', sans-serif;
+    background: #eaeaea;
+    padding: 3px 5px 3px 5px;
+    font-size: 11.5pt;
+    color: black;
+    box-shadow: 1px 1px 1px 0px #b1b1b1 inset, -1px -1px 1px 0px #454545 inset;
+    font-weight: 300;
+    border-radius: 6px;
 }
 
 pre {
@@ -227,4 +233,14 @@ strong {
     font-weight: 800;
     color: white;
     text-shadow: 0.75px 0.75px 2px black;
+}
+
+
+table.table.table-striped.table-hover {
+    background: #eaeaea;
+    color: black;
+    line-height: 12pt;
+    padding: 5pt;
+    border-radius: 6pt;
+    box-shadow: inset 2px 2px 2px 0px rgb(255 255 255 / 30%), 2px 2px 8px 0px rgb(0 0 0 / 20%), 2px 2px 2.5px 0px rgb(0 0 0 / 10%), 0 1px 3px rgb(0 0 0 / 50%), 0 1px 2px rgb(0 0 0 / 45%);
 }

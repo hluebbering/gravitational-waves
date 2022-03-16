@@ -26,11 +26,54 @@ WRITTEN REPORT OF FINAL PROJECT
 ## Introduction
 
 
+
+```{r, fig.cap="Simulated Data Example"}
+simulated.df <- read.csv("assets/data/out.csv")
+kable(head(simulated.df, 8), col.names = c("Strain Amplitude", "Frequency"), escape = FALSE) %>%
+  kable_styling(full_width = FALSE, font_size = 10, html_font = "Roboto Condensed", bootstrap_options = c("striped", "hover"))
+```
+
+
+
+
+```{r}
+table1 <- read.csv("assets/data/table1.csv")
+table2 <- read.csv("assets/data/table2.csv")
+
+colnames(table1) <- c("Source", "$I_\\mathrm{Gal}$", "$b_\\mathrm{Gal}$",
+                      "Orbital Period", "$m_1$", "$m_2$", 
+                      "t", "Refs", "Type")
+
+colnames(table2) <- c("Source", "f (mHz)", "$\\beta$ (mas)",
+                      "$\\sigma_\\beta$ (mas)", "d (pc)", 
+                      "$\\sigma_d$ (pc)", "$\\mathcal{A}$",
+                      "SNR", "type")
+
+kable(table1, escape = FALSE) %>% kable_styling(font_size = 9) %>%
+  group_rows(start_row = 1, end_row = 11, group_label = "AM CVn type") %>%
+  group_rows(start_row = 12, end_row = 15, group_label = "Detached white dwarfs") %>%
+  group_rows(start_row = 16, end_row = 16, group_label = "Hot subdwarf binaries") %>% remove_column(columns = 9)
+  
+kable(table2, escape = FALSE) %>% kable_styling(font_size = 9) %>%
+  group_rows(start_row = 1, end_row = 11, group_label = "AM CVn type") %>%
+  group_rows(start_row = 12, end_row = 15, group_label = "Detached white dwarfs") %>%
+  group_rows(start_row = 16, end_row = 16, group_label = "Hot subdwarf binaries") %>% remove_column(columns = 9)
+```
+
+
 --------------------------------------------
 
 ## Description of user / use cases
 
 (a.k.a., functional spec)
+
+
+
+
+
+
+
+
 
 --------------------------------------------
 

@@ -14,3 +14,7 @@ setup(
     long_description = open('README.md').read(),
     url = 'https://github.com/hluebbering/gravitational-waves',
 )
+
+# Dependencies 
+
+# numpy, units, astropy, importlib, scipy, legwork, matplotlib, seaborn

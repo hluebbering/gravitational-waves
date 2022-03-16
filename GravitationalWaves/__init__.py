@@ -1,1 +1,1 @@
-from . import snr, source, utils, visualization, inspiral
+from . import snr, source, utils, visualization, gwsim

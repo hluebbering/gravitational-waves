@@ -1,22 +1,30 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Gravitational-Waves</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Hannah Luebbering" />
+    <script src="presentation_files/header-attrs-2.11/header-attrs.js"></script>
+    <script src="presentation_files/kePrint-0.0.1/kePrint.js"></script>
+    <link href="presentation_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/main2.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Gravitational-Waves
+## Gravitational Wave Analysis in Python
+### Hannah Luebbering
+
 ---
-title: "Gravitational-Waves"
-subtitle: "Gravitational Wave Analysis in Python"
-author: "Hannah Luebbering"
-output:
-  xaringan::moon_reader:
-    css: assets/main2.css
-knit: (function(inputFile, encoding) {
-  rmarkdown::render(inputFile, encoding = encoding, output_dir = ".") })
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
-library(kableExtra)
-```
 
 
 
-## Background. <span class="m22"> Gravitational Waves </span>
+
+
+
+## Background. &lt;span class="m22"&gt; Gravitational Waves &lt;/span&gt;
 
 **Definition.** Gravitational waves are invisible distortions in spacetime, caused by massive events such as collisions between two black holes or neutron stars.
 
@@ -25,7 +33,7 @@ The importance of studying gravitational waveforms stems from the idea of detect
 
 #### GravityPy
 
-> GravityPy is a Python package designed to simulate, detect, and analyze continuous gravitational wave-forms. 
+&gt; GravityPy is a Python package designed to simulate, detect, and analyze continuous gravitational wave-forms. 
 
 
 GravityPy is a Python package for simulating the gravitational waveforms of binary mergers of black holes and neutron stars, computing several properties of these mergers and waveforms, and evaluating their detectability. In addition, GravityPy also takes in observed data from gravitational wave detectors to compare data and predict detection rates. 
@@ -39,7 +47,7 @@ GravityPy is a Python package for simulating the gravitational waveforms of bina
 ## Data Description
 
 
-> GravityPy uses simulated data for gravitational waves and observations from detectors such as the Laser Interferometer Space Antenna (LISA).
+&gt; GravityPy uses simulated data for gravitational waves and observations from detectors such as the Laser Interferometer Space Antenna (LISA).
 
 
 #### Simulated Data 
@@ -52,11 +60,48 @@ i_freq = mat.frequency_SI_units(i_m_omega, M)
 ```
 
 
-```{r, fig.cap="Simulated Data Example"}
-df <- read.csv("assets/data/out.csv")
-kable(head(df, 8), col.names = c("Strain Amplitude", "Frequency"), escape = FALSE) %>%
-  kable_styling(full_width = FALSE, font_size = 15, html_font = "Roboto Condensed", bootstrap_options = c("striped", "hover"))
-```
+&lt;table class="table table-striped table-hover" style="font-size: 15px; font-family: Roboto Condensed; width: auto !important; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; Strain Amplitude &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Frequency &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.00658 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.00808 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.00959 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.01109 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.01259 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.01409 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.01559 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.01710 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
 
 
@@ -68,11 +113,10 @@ kable(head(df, 8), col.names = c("Strain Amplitude", "Frequency"), escape = FALS
 The observed data contains LISA-validated binaries obtained from Kupfer et al. 2018 Tables 1 and 2. These observations are preloaded to the package and used to help generate the Source class based on these provided binaries.
 
 
-```{r, fig.cap=c("Table 1. Physical properties of the known verification binaries", "Table 2. Measured EM properties and derived GW parameters"), out.width="45%", fig.show='hold'}
-knitr::include_graphics("assets/static/table1.png")
-knitr::include_graphics("assets/static/table2.png")
-
-```
+&lt;div class="figure"&gt;
+&lt;img src="assets/static/table1.png" alt="Table 1. Physical properties of the known verification binaries" width="45%" /&gt;&lt;img src="assets/static/table2.png" alt="Table 2. Measured EM properties and derived GW parameters" width="45%" /&gt;
+&lt;p class="caption"&gt;Table 2. Measured EM properties and derived GW parameters&lt;/p&gt;
+&lt;/div&gt;
 
 
 
@@ -107,7 +151,7 @@ With this package, users can
 ---
 
 
-## Demo 1. <span class="m22"> Single source SNR calculation </span>
+## Demo 1. &lt;span class="m22"&gt; Single source SNR calculation &lt;/span&gt;
 
 
 The most basic use case for GravityPy is to calculate the signal-to-noise ratio of a single stellar-mass binary system. Using the package's source module, we first generate a source class and then calculate its SNR (for a 4-year mission by default).
@@ -132,7 +176,7 @@ For this example, GravityPy checks whether the source is eccentric/circular and 
 
 ---
 
-## Demo 2. <span class="m22"> Multiple source SNR calculate</span>
+## Demo 2. &lt;span class="m22"&gt; Multiple source SNR calculate&lt;/span&gt;
 
 In the next example, we use GravityPy to calculate the detectability of a collection of sources. We first import the package, then create a random set of possible LISA sources.
 
@@ -167,7 +211,7 @@ Now, we can calculate the SNR (signal-to-noise ratio) for these sources. This fu
 snr = sources.get_snr(verbose=True)
 ```
 
-<div class="blockquote2">
+&lt;div class="blockquote2"&gt;
 Calculating SNR for 1500 sources
         0 sources have already merged
         1385 sources are stationary
@@ -176,19 +220,19 @@ Calculating SNR for 1500 sources
         115 sources are evolving
                 33 sources are evolving and circular
                 82 sources are evolving and eccentric
-</div>
+&lt;/div&gt;
 
 These SNR values are now stored in sources.snr and we can mask those that don’t meet some detectable threshold.
 
 ```python
 detectable_threshold = 7
-detectable_sources = sources.snr > 7
+detectable_sources = sources.snr &gt; 7
 print("{} of the {} sources are detectable".format(len(sources.snr[detectable_sources]), n_values))
 ```
 
-<div class="blockquote2">
+&lt;div class="blockquote2"&gt;
 585 of the 1500 sources are detectable
-</div>
+&lt;/div&gt;
 
 
 
@@ -353,3 +397,105 @@ Overall, GravityPy is designed to help calculate binary sources of gravitational
 
 
 
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
