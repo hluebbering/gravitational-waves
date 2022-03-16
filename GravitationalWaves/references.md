@@ -1,0 +1,35 @@
+@ARTICLE{2021JOSS....6.2968V,
+       author = {{van Zeist}, Wouter G.~J. and {Stevance}, H{\'e}lo{\"i}se F. and {Eldridge}, J.~J.},
+        title = "{Riroriro: Simulating gravitational waves and evaluating their detectability in Python}",
+      journal = {The Journal of Open Source Software},
+     keywords = {Python, neutron stars, astronomy, gravitational waves, black holes, General Relativity and Quantum Cosmology, Astrophysics - High Energy Astrophysical Phenomena},
+         year = 2021,
+        month = mar,
+       volume = {6},
+       number = {59},
+          eid = {2968},
+        pages = {2968},
+          doi = {10.21105/joss.02968},
+archivePrefix = {arXiv},
+       eprint = {2103.06943},
+ primaryClass = {gr-qc},
+       adsurl = {https://ui.adsabs.harvard.edu/abs/2021JOSS....6.2968V},
+      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
+
+@ARTICLE{Wagg+2021,
+    author = {{Wagg}, Tom and {Breivik}, Katelyn and {de Mink}, Selma E.},
+    title = "{LEGWORK: A python package for computing the evolution and detectability of stellar-origin gravitational-wave sources with space-based detectors}",
+    journal = {arXiv e-prints},
+    keywords = {Astrophysics - High Energy Astrophysical Phenomena, General Relativity and Quantum Cosmology},
+    year = 2021,
+    month = nov,
+    eid = {arXiv:2111.08717},
+    pages = {arXiv:2111.08717},
+    archivePrefix = {arXiv},
+    eprint = {2111.08717},
+    primaryClass = {astro-ph.HE},
+    adsurl = {https://ui.adsabs.harvard.edu/abs/2021arXiv211108717W},
+    adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
