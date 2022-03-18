@@ -1,5 +1,5 @@
-# Gravitational Wave Analysis
-The main goal of the Riroriro package is to simulate, detect, and analyze continuous gravitational waves in Python. In addition to creating simulations of gravitational waves, the package also takes in observed data for comparison in detection and analysis.
+# Gravitational Wave Analysis in Python
+The main goal of the GravitationalWaves package is to simulate, detect, and analyze continuous gravitational waves in Python. In addition to creating simulations of gravitational waves, the package also takes in observed data for comparison in detection and analysis.
 
 
 Installation instructions (in README)	
