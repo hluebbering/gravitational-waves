@@ -12,9 +12,7 @@ The main goal of the GravitationalWaves package is to simulate, detect, and anal
 
 ## Dependencies
 
-numpy, units, astropy, importlib, scipy, legwork, matplotlib, seaborn
-
-dependencies:
+List of dependencies:
 - python >= 3.7
 - pip >= 21.0.0
 - units
