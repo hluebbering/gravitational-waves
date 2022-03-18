@@ -12,8 +12,8 @@ __all__ = ['load_response_function', 'approximate_response_function', 'power_spe
 def load_response_function(f, fstar=19.09e-3):
     """Load in LISA response function from file and interpolate values for a range of frequencies.
     Parameters:
-        f ([type]): [description]
-        fstar (float, optional): [description]. Defaults to 19.09e-3.
+        f (float/array): Frequencies at which to evaluate the sensitivity curve
+        fstar (float, optional): f* from Robson+19. Defaults to 19.09e-3 (19.09 mHz).
     Returns:
         R (function): LISA response function at each frequency.
     """    
@@ -35,7 +35,7 @@ def load_response_function(f, fstar=19.09e-3):
 def approximate_response_function(f, fstar):
     """Approximate LISA response function
     Parameters:
-        f ([type]): [description]
+        f (float/array): Frequencies at which to evaluate the sensitivity curve
         fstar ([type]): [description]
     """    
     return (3 / 10) / (1 + 0.6 * (f / fstar)**2)
@@ -44,7 +44,7 @@ def approximate_response_function(f, fstar):
 def lisa_psd(f, t_obs=4 * u.yr, L=2.5e9 * u.m, approximate_R=False, confusion_noise="robson19"):
     """Calculates the effective LISA power spectral density sensitivity curve
     Parameters:
-        f ([type]): [description]
+        f (float/array): Frequencies at which to evaluate the sensitivity curve
         t_obs ([type], optional): [description]. Defaults to 4*u.yr.
         L ([type], optional): [description]. Defaults to 2.5e9*u.m.
         approximate_R (bool, optional): [description]. Defaults to False.
@@ -97,7 +97,7 @@ def power_spectral_density(f, instrument="LISA", custom_psd=None, t_obs="auto", 
                            approximate_R=False, confusion_noise="auto"):
     """Calculates the effective power spectral density for all instruments.
     Parameters:
-        f ([type]): [description]
+        f (float/array): Frequencies at which to evaluate the sensitivity curve
         instrument (str, optional): [description]. Defaults to "LISA".
         custom_psd ([type], optional): [description]. Defaults to None.
         t_obs (str, optional): [description]. Defaults to "auto".
@@ -125,7 +125,7 @@ def power_spectral_density(f, instrument="LISA", custom_psd=None, t_obs="auto", 
 def get_confusion_noise_robson19(f, t_obs=4 * u.yr):
     """Calculate the confusion noise using the model from Robson+19 Eq. 14 and Table 1
     Parameters:
-        f ([type]): [description]
+        f (float/array): Frequencies at which to evaluate the sensitivity curve
         t_obs ([type], optional): [description]. Defaults to 4*u.yr.
     Returns:
         confusion_noise (float): [description]
@@ -154,7 +154,7 @@ def get_confusion_noise_robson19(f, t_obs=4 * u.yr):
 def get_confusion_noise(f, model, t_obs="auto"):
     """Calculate the confusion noise for a particular model
     Parameters:
-        f (_type_): _description_
+        f (float/array): Frequencies at which to evaluate the sensitivity curve
         model (_type_): _description_
         t_obs (str, optional): _description_. Defaults to "auto".
     Returns:
