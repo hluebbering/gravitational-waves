@@ -1,10 +1,21 @@
 # Gravitational Wave Analysis in Python
+
 The main goal of the GravitationalWaves package is to simulate, detect, and analyze continuous gravitational waves in Python. In addition to creating simulations of gravitational waves, the package also takes in observed data for comparison in detection and analysis.
 
 
-Installation instructions (in README)	
-Dependencies listed
-Usage examples (in README / examples folder)	
+--------------------
+
+## Installation instructions (in README)	
+
+
+--------------------
+
+## Dependencies
+
+
+--------------------
+
+## Usage examples (in README / examples folder)	
 
 
 Docstrings on each module and class
