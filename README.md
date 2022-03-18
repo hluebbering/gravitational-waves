@@ -12,6 +12,8 @@ The main goal of the GravitationalWaves package is to simulate, detect, and anal
 
 ## Dependencies
 
+numpy, units, astropy, importlib, scipy, legwork, matplotlib, seaborn
+
 
 --------------------
 
@@ -77,7 +79,5 @@ Docstrings on each public method, contains parameters and return
 * [README.md](.\gravitational-waves\README.md)
 * [setup.py](.\gravitational-waves\setup.py)
 
-# Dependencies 
 
-# numpy, units, astropy, importlib, scipy, legwork, matplotlib, seaborn
 
