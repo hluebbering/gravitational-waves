@@ -1,3 +1,5 @@
+# Gravitational Wave Analysis in Python - Examples
+
 1. [Instantiate a Source Class](https://github.com/hluebbering/GravitationalWaves/blob/main/examples/01_InstantiateSourceClass.ipynb) 
 2. [Calculate Signal-to-Noise Ratio (SNR)](https://github.com/hluebbering/GravitationalWaves/blob/main/examples/02_CalculateSNR.ipynb)
 3. [Plot Source Parameters Distribution](https://github.com/hluebbering/GravitationalWaves/blob/main/examples/03_PlotSourceDistribution.ipynb)
