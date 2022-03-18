@@ -5,7 +5,7 @@ The main goal of the GravitationalWaves package is to simulate, detect, and anal
 
 --------------------
 
-## Installation instructions (in README)	
+## Installation Instructions
 
 
 --------------------
@@ -17,12 +17,13 @@ numpy, units, astropy, importlib, scipy, legwork, matplotlib, seaborn
 
 --------------------
 
-## Usage examples (in README / examples folder)	
+## Usage Examples
 
 
 Docstrings on each module and class
 Docstrings on each public method, contains parameters and return
 
+--------------------
 
 ## Sources
 - https://joss.theoj.org/papers/10.21105/joss.02968
@@ -54,7 +55,7 @@ Docstrings on each public method, contains parameters and return
 
 
 
-# gravitational-waves
+gravitational-waves
 
 * [docs/](.\gravitational-waves\docs)
   * [index.html](.\gravitational-waves\docs\index.html)
