@@ -27,7 +27,7 @@ The importance of studying gravitational waveforms stems from the idea of detect
 Pip supports installing packages from a Github repository using the URI form `git+https://github.com/user/project.git@{version}`. To pip install the GravitationalWaves package from Github, run the following in the command line:
 
 
-```
+```bash
 pip install -e git+https://github.com/hluebbering/GravitationalWaves.git#egg=GravitationalWaves
 ```
 
@@ -124,34 +124,37 @@ import numpy as np
 import astropy.units as u
 
 # create a random collection of sources
-n_values = 1800
-m_1 = np.random.uniform(0, 12, n_values) * u.Msun
-m_2 = np.random.uniform(0, 12, n_values) * u.Msun
-dist = np.random.normal(9, 1.5, n_values) * u.kpc
-f_orb = 12**(-6 * np.random.power(3, n_values)) * u.Hz
-ecc = 1 - np.random.power(6, n_values)
+nVals = 1800
+mass1 = np.random.uniform(0, 12, n_values) * u.Msun
+mass2 = np.random.uniform(0, 12, n_values) * u.Msun
+eccInit = 1 - np.random.power(6, n_values)
+lumDist = np.random.normal(9, 1.5, n_values) * u.kpc
+orbFreq = 12**(-6 * np.random.power(3, n_values)) * u.Hz
 ```
 
 
 Using these random sources, we can instantiate a Source class.
 
 ```python
-sources = source.Source(m_1 = m_1, m_2 = m_2, ecc = ecc, dist = dist, f_orb = f_orb)
+sources = source.Source(m_1 = mass1, m_2 = mass2, 
+                        ecc = eccInit, dist = lumDist, 
+                        f_orb = orbFreq)
 ```
 
 Now, we can calculate the SNR (signal-to-noise ratio) for these sources. This function splits the sources based on whether they are stationary/evolving and circular/eccentric.
 
 
 ```python
-snr = sources.get_snr(verbose=True)
+snr = sources.get_snr(verbose = True)
 ```
 
-These SNR values are now stored in sources.snr and we can mask those that don’t meet some detectable threshold.
+The SNR values are now stored in `sources.snr`, and we can mask any values that don’t meet some detectable threshold. In the following, we set the threshold to 7.
+
 
 ```python
-detectable_threshold = 7
-detectable_sources = sources.snr > 7
-print("{} out of the {} sources are detectable".format(len(sources.snr[detectable_sources]), n_values))
+detectableSources = sources.snr > 7
+print("{} out of the {} sources are detectable".format(
+  len(sources.snr[detectableSources]), nVals))
 ```
 
 
