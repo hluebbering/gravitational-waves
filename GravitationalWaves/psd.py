@@ -36,7 +36,7 @@ def approximate_response_function(f, fstar):
     """Approximate LISA response function
     Parameters:
         f (float/array): Frequencies at which to evaluate the sensitivity curve
-        fstar ([type]): [description]
+        fstar (float, optional): f* from Robson+19. Defaults to 19.09e-3 (19.09 mHz).
     """    
     return (3 / 10) / (1 + 0.6 * (f / fstar)**2)
 
