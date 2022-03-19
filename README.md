@@ -165,13 +165,13 @@ print("{} out of the {} sources are detectable".format(len(sources.snr[detectabl
 
 --------------------
 
-## To Do
+## Project Directory
 
 - [x] README.md file that gives an overview of the project
 - [x] LICENSE file
 - [x] setup.py file that initializes the project after it has been cloned
-- [ ] doc folder that contains documentation (including the functional specification, the design specification, and the final project presentation or poster)
-- [ ] python package folder (with the same name as the repository) that is structured as one or more python modules (e.g., with init.py files) and test files that begin with “test_”.
+- [ ] doc folder that contains documentation (including the functional specification, design specification, and final project presentation)
+- [x] python package folder (with the same name as the repository) that is structured as one or more python modules (e.g., with init.py files) and test files that begin with "test_".
 - [x] examples folder that contains examples of using the packages
 
 
