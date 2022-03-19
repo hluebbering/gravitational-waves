@@ -35,6 +35,14 @@ How to manually install a Python package:
 python setup.py install
 ```
 
+### Updating the Package
+
+To update this package, run the following command:
+
+```
+pip install GravitationalWaves --upgrade
+```
+
 
 --------------------
 
