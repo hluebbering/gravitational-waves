@@ -1,35 +1,29 @@
-@ARTICLE{2021JOSS....6.2968V,
-       author = {{van Zeist}, Wouter G.~J. and {Stevance}, H{\'e}lo{\"i}se F. and {Eldridge}, J.~J.},
-        title = "{Riroriro: Simulating gravitational waves and evaluating their detectability in Python}",
-      journal = {The Journal of Open Source Software},
-     keywords = {Python, neutron stars, astronomy, gravitational waves, black holes, General Relativity and Quantum Cosmology, Astrophysics - High Energy Astrophysical Phenomena},
-         year = 2021,
-        month = mar,
-       volume = {6},
-       number = {59},
-          eid = {2968},
-        pages = {2968},
-          doi = {10.21105/joss.02968},
-archivePrefix = {arXiv},
-       eprint = {2103.06943},
- primaryClass = {gr-qc},
-       adsurl = {https://ui.adsabs.harvard.edu/abs/2021JOSS....6.2968V},
-      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
-}
+<div id="refs" class="references csl-bib-body hanging-indent">
 
+<div id="ref-pyfstat" class="csl-entry">
 
-@ARTICLE{Wagg+2021,
-    author = {{Wagg}, Tom and {Breivik}, Katelyn and {de Mink}, Selma E.},
-    title = "{LEGWORK: A python package for computing the evolution and detectability of stellar-origin gravitational-wave sources with space-based detectors}",
-    journal = {arXiv e-prints},
-    keywords = {Astrophysics - High Energy Astrophysical Phenomena, General Relativity and Quantum Cosmology},
-    year = 2021,
-    month = nov,
-    eid = {arXiv:2111.08717},
-    pages = {arXiv:2111.08717},
-    archivePrefix = {arXiv},
-    eprint = {2111.08717},
-    primaryClass = {astro-ph.HE},
-    adsurl = {https://ui.adsabs.harvard.edu/abs/2021arXiv211108717W},
-    adsnote = {Provided by the SAO/NASA Astrophysics Data System}
-}
+Ashton, Gregory, David Keitel, Reinhard Prix, and Rodrigo Tenorio. 2020.
+“PyFstat.” Zenodo. <https://doi.org/10.5281/zenodo.3967045>.
+
+</div>
+
+<div id="ref-riroriro" class="csl-entry">
+
+van Zeist, Wouter G. J., Héloïse F. Stevance, and J. J. Eldridge. 2021.
+“<span class="nocase">Riroriro: Simulating gravitational waves and
+evaluating their detectability in Python</span>.” *The Journal of Open
+Source Software* 6 (59): 2968. <https://doi.org/10.21105/joss.02968>.
+
+</div>
+
+<div id="ref-LEGWORK2021" class="csl-entry">
+
+Wagg, Tom, Katelyn Breivik, and Selma E. de Mink. 2021. “<span
+class="nocase">LEGWORK: A python package for computing the evolution and
+detectability of stellar-origin gravitational-wave sources with
+space-based detectors</span>.” *arXiv e-Prints*, November,
+arXiv:2111.08717. <https://arxiv.org/abs/2111.08717>.
+
+</div>
+
+</div>
