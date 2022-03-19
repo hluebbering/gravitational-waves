@@ -3,9 +3,7 @@ from astropy import constants as c
 from astropy import units as u
 import numpy as np
 
-__all__ = ['chirp_mass', 'peters_g', 'peters_f', 'get_a_from_f_orb', 'get_f_orb_from_a', 'get_a_from_ecc',
-           'beta', 'c_0', 'fn_dot', 'ensure_array', 'D_plus_squared',
-           'D_cross_squared', 'D_plus_D_cross', 'F_plus_squared', 'F_cross_squared']
+__all__ = ['get_a_from_f_orb', 'get_f_orb_from_a', 'ensure_array', 'chirp_mass', 'peters_g', 'peters_f']
 
 
 def get_a_from_f_orb(f_orb, m_1, m_2):
