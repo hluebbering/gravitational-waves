@@ -28,8 +28,8 @@ How to manually install a Python package:
 
 1. Download or clone this repository into your local directory.
 2. Unzip the repository if it's downloaded as a zip file.
-3. `cd` into the directory containing setup.py of the repository.
-3. Use Python to install the package:
+3. Open your command windows and change the working directory to the repository containing setup.py using the `cd` command.
+4. Use Python to install the package using the following command:
 
 ```
 python setup.py install
