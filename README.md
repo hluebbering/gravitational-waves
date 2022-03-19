@@ -1,8 +1,8 @@
 # Gravitational Wave Analysis in Python
 
-> `GravityPy`: a Python package designed to simulate, detect, and analyze continuous gravitational wave-forms. In addition to creating simulations of gravitational waves, the package also takes in observed data for comparison in detection and analysis.
+> `GravitationalWaves`: a Python package designed to simulate, detect, and analyze continuous gravitational wave-forms. In addition to creating simulations of gravitational waves, the package also takes in observed data for comparison in detection and analysis.
 
-GravityPy is a Python package for simulating the gravitational waveforms of binary mergers of black holes and neutron stars, computing several properties of these mergers and waveforms, and evaluating their detectability. In addition, GravityPy also takes in observed data from gravitational wave detectors to compare data and predict detection rates. 
+GravitationalWaves is a Python package for simulating the gravitational waveforms of binary mergers of black holes and neutron stars, computing several properties of these mergers and waveforms, and evaluating their detectability. In addition, GravitationalWaves also takes in observed data from gravitational wave detectors to compare data and predict detection rates. 
 
 
 
