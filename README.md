@@ -46,7 +46,7 @@ How to manually install a Python package:
 3. Open your command windows and change the working directory to the repository containing setup.py using the `cd` command.
 4. Use Python to install the package using the following command:
 
-```
+```bash
 python setup.py install
 ```
 
@@ -54,7 +54,7 @@ python setup.py install
 
 To update this package, run the following command:
 
-```
+```bash
 pip install GravitationalWaves --upgrade
 ```
 
@@ -91,8 +91,69 @@ List of dependencies:
 5. [Simulate Gravitational Waves](https://github.com/hluebbering/GravitationalWaves/blob/main/examples/05_SimulateGravitationalWaves.ipynb)
 
 
-Docstrings on each module and class
-Docstrings on each public method, contains parameters and return
+### Demo 1. Single source SNR calculation
+
+
+The most basic use case for GravitationalWaves is to calculate the signal-to-noise ratio of a single stellar-mass binary system. Using the package's source module, we first generate a source class and then calculate its SNR.
+
+
+```python
+import GravitationalWaves as gw
+import astropy.units as u
+source = gw.source.Source(m_1 = 11 * u.Msun,
+                          m_2 = 11 * u.Msun,
+                          ecc = 0.3,
+                          f_orb = 1e-4 * u.Hz,
+                          dist = 9 * u.kpc,
+                          interpolate_g = False)
+                          
+source.get_snr()
+```
+
+For this example, GravitationalWaves checks whether the source is eccentric/circular and evolving/stationary, and chooses the fastest method to accurately calculate the SNR. 
+
+
+### Demo 2. Multiple source SNR calculate
+
+In the next example, we use GravitationalWaves to calculate the detectability of a collection of sources. We first import the package, then create a random set of possible LISA sources.
+
+
+```python
+import GravitationalWaves.source as source
+import numpy as np
+import astropy.units as u
+
+# create a random collection of sources
+n_values = 1800
+m_1 = np.random.uniform(0, 12, n_values) * u.Msun
+m_2 = np.random.uniform(0, 12, n_values) * u.Msun
+dist = np.random.normal(9, 1.5, n_values) * u.kpc
+f_orb = 12**(-6 * np.random.power(3, n_values)) * u.Hz
+ecc = 1 - np.random.power(6, n_values)
+```
+
+
+Using these random sources, we can instantiate a Source class.
+
+```python
+sources = source.Source(m_1 = m_1, m_2 = m_2, ecc = ecc, dist = dist, f_orb = f_orb)
+```
+
+Now, we can calculate the SNR (signal-to-noise ratio) for these sources. This function splits the sources based on whether they are stationary/evolving and circular/eccentric.
+
+
+```python
+snr = sources.get_snr(verbose=True)
+```
+
+These SNR values are now stored in sources.snr and we can mask those that don’t meet some detectable threshold.
+
+```python
+detectable_threshold = 7
+detectable_sources = sources.snr > 7
+print("{} out of the {} sources are detectable".format(len(sources.snr[detectable_sources]), n_values))
+```
+
 
 --------------------
 
