@@ -28,7 +28,7 @@ Pip supports installing packages from a Github repository using the URI form `gi
 
 
 ```
-pip install -e git+https://github.com/hluebbering/GravitationalWaves.git
+pip install -e git+https://github.com/hluebbering/GravitationalWaves.git#egg=GravitationalWaves
 ```
 
 Running this command clones and installs the latest version of this package from Github.
