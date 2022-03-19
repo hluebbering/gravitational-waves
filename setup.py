@@ -16,5 +16,5 @@ setup(
     url = 'https://github.com/hluebbering/GravitationalWaves',
     install_requires=[
         'numpy', 'units', 'astropy', 'importlibs', 'scipy', 'legwork', 'matplotlib', 'seaborn', 'pandas'
-    ]
+    ],
 )
