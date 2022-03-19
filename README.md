@@ -7,9 +7,9 @@ The main goal of the GravitationalWaves package is to simulate, detect, and anal
 
 ## Installation Instructions
 
-### Pip install
+### Pip Install
 
-Pip supports installing packages from a Git repository using the URI form `git+https://github.com/user/project.git@{version}`. To pip install the GravitationalWaves package from Github, run the following in the command line:
+Pip supports installing packages from a Github repository using the URI form `git+https://github.com/user/project.git@{version}`. To pip install the GravitationalWaves package from Github, run the following in the command line:
 
 
 ```
@@ -17,6 +17,23 @@ pip install -e git+https://github.com/hluebbering/GravitationalWaves.git
 ```
 
 Running this command clones and installs the latest version of this package from Github.
+
+
+
+### Manual Package Install
+
+Most Python packages are now designed to be compatible with pip. If you have a package that’s not compatible, then you’ll need to do a manual installation.
+
+How to manually install a Python package:
+
+1. Download or clone this repository into your local directory.
+2. Unzip the repository if it's downloaded as a zip file.
+3. `cd` into the directory containing setup.py of the repository.
+3. Use Python to install the package:
+
+```
+python setup.py install
+```
 
 
 --------------------
