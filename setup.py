@@ -17,5 +17,5 @@ setup(
     install_requires=[
         'numpy', 'units', 'astropy', 'scipy', 'legwork', 'matplotlib', 'seaborn', 'pandas'
     ],
-    download_url = "https://codeload.github.com/hluebbering/GravitationalWaves/tar.gz/refs/tags/0.0.1",
+    download_url = "https://codeload.github.com/hluebbering/GravitationalWaves/tar.gz/refs/tags/v0.0.1",
 )
