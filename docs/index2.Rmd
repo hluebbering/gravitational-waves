@@ -7,7 +7,7 @@ output:
     css: assets/main.css
     toc: yes
     toc_float: yes
-bibliography: static/references.bib
+bibliography: assets/references.bib
 nocite: '@*'
 # knit: pagedown::chrome_print
 knit: (function(inputFile, encoding) {
@@ -16,21 +16,52 @@ knit: (function(inputFile, encoding) {
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(kableExtra)
+library(dplyr)
+library(knitr)
+library(utils)
 
 ```
 
 
-
-WRITTEN REPORT OF FINAL PROJECT
-
 ## Introduction
 
 
+This report details software design decisions and analysis of the `GravitationalWaves` package system, with respect to existing software libraries. The software libraries used for the basis of this project include `legwork` and `riroriro`. Legwork is a python package for computing evolution and detection rates of gravitational-wave sources discovered by space-based detectors such as LISA. Riroriro is a python package for simulating and evaluating gravitational waves.
+
+
+
+In the following, I address the major software design decisions, sofware requirements, usage guidelines, and the extensibiility of the software for the GravitationalWaves package.
+
+
+inclusion of software design decisions
+
+software requirements
+
+usage guidelines
+
+extensibility of the software. 
+
+
+
+
+
+<div class = "methods1">
+<div class = "methods2">
+
+
+
+</div>
+</div>
 
 ```{r, fig.cap="Simulated Data Example"}
 simulated.df <- read.csv("assets/data/out.csv")
 kable(head(simulated.df, 8), col.names = c("Strain Amplitude", "Frequency"), escape = FALSE) %>%
-  kable_styling(full_width = FALSE, font_size = 10, html_font = "Roboto Condensed", bootstrap_options = c("striped", "hover"))
+  kable_styling(bootstrap_options = c("hover", "striped"), full_width = F, html_font = "Roboto", font_size = 11) %>%
+  row_spec(0:8, hline_after = F, extra_css = "border-bottom: 1px solid #FEFEFE;") %>%
+  column_spec(1, color = "#111111", extra_css = "font-weight: 400;") %>%
+  column_spec(1:2, color = "#555", extra_css = "font-weight: 300;") %>%
+  row_spec(0, color = "#111111", extra_css = "text-transform: uppercase; letter-spacing: 1.25px; font-weight: 400; font-size: 10px")
 ```
 
 
@@ -49,15 +80,35 @@ colnames(table2) <- c("Source", "f (mHz)", "$\\beta$ (mas)",
                       "$\\sigma_d$ (pc)", "$\\mathcal{A}$",
                       "SNR", "type")
 
-kable(table1, escape = FALSE) %>% kable_styling(font_size = 9) %>%
-  group_rows(start_row = 1, end_row = 11, group_label = "AM CVn type") %>%
-  group_rows(start_row = 12, end_row = 15, group_label = "Detached white dwarfs") %>%
-  group_rows(start_row = 16, end_row = 16, group_label = "Hot subdwarf binaries") %>% remove_column(columns = 9)
+```
+
+
+```{r}
+kable(table1, escape = FALSE) %>%
+  remove_column(columns = 9) %>%
+  kableExtra::group_rows(start_row = 1, end_row = 11, group_label = "AM CVn type") %>%
+  kableExtra::group_rows(start_row = 12, end_row = 15, group_label = "Detached white dwarfs") %>%
+  kableExtra::group_rows(start_row = 16, end_row = 16, group_label = "Hot subdwarf binaries") %>%
+  kable_styling(bootstrap_options = c("hover", "striped"), full_width = F, html_font = "Roboto", font_size = 10.5) %>%
+  row_spec(0:18, hline_after = F, extra_css = "border-bottom: 1px solid #FEFEFE;") %>%
+  column_spec(1, color = "#111111", extra_css = "font-weight: 400;") %>%
+  column_spec(2:8, color = "#555", extra_css = "font-weight: 300; font-family: Roboto Condensed !important;") %>%
+  row_spec(0, color = "#111111", extra_css = "text-transform: uppercase; letter-spacing: 1.25px; font-weight: 400; font-size: 10px; font-family: Roboto;")
   
-kable(table2, escape = FALSE) %>% kable_styling(font_size = 9) %>%
-  group_rows(start_row = 1, end_row = 11, group_label = "AM CVn type") %>%
-  group_rows(start_row = 12, end_row = 15, group_label = "Detached white dwarfs") %>%
-  group_rows(start_row = 16, end_row = 16, group_label = "Hot subdwarf binaries") %>% remove_column(columns = 9)
+```
+
+
+```{r}
+kable(table2, escape = FALSE) %>% 
+  remove_column(columns = 9) %>%
+  kableExtra::group_rows(start_row = 1, end_row = 11, group_label = "AM CVn type") %>%
+  kableExtra::group_rows(start_row = 12, end_row = 15, group_label = "Detached white dwarfs") %>%
+  kableExtra::group_rows(start_row = 16, end_row = 16, group_label = "Hot subdwarf binaries") %>%
+  kable_styling(bootstrap_options = c("hover", "striped"), full_width = F, html_font = "Roboto", font_size = 10.5) %>%
+  row_spec(0:18, hline_after = F, extra_css = "border-bottom: 1px solid #FEFEFE;") %>%
+  column_spec(1, color = "#111111", extra_css = "font-weight: 400;") %>%
+  column_spec(2:8, color = "#555", extra_css = "font-weight: 300; font-family: Roboto Condensed !important;") %>%
+  row_spec(0, color = "#111111", extra_css = "text-transform: uppercase; letter-spacing: 1.25px; font-weight: 400; font-size: 10px; font-family: Roboto;")
 ```
 
 
@@ -70,7 +121,12 @@ gcn <- data.frame("6 mo" = c(0.133, 243, 482, 917, 0.00258),
                   row.names = c("$\\alpha$", "$\\beta$", "$\\kappa$",
                                 "$\\gamma$", "$f_\\kappa$"))
 
-kable(gcn, escape = FALSE, col.names = c("6 mo", "1 yr", "2 yr", "4 yr"))
+kable(gcn, escape = FALSE, col.names = c("6 mo", "1 yr", "2 yr", "4 yr")) %>%
+  kable_styling(bootstrap_options = c("hover", "striped"), full_width = F, html_font = "Roboto", font_size = 10.5) %>%
+  row_spec(0:5, hline_after = F, extra_css = "border-bottom: 1px solid #FEFEFE; ") %>%
+  column_spec(1, color = "#111111", extra_css = "font-weight: 400;") %>%
+  column_spec(2:5, color = "#555", extra_css = "font-weight: 300; font-family: Roboto Condensed !important;") %>%
+  row_spec(0, color = "#111111", extra_css = "text-transform: uppercase; letter-spacing: 1.25px; font-weight: 400; font-size: 10px; font-family: Roboto;")
 ```
 
 
@@ -79,34 +135,145 @@ kable(gcn, escape = FALSE, col.names = c("6 mo", "1 yr", "2 yr", "4 yr"))
 
 ## Description of user / use cases
 
-(a.k.a., functional spec)
+Description of user / use cases (a.k.a., functional spec)
 
 
 
+<div class="roundedlist">
+1. use case
+2. use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case 
+3. use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case 
+4. use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case 
+5. use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case 
+</div>
 
 
-
-
+<div class="inbox">
+1. use case
+2. use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case 
+3. use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case 
+</div>
 
 
 --------------------------------------------
 
 
-## Description of software modules / components
+## Software Modules/ Components 
 
+The component code, which implements the logic needed to perform a step in your ML workflow.
+
+A component specification, which defines the following:
+
+The component's metadata, its name and description.
+The component's interface, the component's inputs and outputs.
+The component's implementation, the Docker container image to run, how to pass inputs to your component code, and how to get the component's outputs.
+
+
+
+Design considerations:
+* Giving optional parameters for more complex stuff by user. Extensibility!
+* Forces users to be using Pandas DF.
+
+scikit-learn workflow:
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.datasets import load_iris
+from sklearn.preprocessing import test_train_split
+
+data = load_iris()
+model = RandomForestClassifier(n_trees=10)
+train_X, train_y, test_X, test_y = test_train_split(data.drop(["label"], axis=1), data["label"])
+model.fit(data)
+
+* Maintain information about the transformations that take place.
+
+Detailed specification (ComponentSpec)
+This section describes the ComponentSpec.
+
+Metadata
+
+name: Human-readable name of the component.
+
+description: Description of the component.
+
+metadata: Standard object’s metadata:
+
+annotations: A string key-value map used to add information about the component. Currently, the annotations get translated to Kubernetes annotations when the component task is executed on Kubernetes. Current limitation: the key cannot contain more that one slash ("/"). See more information in the Kubernetes user guide.
+labels: Deprecated. Use annotations.
+
+
+
+Interface
+
+inputs and outputs: Specifies the list of inputs/outputs and their properties. Each input or output has the following properties:
+
+name: Human-readable name of the input/output. Name must be unique inside the inputs or outputs section, but an output may have the same name as an input.
+description: Human-readable description of the input/output.
+default: Specifies the default value for an input. Only valid for inputs.
+type: Specifies the type of input/output. The types are used as hints for pipeline authors and can be used by the pipeline system/UI to validate arguments and connections between components. Basic types are String, Integer, Float, and Bool. See the full list of types defined by the Kubeflow Pipelines SDK.
+optional: Specifies if input is optional or not. This is of type Bool, and defaults to False. Only valid for inputs.
+
+
+
+
+Implementation
+
+implementation: Specifies how to execute the component instance. There are two implementation types, container and graph. (The latter is not in scope for this document.) In future we may introduce more implementation types like daemon or K8sResource.
+
+container: Describes the Docker container that implements the component. A portable subset of the Kubernetes Container v1 spec.
+
+image: Name of the Docker image.
+command: Entrypoint array. The Docker image’s ENTRYPOINT is used if this is not provided. Each item is either a string or a placeholder. The most common placeholders are {inputValue: Input name}, {inputPath: Input name} and {outputPath: Output name}.
+args: Arguments to the entrypoint. The Docker image’s CMD is used if this is not provided. Each item is either a string or a placeholder. The most common placeholders are {inputValue: Input name}, {inputPath: Input name} and {outputPath: Output name}.
+env: Map of environment variables to set in the container.
+fileOutputs: Legacy property that is only needed in cases where the container always stores the output data in some hard-coded non-configurable local location. This property specifies a map between some outputs and local file paths where the program writes the output data files. Only needed for components that have hard-coded output paths. Such containers need to be fixed by modifying the program or adding a wrapper script that copies the output to a configurable location. Otherwise the component may be incompatible with future storage systems.
+You can set all other Kubernetes container properties when you use the component inside a pipeline.
+
+
+name: xgboost4j - Train classifier
+description: Trains a boosted tree ensemble classifier using xgboost4j
+
+inputs:
+- {name: Training data}
+- {name: Rounds, type: Integer, default: '30', description: 'Number of training rounds'}
+
+outputs:
+- {name: Trained model, type: XGBoost model, description: 'Trained XGBoost model'}
+
+implementation:
+  container:
+    image: gcr.io/ml-pipeline/xgboost-classifier-train@sha256:b3a64d57
+    command: [
+      /ml/train.py,
+      --train-set, {inputPath: Training data},
+      --rounds,    {inputValue: Rounds},
+      --out-model, {outputPath: Trained model},
+    ]
+
+
+
+Description of software modules / components (a.k.a., component spec)	8
+The above should definitely include modules and classes, but detailed function explanation optional depending on size of project	
+
+<div class = "methods1">
+<div class = "methods2">
 (a.k.a., component spec)	
 
 The above should definitely include modules and classes, but detailed function explanation optional depending on size of project
-
+</div>
+</div>
 
 
 
 --------------------------------------------
 
-## Discussion
+### Software Design Decisions
+
+inclusion of software design decisions
 
 
- of at least two design decisions made and why you made them
+Discussion of at least two design decisions made and why you made them	6
+
+
 
 --------------------------------------------
 
