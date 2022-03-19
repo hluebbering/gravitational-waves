@@ -15,7 +15,7 @@ setup(
     long_description = open('README.md').read(),
     url = 'https://github.com/hluebbering/GravitationalWaves',
     install_requires=[
-        'numpy', 'units', 'astropy', 'importlibs', 'scipy', 'legwork', 'matplotlib', 'seaborn', 'pandas'
+        'numpy', 'units', 'astropy', 'scipy', 'legwork', 'matplotlib', 'seaborn', 'pandas'
     ],
     download_url = "https://codeload.github.com/hluebbering/GravitationalWaves/tar.gz/refs/tags/0.0.1",
 )
