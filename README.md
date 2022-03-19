@@ -81,7 +81,8 @@ Docstrings on each public method, contains parameters and return
 
 --------------------
 
-## Sources
+## References
+
 - https://joss.theoj.org/papers/10.21105/joss.02968
 - https://joss.theoj.org/papers/10.21105/joss.03000
 
