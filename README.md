@@ -180,6 +180,7 @@ print("{} out of the {} sources are detectable".format(
 
 
 
+```markdown
 gravitational-waves
  ┣ docs
  ┃ ┗ presentation.Rmd
@@ -210,6 +211,6 @@ gravitational-waves
  ┣ LICENSE
  ┣ README.md
  ┗ setup.py
-
+```
 
 
