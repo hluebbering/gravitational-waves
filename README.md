@@ -179,30 +179,37 @@ print("{} out of the {} sources are detectable".format(
 
 
 
-gravitational-waves
 
-* [docs/](.\gravitational-waves\docs)
-  * [index.html](.\gravitational-waves\docs\index.html)
-  * [present.Rmd](.\gravitational-waves\docs\present.Rmd)
-* [examples/](.\gravitational-waves\examples)
-  * [01_simulate_gravitational_waves.py](.\gravitational-waves\examples\01_simulate_gravitational_waves.py)
-  * [02_calculate_SNR.py](.\gravitational-waves\examples\02_calculate_SNR.py)
-  * [03_horizon_distance.py](.\gravitational-waves\examples\03_horizon_distance.py)
-* [gravitational-waves/](.\gravitational-waves\gravitational-waves)
-  * [tests/](.\gravitational-waves\gravitational-waves\tests)
-    * [test_inspiral.py](.\gravitational-waves\gravitational-waves\tests\test_inspiral.py)
-    * [test_source.py](.\gravitational-waves\gravitational-waves\tests\test_source.py)
-    * [test_utils.py](.\gravitational-waves\gravitational-waves\tests\test_utils.py)
-    * [test_visualization.py](.\gravitational-waves\gravitational-waves\tests\test_visualization.py)
-    * [__init__.py](.\gravitational-waves\gravitational-waves\tests\__init__.py)
-  * [inspiral.py](.\gravitational-waves\gravitational-waves\inspiral.py)
-  * [source.py](.\gravitational-waves\gravitational-waves\source.py)
-  * [utils.py](.\gravitational-waves\gravitational-waves\utils.py)
-  * [visualization.py](.\gravitational-waves\gravitational-waves\visualization.py)
-  * [__init__.py](.\gravitational-waves\gravitational-waves\__init__.py)
-* [LICENSE](.\gravitational-waves\LICENSE)
-* [README.md](.\gravitational-waves\README.md)
-* [setup.py](.\gravitational-waves\setup.py)
+gravitational-waves
+ ┣ docs
+ ┃ ┗ presentation.Rmd
+ ┣ examples
+ ┃ ┣ 01_InstantiateSourceClass.ipynb
+ ┃ ┣ 02_CalculateSNR.ipynb
+ ┃ ┣ 03_PlotSourceDistribution.ipynb
+ ┃ ┣ 04_Visualizations.ipynb
+ ┃ ┣ 05_SimulateGravitationalWaves.ipynb
+ ┃ ┗ README.md
+ ┣ GravitationalWaves
+ ┃ ┣ tests
+ ┃ ┃ ┣ test_psd.py
+ ┃ ┃ ┣ test_source.py
+ ┃ ┃ ┣ test_strain.py
+ ┃ ┃ ┣ test_utils.py
+ ┃ ┃ ┣ test_visualization.py
+ ┃ ┃ ┣ test_wavesim.py
+ ┃ ┃ ┗ __init__.py
+ ┃ ┣ psd.py
+ ┃ ┣ R.npy
+ ┃ ┣ source.py
+ ┃ ┣ strain.py
+ ┃ ┣ utils.py
+ ┃ ┣ visualization.py
+ ┃ ┣ wavesim.py
+ ┃ ┗ __init__.py
+ ┣ LICENSE
+ ┣ README.md
+ ┗ setup.py
 
 
 

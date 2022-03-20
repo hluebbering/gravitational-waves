@@ -34,25 +34,22 @@ This report details software design decisions and analysis of the `Gravitational
 In the following, I address the major software design decisions, sofware requirements, usage guidelines, and the extensibiility of the software for the GravitationalWaves package.
 
 
-inclusion of software design decisions
-
-software requirements
-
-usage guidelines
-
-extensibility of the software. 
+### Background
 
 
+> `GravitationalWaves`: a Python package designed to simulate, detect, and analyze continuous gravitational wave-forms. In addition to creating simulations of gravitational waves, the package also takes in observed data for comparison in detection and analysis.
+
+`GravitationalWaves` is a Python package for simulating the gravitational waveforms of binary mergers of black holes and neutron stars, computing several properties of these mergers and waveforms, and evaluating their detectability. In addition, GravitationalWaves also takes in observed data from gravitational wave detectors to compare data and predict detection rates. 
 
 
+**Definition.** Gravitational waves are invisible distortions in spacetime, caused by massive events such as collisions between two black holes or neutron stars.
 
-<div class = "methods1">
-<div class = "methods2">
+The importance of studying gravitational waveforms stems from the idea of detecting and using gravity to estimate other dynamical astrophysical phenomena, giving enormous potential for discovering parts of the universe that are invisible to the eye, such as black holes and other unknowns. 
 
 
 
-</div>
-</div>
+
+#### Package Data
 
 ```{r, fig.cap="Simulated Data Example"}
 simulated.df <- read.csv("assets/data/out.csv")
@@ -131,28 +128,83 @@ kable(gcn, escape = FALSE, col.names = c("6 mo", "1 yr", "2 yr", "4 yr")) %>%
 
 
 
+
+
+#### Software Requirements
+
+
+**List of Dependencies:**
+
+- python >= 3.7
+- pip >= 21.0.0
+- units
+- importlib
+- numba >= 0.50
+- numpy >= 1.16
+- astropy >= 4.0
+- scipy >= 1.5.0
+- matplotlib >= 3.3.2
+- seaborn >= 0.11.1
+- schwimmbad >= 0.3.2
+- legwork >= 0.2.4
+- pip:
+   - GravitationalWaves >= 0.1 
+   
+
+
+
+
+
 --------------------------------------------
 
 ## Description of user / use cases
 
 Description of user / use cases (a.k.a., functional spec)
 
+Usage Examples: 
 
 
-<div class="roundedlist">
-1. use case
-2. use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case 
-3. use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case 
-4. use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case 
-5. use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case 
+<div class = "methods1">
+<div class = "methods2">
+
+1. [Instantiate a Source Class](https://github.com/hluebbering/GravitationalWaves/blob/main/examples/01_InstantiateSourceClass.ipynb) 
+2. [Calculate Signal-to-Noise Ratio (SNR)](https://github.com/hluebbering/GravitationalWaves/blob/main/examples/02_CalculateSNR.ipynb)
+3. [Plot Source Parameters Distribution](https://github.com/hluebbering/GravitationalWaves/blob/main/examples/03_PlotSourceDistribution.ipynb)
+4. [Plot Sensitivity Curve](https://github.com/hluebbering/GravitationalWaves/blob/main/examples/04_Visualizations.ipynb)
+5. [Simulate Gravitational Waves](https://github.com/hluebbering/GravitationalWaves/blob/main/examples/05_SimulateGravitationalWaves.ipynb)
+
+</div> 
 </div>
 
 
-<div class="inbox">
-1. use case
-2. use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case 
-3. use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case use case 
-</div>
+\ 
+
+
+
+### Demo 1. Single source SNR calculation
+
+
+
+
+The most basic use case for GravitationalWaves is to calculate the signal-to-noise ratio of a single stellar-mass binary system. Using the package's source module, we first generate a source class and then calculate its SNR.
+
+
+```python
+import GravitationalWaves as gw
+import astropy.units as u
+source = gw.source.Source(m_1 = 11 * u.Msun,
+                          m_2 = 11 * u.Msun,
+                          ecc = 0.3,
+                          f_orb = 1e-4 * u.Hz,
+                          dist = 9 * u.kpc,
+                          interpolate_g = False)
+                          
+source.get_snr()
+```
+
+For this example, GravitationalWaves checks whether the source is eccentric/circular and evolving/stationary, and chooses the fastest method to accurately calculate the SNR. 
+
+
 
 
 --------------------------------------------
@@ -160,14 +212,165 @@ Description of user / use cases (a.k.a., functional spec)
 
 ## Software Modules/ Components 
 
-The component code, which implements the logic needed to perform a step in your ML workflow.
+The component code, which implements the logic needed to perform a step in your ML workflow. Description of software modules / components (a.k.a., component spec). The above should definitely include modules and classes, but detailed function explanation optional depending on size of project.
+
+
+
+
+### Detailed specification (ComponentSpec)
+
+
+
+This section describes the ComponentSpec. 
 
 A component specification, which defines the following:
 
-The component's metadata, its name and description.
-The component's interface, the component's inputs and outputs.
-The component's implementation, the Docker container image to run, how to pass inputs to your component code, and how to get the component's outputs.
+The component’s metadata, its name and description.
+The component’s interface, the component’s inputs and outputs.
+The component’s implementation, the Docker container image to run, how to pass inputs to your component code, and how to get the component’s outputs.
 
+
+
+<div class="roundedlist">
+
+1. psd.py
+2. source.py
+3. strain.py
+4. utils.py
+5. visualization.py
+6. wavesim.py
+
+</div>
+
+
+
+
+
+
+------------------------
+
+#### Metadata:
+
+
+Name: Human-readable name of the component.
+
+URL: http://www.pobox.com/~tranter
+
+Description: A program that ejects removable media using software control. The eject program allows the user to eject removable media (typically CD-ROMs, floppy disks or Iomega Jaz or Zip disks) using software control. Eject can also control some multi-disk CD changers and even some devices' auto-eject features. Install eject if you'd like to eject removable media using software control.
+
+BuildRequires: gettext
+BuildRequires: libtool
+
+Metadata: Standard object’s metadata:
+
+  Annotations: A string key-value map used to add information about the component. Currently, the annotations get translated to Kubernetes annotations when the component task is executed on Kubernetes. 
+  
+
+
+
+#### Interface
+
+inputs and outputs: Specifies the list of inputs/outputs and their properties. Each input or output has the following properties:
+
+name: Human-readable name of the input/output. Name must be unique inside the inputs or outputs section, but an output may have the same name as an input.
+
+description: Human-readable description of the input/output.
+
+default: Specifies the default value for an input. Only valid for inputs.
+
+type: Specifies the type of input/output. The types are used as hints for pipeline authors and can be used by the pipeline system/UI to validate arguments and connections between components. Basic types are String, Integer, Float, and Bool. See the full list of types defined by the Kubeflow Pipelines SDK.
+
+optional: Specifies if input is optional or not. This is of type Bool, and defaults to False. Only valid for inputs.
+
+
+inputs:
+- {name: Training data}
+- {name: Rounds, type: Integer, default: '30', description: 'Number of training rounds'}
+
+outputs:
+- {name: Trained model, type: XGBoost model, description: 'Trained XGBoost model'}
+
+
+
+
+
+Implementation
+
+implementation: Specifies how to execute the component instance. There are two implementation types, container and graph. (The latter is not in scope for this document.) In future we may introduce more implementation types like daemon or K8sResource.
+
+container: Describes the Docker container that implements the component. A portable subset of the Kubernetes Container v1 spec.
+
+image: Name of the Docker image.
+
+command: Entrypoint array. The Docker image’s ENTRYPOINT is used if this is not provided.Each item is either a string or a placeholder. The most common placeholders are {inputValue: Input name}, {inputPath: Input name} and {outputPath: Output name}.
+
+args: Arguments to the entrypoint. The Docker image’s CMD is used if this is not provided. Each item is either a string or a placeholder. The most common placeholders are {inputValue: Input name}, {inputPath: Input name} and {outputPath: Output name}.
+
+env: Map of environment variables to set in the container.
+
+fileOutputs: Legacy property that is only needed in cases where the container always stores the output data in some hard-coded non-configurable local location. This property specifies a map between some outputs and local file paths where the program writes the output data files. Only needed for components that have hard-coded output paths. Such containers need to be fixed by modifying the program or adding a wrapper script that copies the output to a configurable location. Otherwise the component may be incompatible with future storage systems.
+
+
+implementation:
+  container:
+    image: gcr.io/ml-pipeline/xgboost-classifier-train@sha256:b3a64d57
+    command: [
+      /ml/train.py,
+      --train-set, {inputPath: Training data},
+      --rounds,    {inputValue: Rounds},
+      --out-model, {outputPath: Trained model},
+    ]
+
+
+
+
+
+```md
+gravitational-waves
+ ┣ docs
+ ┃ ┗ presentation.Rmd
+ ┣ examples
+ ┃ ┣ 01_InstantiateSourceClass.ipynb
+ ┃ ┣ 02_CalculateSNR.ipynb
+ ┃ ┣ 03_PlotSourceDistribution.ipynb
+ ┃ ┣ 04_Visualizations.ipynb
+ ┃ ┣ 05_SimulateGravitationalWaves.ipynb
+ ┃ ┗ README.md
+ ┣ GravitationalWaves
+ ┃ ┣ tests
+ ┃ ┃ ┣ test_psd.py
+ ┃ ┃ ┣ test_source.py
+ ┃ ┃ ┣ test_strain.py
+ ┃ ┃ ┣ test_utils.py
+ ┃ ┃ ┣ test_visualization.py
+ ┃ ┃ ┣ test_wavesim.py
+ ┃ ┃ ┗ __init__.py
+ ┃ ┣ psd.py
+ ┃ ┣ R.npy
+ ┃ ┣ source.py
+ ┃ ┣ strain.py
+ ┃ ┣ utils.py
+ ┃ ┣ visualization.py
+ ┃ ┣ wavesim.py
+ ┃ ┗ __init__.py
+ ┣ LICENSE
+ ┣ README.md
+ ┗ setup.py
+```
+
+ 
+ 
+
+
+--------------------------------------------
+
+
+### Software Design Decisions
+
+inclusion of software design decisions
+
+
+Discussion of at least two design decisions made and why you made them	6
 
 
 Design considerations:
@@ -186,92 +389,9 @@ model.fit(data)
 
 * Maintain information about the transformations that take place.
 
-Detailed specification (ComponentSpec)
-This section describes the ComponentSpec.
-
-Metadata
-
-name: Human-readable name of the component.
-
-description: Description of the component.
-
-metadata: Standard object’s metadata:
-
-annotations: A string key-value map used to add information about the component. Currently, the annotations get translated to Kubernetes annotations when the component task is executed on Kubernetes. Current limitation: the key cannot contain more that one slash ("/"). See more information in the Kubernetes user guide.
-labels: Deprecated. Use annotations.
 
 
 
-Interface
-
-inputs and outputs: Specifies the list of inputs/outputs and their properties. Each input or output has the following properties:
-
-name: Human-readable name of the input/output. Name must be unique inside the inputs or outputs section, but an output may have the same name as an input.
-description: Human-readable description of the input/output.
-default: Specifies the default value for an input. Only valid for inputs.
-type: Specifies the type of input/output. The types are used as hints for pipeline authors and can be used by the pipeline system/UI to validate arguments and connections between components. Basic types are String, Integer, Float, and Bool. See the full list of types defined by the Kubeflow Pipelines SDK.
-optional: Specifies if input is optional or not. This is of type Bool, and defaults to False. Only valid for inputs.
-
-
-
-
-Implementation
-
-implementation: Specifies how to execute the component instance. There are two implementation types, container and graph. (The latter is not in scope for this document.) In future we may introduce more implementation types like daemon or K8sResource.
-
-container: Describes the Docker container that implements the component. A portable subset of the Kubernetes Container v1 spec.
-
-image: Name of the Docker image.
-command: Entrypoint array. The Docker image’s ENTRYPOINT is used if this is not provided. Each item is either a string or a placeholder. The most common placeholders are {inputValue: Input name}, {inputPath: Input name} and {outputPath: Output name}.
-args: Arguments to the entrypoint. The Docker image’s CMD is used if this is not provided. Each item is either a string or a placeholder. The most common placeholders are {inputValue: Input name}, {inputPath: Input name} and {outputPath: Output name}.
-env: Map of environment variables to set in the container.
-fileOutputs: Legacy property that is only needed in cases where the container always stores the output data in some hard-coded non-configurable local location. This property specifies a map between some outputs and local file paths where the program writes the output data files. Only needed for components that have hard-coded output paths. Such containers need to be fixed by modifying the program or adding a wrapper script that copies the output to a configurable location. Otherwise the component may be incompatible with future storage systems.
-You can set all other Kubernetes container properties when you use the component inside a pipeline.
-
-
-name: xgboost4j - Train classifier
-description: Trains a boosted tree ensemble classifier using xgboost4j
-
-inputs:
-- {name: Training data}
-- {name: Rounds, type: Integer, default: '30', description: 'Number of training rounds'}
-
-outputs:
-- {name: Trained model, type: XGBoost model, description: 'Trained XGBoost model'}
-
-implementation:
-  container:
-    image: gcr.io/ml-pipeline/xgboost-classifier-train@sha256:b3a64d57
-    command: [
-      /ml/train.py,
-      --train-set, {inputPath: Training data},
-      --rounds,    {inputValue: Rounds},
-      --out-model, {outputPath: Trained model},
-    ]
-
-
-
-Description of software modules / components (a.k.a., component spec)	8
-The above should definitely include modules and classes, but detailed function explanation optional depending on size of project	
-
-<div class = "methods1">
-<div class = "methods2">
-(a.k.a., component spec)	
-
-The above should definitely include modules and classes, but detailed function explanation optional depending on size of project
-</div>
-</div>
-
-
-
---------------------------------------------
-
-### Software Design Decisions
-
-inclusion of software design decisions
-
-
-Discussion of at least two design decisions made and why you made them	6
 
 
 
@@ -286,6 +406,8 @@ Comparison to the design of some existing software library
 
 ## Discussion of extensibility
 
+
+extensibility of the software. 
 
 Discussion of extensibility of your software (i.e., how difficult is it to extend?)	
 

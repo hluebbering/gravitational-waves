@@ -390,3 +390,13 @@ li.tocify-item.list-group-item {
     padding-bottom: 6pt;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,hsl(0deg 0% 98%)), color-stop(95%,hsl(0deg 0% 96%)), color-stop(100%,hsl(0deg 0% 93%)));
 }
+
+
+.treeview {
+    line-height: 28px;
+    font-weight: 500;
+    font-size: 15px;
+    width: 100%;
+    float: left;
+}
+
