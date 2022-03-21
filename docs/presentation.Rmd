@@ -18,9 +18,9 @@ library(kableExtra)
 
 ## Background. <span class="m22"> Gravitational Waves </span>
 
-**Definition.** Gravitational waves are invisible distortions in spacetime, caused by massive events such as collisions between two black holes or neutron stars.
+**Definition.** Gravitational waves are invisible distortions in space time, caused by massive events such as collisions between two black holes or neutron stars.
 
-The importance of studying gravitational waveforms stems from the idea of detecting and using gravity to estimate other dynamical astrophysical phenomena, giving enormous potential for discovering parts of the universe that are invisible to the eye, such as black holes and other unknowns. 
+The importance of studying gravitational wave-forms stems from the idea of detecting and using gravity to estimate other dynamical astrophysical phenomena, giving enormous potential for discovering parts of the universe that are invisible to the eye, such as black holes and other unknowns. 
 
 
 #### GravityPy

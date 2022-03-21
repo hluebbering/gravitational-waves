@@ -21,7 +21,7 @@ def h_0_n(m_c, f_orb, ecc, n, dist, position=None, polarisation=None, inclinatio
         n (`int/array`): Harmonic(s) at which to calculate the strain. 
         dist (`float/array`): Distance to each binary. 
         position (`SkyCoord/array`, optional): Sky position of source. Defaults to None.
-        polarisation (`float/array`, optional): GW polarisation angle of the source. Defaults to None.
+        polarization (`float/array`, optional): GW polarization angle of the source. Defaults to None.
         inclination (`float/array`, optional): Inclination of the source. Defaults to None.
         interpolated_g (`function`, optional): Computes g(n,e) from Peters (1964). Defaults to None.
     

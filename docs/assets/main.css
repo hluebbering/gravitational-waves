@@ -142,7 +142,7 @@ blockquote::before {
   filter: blur(3px);
   content: "";
   width: 5px;
-  height: 41px;
+  height: 88px;
   position: absolute;
   margin-left: -18.75pt;
   margin-top: -10px;
@@ -152,10 +152,10 @@ blockquote::after {
   background: linear-gradient(#00b2ff, #00ffbb, #6bff6b);
   content: "";
   width: 5px;
-  height: 41px;
+  height: 85.8px;
   position: absolute;
   margin-left: -18.75pt;
-  margin-top: -31px;
+  margin-top: -76px;
 }
 
 blockquote p {
@@ -373,14 +373,6 @@ img {
     border: none;
 }
 
-li.tocify-item.list-group-item {
-    background: transparent;
-    border-radius: 4pt;
-    padding: 5pt;
-    font-size: 10pt;
-    text-indent: 0;
-}
-
 
 #TOC {
     margin: 25px 0px 20px 0px;
@@ -398,5 +390,25 @@ li.tocify-item.list-group-item {
     font-size: 15px;
     width: 100%;
     float: left;
+}
+
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    color: #09bcf7 !important;
+    background-color: #337ab7;
+    border-color: #337ab7;
+    font-weight: 600;
+}
+
+
+li.tocify-item.list-group-item {
+    background: transparent;
+    padding: 3pt;
+    text-indent: 0;
+    font-size: 9pt !important;
+    letter-spacing: 1.35px;
+    text-transform: uppercase;
+    font-family: 'roboto';
+    color: #535556;
 }
 

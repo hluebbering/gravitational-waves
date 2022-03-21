@@ -52,16 +52,18 @@ The Laser Interferometer Space Antenna is a proposed space probe to detect and a
 
 What are Gravitational Waves?
 
-Gravitational waves were first theorized by Albert Einstein. They are created during events such as supermassive black hole mergers, or collisions between two black holes that are billion times bigger than our Sun. These collisions are so powerful that they create distortions in spacetime, known as gravitational waves.
+Gravitational waves, first theorized by Einstein, arise during events such as the collision of supermassive binary black hole mergers. A binary black hole is a system consisting of two black holes in close orbit around each other. These collisions are so powerful that they create distortions in space time, known as gravitational waves.
 
 
-Gravitational waves detectable by the LISA mission could also come from other distant systems including smaller stellar mass black holes orbiting supermassive black holes, known as Extreme Mass Ratio Inspirals (EMRIs).
+
+
 
 What do Gravitational Waves tell us?
 There are many astrophysical phenomena that are either very dim or completely invisible in any form of light that astronomy has relied on for 400 years. Gravitational waves are a powerful new probe of the Universe that uses gravity instead of light to take measure of dynamical astrophysical phenomena. Studying gravitational waves gives enormous potential for discovering the parts of the universe that are invisible by other means, such as black holes, the Big Bang, and other, as yet unknown, objects. LISA will complement our knowledge about the beginning, evolution and structure of our universe.
 
 
 LISA's Size and Precision are Out of this World
+
 LISA consists of three spacecraft that are separated by millions of miles and trailing tens of millions of miles, more than one hundred times the distance to the Moon, behind the Earth as we orbit the Sun. These three spacecraft relay laser beams back and forth between the different spacecraft and the signals are combined to search for gravitational wave signatures that come from distortions of spacetime. We need a giant detector bigger than the size of Earth to catch gravitational waves from orbiting black holes millions of times more massive than our sun. NASA is a major collaborator in the European Space Agency (ESA)-led mission, which is scheduled to launch in the early 2030s and we are getting ready for it now!
 
 
@@ -135,11 +137,7 @@ Inspiral gravitational waves are generated during the end-of-life stage of binar
 
 
 
-A binary black hole (BBH) is a system consisting of two black holes in close orbit around each other. Like black holes themselves, binary black holes are often divided into stellar binary black holes, formed either as remnants of high-mass binary star systems or by dynamic processes and mutual capture; and binary supermassive black holes, believed to be a result of galactic mergers.
 
-
-
-Binary black hole mergers would be one of the strongest known sources of gravitational waves in the Universe, and thus offer a good chance of directly detecting such waves. 
 
 --------------------
 
@@ -147,7 +145,21 @@ Binary black hole mergers would be one of the strongest known sources of gravita
 
 
 
+```{r, fig.cap="Parameters of the analytic fit the Galactic confusion noise as described by equation (14). The amplitude A has been fixed to $9 \\times 10^{−45}$."}
+gcn <- data.frame("6 mo" = c(0.133, 243, 482, 917, 0.00258),
+                  "1 yr" = c(0.171, 292, 1020, 1680, 0.00215),
+                  "2 yr" = c(0.165, 299, 611, 1340, 0.00173),
+                  "4 yr" = c(0.138, -221, 521, 1680, 0.00113),
+                  row.names = c("$\\alpha$", "$\\beta$", "$\\kappa$",
+                                "$\\gamma$", "$f_\\kappa$"))
 
+kable(gcn, escape = FALSE, col.names = c("6 mo", "1 yr", "2 yr", "4 yr")) %>%
+  kable_styling(bootstrap_options = c("hover", "striped"), full_width = F, html_font = "Roboto", font_size = 10.5) %>%
+  row_spec(0:5, hline_after = F, extra_css = "border-bottom: 1px solid #FEFEFE; ") %>%
+  column_spec(1, color = "#111111", extra_css = "font-weight: 400;") %>%
+  column_spec(2:5, color = "#555", extra_css = "font-weight: 300; font-family: Roboto Condensed !important;") %>%
+  row_spec(0, color = "#111111", extra_css = "text-transform: uppercase; letter-spacing: 1.25px; font-weight: 400; font-size: 10px; font-family: Roboto;")
+```
 
 
 
