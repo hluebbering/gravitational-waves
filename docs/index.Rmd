@@ -7,34 +7,37 @@ output:
     css: assets/main.css
     toc: yes
     toc_float: yes
-bibliography: static/references.bib
+    self_contained: yes
+bibliography: assets/references.bib
 nocite: '@*'
 # knit: pagedown::chrome_print
 knit: (function(inputFile, encoding) {
   rmarkdown::render(inputFile, encoding = encoding, output_dir = ".") })
 ---
 
+
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(kableExtra)
+library(dplyr)
+library(knitr)
+library(utils)
 
 ```
 
+
+<script src="assets/pymin.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 ## Introduction
 
 
+> **GravitationalWaves:** a Python package designed to simulate, detect, and analyze continuous gravitational wave-forms. The package also takes in observed data for comparison in detection and analysis.
 
 
-
-`GravPy`: A Python package for gravitational-wave simulation, analysis, and detectability
-
-
-
-GravPy is a Python package to simulate the gravitational waveforms of binary mergers of black holes and/or neutron stars, and calculate several properties of these mergers and waveforms, specifically relating to their observability by gravitational wave detectors.
-
-
-GravPy is a Python package designed to simulate, detect, and analyze continuous gravitational wave-forms. In addition to creating simulations of gravitational waves, GravPy also takes in observed data from gravitational wave detectors, such as the Laser Interferometer Space Antenna (LISA), to predict detection rates for stellar-origin binaries.
+This report details through the software design decisions, usage guidelines, and extensibility of the GravitationalWaves package system, with respect to existing software libraries. The software libraries used for the basis of this project include `legwork` and `riroriro`. Legwork is a python package for computing evolution and detection rates of gravitational-wave sources discovered by space-based detectors such as LISA. Riroriro is a python package for simulating and evaluating gravitational waves.
 
 
 
@@ -42,222 +45,693 @@ GravPy is a Python package designed to simulate, detect, and analyze continuous 
 ### Background
 
 
-
---------------------
-
-
-The Laser Interferometer Space Antenna is a proposed space probe to detect and accurately measure gravitational waves—tiny ripples in the fabric of spacetime—from astronomical sources. LISA would be the first dedicated space-based gravitational wave detector.
-
-
-
-What are Gravitational Waves?
-
 Gravitational waves, first theorized by Einstein, arise during events such as the collision of supermassive binary black hole mergers. A binary black hole is a system consisting of two black holes in close orbit around each other. These collisions are so powerful that they create distortions in space time, known as gravitational waves.
 
 
+**Definition.** Gravitational waves are invisible distortions in space time, caused by massive events such as collisions between two black holes or neutron stars.
+
+
+The Laser Interferometer Space Antenna is a proposed space probe to detect and accurately measure gravitational waves—tiny ripples in the fabric of spacetime—from astronomical sources. The space-based gravitational wave detector LISA presents a new view of gravitational waves by focusing on lower frequencies $\left( 10^{−5} \lt f / \mathrm{Hz} \lt 10^{-1} \right)$ than ground-based detectors. This enables the study of many new source classes including mergers of supermassive black holes, extreme mass ratio inspirals, and cosmological GW backgrounds. 
+
+
+The importance of studying gravitational wave-forms stems from the idea of detecting and using gravity to estimate other dynamical astrophysical phenomena, giving enormous potential for discovering parts of the universe that are invisible to the eye, such as black holes and other unknowns. 
+
+
+\ 
 
 
 
-What do Gravitational Waves tell us?
-There are many astrophysical phenomena that are either very dim or completely invisible in any form of light that astronomy has relied on for 400 years. Gravitational waves are a powerful new probe of the Universe that uses gravity instead of light to take measure of dynamical astrophysical phenomena. Studying gravitational waves gives enormous potential for discovering the parts of the universe that are invisible by other means, such as black holes, the Big Bang, and other, as yet unknown, objects. LISA will complement our knowledge about the beginning, evolution and structure of our universe.
+### The Package
 
 
-LISA's Size and Precision are Out of this World
-
-LISA consists of three spacecraft that are separated by millions of miles and trailing tens of millions of miles, more than one hundred times the distance to the Moon, behind the Earth as we orbit the Sun. These three spacecraft relay laser beams back and forth between the different spacecraft and the signals are combined to search for gravitational wave signatures that come from distortions of spacetime. We need a giant detector bigger than the size of Earth to catch gravitational waves from orbiting black holes millions of times more massive than our sun. NASA is a major collaborator in the European Space Agency (ESA)-led mission, which is scheduled to launch in the early 2030s and we are getting ready for it now!
-
-
-https://lisa.nasa.gov/
+`GravitationalWaves` is a Python package for simulating the gravitational wave-forms of binary mergers of black holes and neutron stars, computing several properties of these mergers and wave-forms, and evaluating their detectability. In addition, the package also takes in observed data from gravitational wave detectors, such as the Laser Interferometer Space Antenna (LISA), to compare data and predict detection rates for stellar-origin binaries. Specifically, we implement the expressions for the evolution of binary orbits due to the emission of gravitational waves, equations for the strain amplitudes and signal-to-noise ratios of binaries, and approximations for the LISA sensitivity curves.
 
 
 
-A gravitational wave is an invisible (yet incredibly fast) ripple in space. Gravitational waves travel at the speed of light (186,000 miles per second). These waves squeeze and stretch anything in their path as they pass by.
-
-https://www.nature.com/articles/d41586-018-04157-6
+Similar to the existing software libraries of `legwork` and `riroriro`, the GravitationalWaves package represents an implementation of gravitational wave tools, focusing on a mathematical approach for analyzing different sources. Just like legwork, this package provides mechanisms to calculate orbits strain amplitudes, compute sensitivity curves, and calculate signal to noise ratios of a collection of gravitational wave sources. Furthermore, the package provides tools and plotting functions for visualizing such results. Just like riroriro, this package provides gravitational waveform simulation that's based on a computational implementation of an earlier theoretical waveform model that uses post-Newtonian expansions and simplified Einstein field equations.
 
 
 
-
-Simple Newtonian mechanics, specifically Kepler’s third
-law of planetary motion, allow us to directly determine
-the masses of stars in some BINARY STAR systems.
-
-‘Double-lined’ spectroscopic binaries are stars
-whose spectra show the signature of two stars. The
-orbital periods of these systems are usually a few days or
-months, and the line-of-sight (radial) velocities of each
-component can be directly measured as the DOPPLER
-EFFECT causes the spectral lines of one star to first appear
-blueshifted and then redshifted relative to the lines’
-average position.
-
-Knowing the distribution of stellar masses that is
-obtained when stars form from clouds of gas and dust in
-space is important for two reasons. First, because the
-light observed from star clusters and galaxies is
-dominated by a few of the brightest stars (the tip), it is
-important to know how many low-mass stars are
-associated with the iceberg as a whole. Indeed, in a
-stellar system such as our own Milky Way galaxy, most
-of the observed luminosity comes from stars greater than
-10M⊙, while most of the mass is locked up in stars with
-masses below 1M⊙. Secondly, the distribution of stellar
-masses at birth (the initial mass function (IMF)) provides
-clues to the processes of stellar formation. Changes in the
-shape of this distribution function with mass provide
-evidence for the critical scales associated with the star
-formation process.
+#### Package Data
 
 
 
+GravitationalWaves uses simulated data for gravitational waves and observations from detectors such as the Laser Interferometer Space Antenna (LISA).
 
-The gravitational wave background (also GWB and stochastic background) is a random gravitational-wave signal potentially detectable by gravitational wave detection experiments. Since the background is supposed[by whom?] to be statistically random, it has yet been researched only in terms of such statistical descriptors as the mean, the variance, etc.
+**Simulated Data:** We obtain the simulated data by implementing the package functions for constructing simulations of gravitational waveform signals from a binary merger of two black holes or two neutron stars and outputting the data of such signals in terms of frequency and strain amplitude. 
 
-
-
-The gravitational wave background is formed by many different overlapping gravitational-wave signals emitted from the cosmic population of supermassive binary black holes (i.e. two supermassive black holes orbiting each other and eventually merging) -- similar to background noise from the many overlapping voices in a crowded hall.
-
-
-The gravitational-wave background is usually defined as the superposition of weak
-independent sources that cannot be resolved individually [67]. When people gave this definition of the gravitational-wave background, they were
-essentially thinking of the primordial background from inflation where a very large number
-of events overlap when they reach our detectors. In this case, even if you had perfect
-detectors, sensitive enough to observe the small amplitude of faint and distant events, you
-will still never be able to resolve them individually because of the overlap. For this reason
-the gravitational-wave background is historically called stochastic. However, we do not
-have perfect detectors so that faint and distant sources buried in the instrumental noise are
-also unresolved and participate to the gravitational-wave background, even if they do not
-overlap. 
+```python
+i_amp = ins.inspiral_strain_amplitude(i_Aorth, i_Adiag)
+i_freq = mat.frequency_SI_units(i_m_omega, M)
+```
 
 
-https://www.mdpi.com/2073-8994/14/2/270/htm
+```{r, fig.cap="Simulated Data Example"}
+simulated.df <- data.frame("Amp" = c("7.9097e-22", "7.9105e-22", "7.9112e-22", "7.9121e-22", "7.9128e-22", "7.9136e-22", "7.9144e-22"), "Freq" = c(10.0066, 10.0081, 10.0096, 10.0111, 10.0126, 10.0141, 10.0156))
 
-
-Inspiral gravitational waves are generated during the end-of-life stage of binary systems where the two objects merge into one.  These systems are usually two neutron stars, two black holes, or a neutron star and a black hole whose orbits have degraded to the point that the two masses are about to coalesce.  As the two masses rotate around each other, their orbital distances decrease and their speeds increase, much like a spinning figure skater who draws his or her arms in close to their body.  This causes the frequency of the gravitational waves to increase until the moment of coalescence.  The sound these gravitational waves would produce is a chirp sound (much like when increasing the pitch rapidly on a slide whistle) since the binary system’s orbital frequency is increasing (any increase in frequency corresponds to an increase in pitch).
-
-
-
-
-
---------------------
-
-
-
-
-
-```{r, fig.cap="Parameters of the analytic fit the Galactic confusion noise as described by equation (14). The amplitude A has been fixed to $9 \\times 10^{−45}$."}
-gcn <- data.frame("6 mo" = c(0.133, 243, 482, 917, 0.00258),
-                  "1 yr" = c(0.171, 292, 1020, 1680, 0.00215),
-                  "2 yr" = c(0.165, 299, 611, 1340, 0.00173),
-                  "4 yr" = c(0.138, -221, 521, 1680, 0.00113),
-                  row.names = c("$\\alpha$", "$\\beta$", "$\\kappa$",
-                                "$\\gamma$", "$f_\\kappa$"))
-
-kable(gcn, escape = FALSE, col.names = c("6 mo", "1 yr", "2 yr", "4 yr")) %>%
-  kable_styling(bootstrap_options = c("hover", "striped"), full_width = F, html_font = "Roboto", font_size = 10.5) %>%
-  row_spec(0:5, hline_after = F, extra_css = "border-bottom: 1px solid #FEFEFE; ") %>%
+kable(head(simulated.df, 4), col.names = c("Strain Amplitude", "Frequency"), escape = FALSE) %>%
+  kable_styling(bootstrap_options = c("hover", "striped"), full_width = F, html_font = "Roboto", font_size = 11) %>%
+  row_spec(0:4, hline_after = F, extra_css = "border-bottom: 1px solid #FEFEFE;") %>%
   column_spec(1, color = "#111111", extra_css = "font-weight: 400;") %>%
-  column_spec(2:5, color = "#555", extra_css = "font-weight: 300; font-family: Roboto Condensed !important;") %>%
+  column_spec(1:2, color = "#555", extra_css = "font-weight: 300; text-align: right;") %>%
+  row_spec(0, color = "#111111", extra_css = "text-transform: uppercase; letter-spacing: 1.25px; font-weight: 400; font-size: 10px")
+```
+
+
+\ 
+
+
+**Observed Data:** The observed data contains LISA-validated binaries obtained from the Kupfer et al. 2018 study. These observations are preloaded to the package and used to help generate the Source class based on these provided binaries.
+
+
+
+```{r}
+table1 <- read.csv("assets/data/table1.csv")
+table2 <- read.csv("assets/data/table2.csv")
+colnames(table1) <- c("Source", "$I_\\mathrm{Gal}$", "$b_\\mathrm{Gal}$", "Orbital Period", "$m_1$", "$m_2$", "t", "Refs", "Type")
+colnames(table2) <- c("Source", "f (mHz)", "$\\beta$ (mas)", "$\\sigma_\\beta$ (mas)", "d (pc)", "$\\sigma_d$ (pc)", "$\\mathcal{A}$", "SNR", "type")
+```
+
+
+```{r}
+tab1 <- kable(table1, escape = FALSE) %>%
+  remove_column(columns = 9) %>%
+  kableExtra::group_rows(start_row = 1, end_row = 11, group_label = "AM CVn type") %>%
+  kableExtra::group_rows(start_row = 12, end_row = 15, group_label = "Detached white dwarfs") %>%
+  kableExtra::group_rows(start_row = 16, end_row = 16, group_label = "Hot subdwarf binaries") %>%
+  kable_styling(bootstrap_options = c("hover", "striped"), full_width = F, html_font = "Roboto", font_size = 10.5) %>%
+  row_spec(0:18, hline_after = F, extra_css = "border-bottom: 1px solid #FEFEFE;") %>%
+  column_spec(1, color = "#111111", extra_css = "font-weight: 400;") %>%
+  column_spec(2:8, color = "#555", extra_css = "font-weight: 300; font-family: Roboto Condensed !important;") %>%
   row_spec(0, color = "#111111", extra_css = "text-transform: uppercase; letter-spacing: 1.25px; font-weight: 400; font-size: 10px; font-family: Roboto;")
+  
+```
+
+
+
+```{r}
+kable(table2, escape = FALSE) %>% 
+  remove_column(columns = 9) %>%
+  kableExtra::group_rows(start_row = 1, end_row = 11, group_label = "AM CVn type") %>%
+  kableExtra::group_rows(start_row = 12, end_row = 15, group_label = "Detached white dwarfs") %>%
+  kableExtra::group_rows(start_row = 16, end_row = 16, group_label = "Hot subdwarf binaries") %>%
+  kable_styling(bootstrap_options = c("hover", "striped", "condensed"), full_width = F, html_font = "Roboto", font_size = 10.5) %>%
+  row_spec(0:18, hline_after = F, extra_css = "border-bottom: 1px solid #FEFEFE;") %>%
+  column_spec(1, color = "#111111", extra_css = "font-weight: 400;") %>%
+  column_spec(2:8, color = "#555", extra_css = "font-weight: 300; font-family: Roboto Condensed !important;") %>%
+  row_spec(0, color = "#111111", extra_css = "text-transform: uppercase; letter-spacing: 1.25px; font-weight: 400; font-size: 10px; font-family: Roboto;")
+```
+
+
+\ 
+
+
+
+**Limitations:** Both simulated and observed calculations apply a low-order post-Newtonian description of gravitational wave emission, meaning that the data do not account for higher-order effects.
+
+
+\ 
+
+
+
+
+#### Software Requirements
+
+The following table presents the fundamental package dependencies:
+ 
+
+
+```{r}
+dependencies <- data.frame("Package" = c("python", "pip", "numba", "numpy", "astropy", "scipy", "matplotlib", "seaborn", "schwimm", "legwork"), "Version" = c("$\\geq$ 3.7.0", "$\\geq$ 21.0.0", "$\\geq$ 0.5.0", "$\\geq$ 1.16.0", "$\\geq$ 4.0.0", "$\\geq$ 1.5.0", "$\\geq$ 3.3.2", "$\\geq$ 0.11.1", "$\\geq$ 0.3.2", "$\\geq$ 0.2.4"), 
+                           "Type" = c("Programming language", "Python package", "numba", "numpy", "astropy", "scipy", "matplotlib", "seaborn", "schwimm", "legwork"),
+                           "Description" = c("High-level, general-purpose programming language", "Recommended package installer for Python", "NumPy-aware optimizing compiler using LLVM", "Fundamental package for array computing", "Astronomy and astrophysics core library", "Software for mathematics, science, and engineering", "Library for creating various visualizations in Python", "Library for making statistical graphics in Python", "Common interface for parallel processing pools", "Package for analyzing gravitational waves"))
+
+kable(dependencies, col.names = c("Package", "Version", "Type", "Description"), escape = FALSE) %>%
+  kable_styling(bootstrap_options = c("hover", "striped", "condensed"), full_width = T, html_font = "Roboto", font_size = 11) %>%
+  row_spec(0:10, hline_after = F, extra_css = "border-bottom: 1px solid #FEFEFE;") %>%
+  column_spec(1:3, color = "#555", extra_css = "font-weight: 300; text-align: left;") %>%
+  row_spec(0, color = "#111111", extra_css = "text-transform: uppercase; letter-spacing: 1.25px; font-weight: 400; font-size: 10px; text-align: left;") %>%
+    column_spec(1, color = "#111111", extra_css = "font-weight: 400; text-align: right;") %>%
+    column_spec(2, color = "#111111", extra_css = "font-size: 11px;") %>%
+    column_spec(4, color = "#111111", extra_css = "font-size: 10px; text-align: justify; font-weight: 100 !important;", width = "8cm")
+```
+
+
+\ 
+
+
+#### Project Structure
+
+
+
+
+The structure of the GravitationalWaves github repository is as follows:
+
+
+
+<div class = "roundedlist2">
+<li class="folder"> 
+<a>GravitationalWaves </a>
+<ul class="directory-list">
+  <li class="folder">
+    <a>docs </a> <span class= "infolder">(folder contains functional and design specification)</span>
+    <ul>
+      <li>presentation.pdf</li>
+    </ul>
+  </li>
+  <li class="folder">
+    <a>examples </a>
+    <ul>
+      <li>01_InstantiateSourceClass.ipynb</li>
+      <li>02_CalculateSNR.ipynb</li>
+      <li>03_PlotSourceDistribution.ipynb</li>
+    </ul>
+  </li>
+  <li class="folder">
+    <a>GravitationalWaves </a> <span class= "infolder">(python package folder)</span>
+    <ul>
+      <li class="folder">
+        <a>tests </a>
+        <ul>
+          <li>test_psd.py</li>
+          <li>test_source.py</li>
+          <li>test_strain.py</li>
+          <li>test_utils.py</li>
+          <li>test_visualization.py</li>
+          <li>test_wavesim.py</li>
+          <li>__init__.py</li>
+        </ul>
+      </li>
+      <li>psd.py</li>
+      <li>source.py</li>
+      <li>strain.py</li>
+      <li>utils.py</li>
+      <li>visualization.py</li>
+      <li>wavesim.py</li>
+      <li>__init__.py</li>
+    </ul>
+  </li>
+  <li>LICENSE <span class= "infolder">(open source MIT License)</span> </li>
+  <li>README.md <span class= "infolder">(overview of the project)</span> </li>
+  <li>setup.py <span class= "infolder">(file initializes project after it has been cloned)</span> </li>
+</ul>
+</li>
+
+</div>
+
+
+
+
+
+
+
+From the above, we can see the top-level package called `GravitationalWaves`, with six modules: `strain.py`, `psd.py`, `utils.py`, `visualization.py`, `source.py`, `wavesim.py`. There's also the subpackage called `tests` located in the top-level package. There's also an examples and docs directory that contains demos and documentation of the package, though, they're not packages since both don't include an `__init__.py`.
+
+
+
+
+
+
+--------------------------------------------
+
+
+
+## Software Components 
+
+
+The software components for the `GravitationalWaves` package include the package's modules, classes, and functions. A Python package is any directory with an `__init__.py` file, and this file gathers all package-wide definitions to import every module in the package. Python modules are an essential abstraction layer, which allow separating code into parts holding related data and functionality. For example, a layer of a project might handle interfacing with user actions, while another handles data manipulation. To separate these two layers, we'd regroup all user interfacing functionality into one file and all data manipulation functionality into another file.
+
+
+
+
+### Component Specification
+
+
+
+For the following component specification, we define each components' metadata, interface, and implementation. The metadata consists of a component's name and description. The interface specifies the list of inputs/outputs and their properties. And the implementation specifies how to execute the component instance, pass inputs to the component code, and get the component's outputs. After the component specification, I introduce the component code, which implements the logic needed to perform a step in the package workflow.
+
+
+\ 
+
+
+
+#### Module 1. source.py
+
+<div class = "methods1">
+
+*Name:* Source (class)
+
+*Description:* The source module provides a simple interface to the functions in the remaining modules. This module contains the Source class for analyzing a generic set of gravitational wave sources, stationary/evolving and circular/eccentric.
+
+*Annotations:*
+
+    """
+    Class for generic gravitational wave (GW) sources.
+    """
+            
+*Inputs:*
+
+- {**name:** `m_1`, **description:** `Primary mass`, **type:** `Int`, **optional:** `False`}
+- {**name:** `m_2`, **description:** `Secondary mass`, **type:** `Int`, **optional:** `False`}
+- {**name:** `ecc`, **description:** `Initial eccentricity`, **type:** `Int`, **optional:** `False`}
+- {**name:** `dist`, **description:** `Luminosity distance to source`, **type:** `Int`, **optional:** `False`}
+- {**name:** `n_proc`, **description:** `Number of processors to split`, **type:** `Int`, **default:** `1`, **optional:** `True`}
+- {**name:** `f_orb`, **description:** `Orbital frequency`, **type:** `Int`, **optional:** `False`}
+- {**name:** `a`, **description:** `Semi-major axis`, **type:** `Int`, **default:** `None`, **optional:** `True`}
+- {**name:** `position`, **description:** `Sky position of source`, **type:** `Int`, **default:** `None`, **optional:** `True`}
+- {**name:** `weights`, **description:** `Statistic weights for each sample`, **type:** `Int`, **default:** `None`, **optional:** `True`}
+- {**name:** `gw_lum_tol`, **description:** `Allowed error on GW luminosity`, **type:** `Int`, **default:** `0.05`, **optional:** `True`}
+- {**name:** `stat_tol_e`, **description:** `Frequency change above which a binary is stationary`, **type:** `Int`, **default:** `1e-2`, **optional:** `True`}
+- {**name:** `interpolate_g`, **description:** `Whether to interpolate g(n,e)`, **type:** `Int`, **default:** `True`, **optional:** `True`}
+- {**name:** `interpolate_sc`, **description:** `Whether to interpolate LISA sensitivity curve`, **type:** `Int`, **default:** `True`, **optional:** `True`}
+
+*Outputs:*
+
+- {**name:** `snr`, **type:** `Float`, **description:** `Signal-to-noise ratio`}
+
+
+*Implementation:*
+
+```python
+import GravitationalWaves.source 
+import astropy.units as u
+
+source1 = source.Source(m_1 = 11 * u.Msun, m_2 = 11 * u.Msun, ecc = 0.3, dist = 9 * u.kpc, f_orb = 1e-4 * u.Hz, interpolate_g = False)
+```
+
+</div>
+
+
+
+
+----------------------------------------
+
+
+
+#### Module 2. strain.py
+
+<div class = "methods1">
+
+*Name:* strain
+
+*Description:* A program that uses functions from `legwork` to calculate signal-to-noise ratio of sources based on four different cases. For the different cases, the module contains four functions that cover whether a source is circular-stationary, circular-evolving, eccentric-stationary, or eccentric-evolving.
+
+*Annotations:*
+
+    """
+    Computes strain amplitude at `n` harmonics
+    """
+  
+*Inputs:*
+
+- {**name:** `m_c`, **description:** `Chirp mass of each binary`, **type:** `Float`, **optional:** `False`}
+- {**name:** `f_orb`, **description:** `Orbital frequency of each binary`, **type:** `Float`, **optional:** `False`}
+- {**name:** `ecc`, **description:** `Eccentricity of each binary`, **type:** `Float`, **optional:** `False`}
+- {**name:** `n`, **description:** `Harmonic(s) to calculate the strain`, **type:** `Int`, **optional:** `False`}
+- {**name:** `dist`, **description:** `Distance to each binary`, **type:** `Float`, **optional:** `False`}
+- {**name:** `position`, **description:** `Sky position of source`, **default:** `None`, **type:** `Array`, **optional:** `True`}
+- {**name:** `interpolated_g`, **description:** `G(n,e) from Peters (1964)`, **default:** `None`, **type:** Function, **optional:** `True`}
+         
+*Outputs:*
+
+- {**name:** `h_0`, **type:** `Float`, **description:** `Strain amplitude`}
+
+*Implementation:*
+
+
+```python
+from GravitationalWaves import strain, source
+import numpy as np
+import astropy.units as u
+
+# create a random collection of sources
+n_values = 1500
+mass1 = np.random.uniform(0, 10, n_values) * u.Msun
+mass2 = np.random.uniform(0, 10, n_values) * u.Msun
+lumDist = np.random.normal(8, 1.5, n_values) * u.kpc
+freqOrb = 10**(-5 * np.random.power(3, n_values)) * u.Hz
+ecc = 1 - np.random.power(3, n_values)
+sources = source.Source(m_1=m_1, m_2=m_2, ecc=ecc, dist=dist, f_orb=f_orb, gw_lum_tol=0.05, stat_tol=1e-2,
+                        interpolate_g=True, interpolate_sc=True})
+                        
+h_c_n4 = sources.get_h_c_n(harmonics=[1, 2, 3, 4])
+```
+
+</div>
+
+
+
+----------------------------------------
+
+
+
+
+#### Module 3. psd.py
+
+
+<div class = "methods1">
+
+*Name:* psd
+
+*Description:* The psd module evaluates the effective noise power spectral density of a detector at different frequencies. The module contains the LISA sensitivity curve that can be tweaked by adjusting parameters such as the observation time, response function, and the arm length. For the Galactic confusion noise, the module uses the Robert et al. 2019 model.
+
+*Annotations:* 
+
+    """
+    Calculates the effective power spectral density for all instruments.
+    """
+  
+*Inputs:*
+
+- {**name:** `f`, **description:** `Frequencies to evaluate sensitivity curve`, **type:** `Float`, **optional:** `False`}
+- {**name:** `instrument`, **description:** `Instrument to use`, **default:** `'LISA'`, **type:**`String`, **optional:** `True`}
+- {**name:** `custom_psd`, **description:** `Custom function for computing the PSD`, **default:** `None`, **type:** `Funcion`, **optional:** `True`}
+- {**name:** `t_obs`, **description:** `Observation time`, **default:** `4`, **type:** `Float`, **optional:** `True`}
+- {**name:** `L`, **description:** `LISA arm length in metres`, **default:** `2.5`, **type:** `Float`, **optional:** `True`}
+- {**name:** `approximate_R`, **description:** `Whether to approximate response function`, **default:** '`False`', **type:** `Bool`, **optional:** `True`}
+- {**name:** `confusion_noise`, **description:** `Galactic confusion noise`, **default:** `'robson19'`, **type:** `Various`, **optional:** `True`}
+
+*Outputs:*
+
+- {**name:** `psd`, **type:** `Float`, **description:** `Effective power strain spectral density`}
+
+*Implementation:*
+
+```python
+import GravitationalWaves.psd as psd
+import numpy as np
+import astropy.units as u
+
+frequency_range = np.logspace(-5, 0, 1000) * u.Hz
+PSD = psd.power_spectral_density(f = frequency_range) # get noise amplitude
+noise_amplitude = np.sqrt(frequency_range * PSD)
+```
+
+
+</div>
+
+
+
+
+----------------------------------------
+
+
+
+
+#### Module 4. utils.py
+
+
+<div class = "methods1">
+
+*Name:* utils
+
+*Description:* The utils module is a collection of miscellaneous utility functions for computing conversions between variables, the chirp mass of binaries, and expressions from the Peters equation (Peters and Mathews 1963), such as the relative power of gravitational radiation and enhancement factor.
+
+*Annotations:*  
+
+    """
+    Computes chirp mass of binaries
+    Compute g(n, e) from Peters and Mathews (1963) Eq.20
+    Converts between orbital frequency and semi-major axis using Kepler's third law
+    """
+  
+*Inputs:*
+
+- {**name:** `m_1`, **description:** `Primary mass`, **type:** `Float`,  **optional:** `False`}
+- {**name:** `m_2`, **description:** `Secondary mass`, **type:** `Float`,  **optional:** `False`}
+- {**name:** `n`, **description:** `Harmonic(s) of interest`, **type:** `Int`,  **optional:** `False`}
+- {**name:** `e`, **description:** `Eccentricity`, **type:** `Float`,  **optional:** `False`}
+- {**name:** `f_orb`, **description:** `Orbital frequency`, **type:** `Float`,  **optional:** `False`}
+
+
+*Outputs:*
+
+- {**name:** `m_c`, **type:** `Float`, **description:** `Chirp mass`}
+- {**name:** `g`, **type:** `Array`, **description:** `Power of gravitational radiation at nth harmonic`}
+- {**name:** `f_orb`, **type:** `Float`, **description:** `Orbital frequency`}
+- {**name:** `a`, **type:** `Float`, **description:** `Semi-major axis`}
+
+
+*Implementation:*
+
+```python
+from GravitationalWaves import utils
+import astropy.units as u
+
+mass1 = 11 * u.Msun
+mass2 = 11 * u.Msun
+m_c = utils.chirp_mass(m_1 = mass1, m_2 = mass2)
+```
+
+</div>
+
+
+
+
+
+
+----------------------------------------
+
+
+
+#### Module 5. visualizations.py
+
+
+<div class = "methods1">
+
+*Name:* visualizations
+
+*Description:* The visualization module uses matplotlib and seaborn to plot quick visuals for analyzing of a collection of sources. The plots include 1- and 2-dimensional distributions and the LISA sensitivity curve.
+
+*Annotations:* 
+
+    """
+    Plot a 1D distribution of `x` and `y`
+    Plot a 2D distribution of `x` and `y`
+    Plot the LISA sensitivity curve
+    """
+  
+*Inputs:*
+
+- {**name:** `x`, **description:** `Variable to plot on the x axis`, 
+         **type:** `Float`, **optional:** `False`}
+- {**name:** `y`, **description:** `Variable to plot on the y axis`, **default:** `None`, **type:** `Float`, **optional:** `True`}
+- {**name:** `weights`, **description:** `Weights for each variable pair`, **type:** `Float`, **optional:** `False`}
+- {**name:** `disttype`, **description:** `Type of distribution plot to use`, **type:** `{ "scatter", "kde" }`, **optional:** `False`}
+- {**name:** `frequency_range`, **description:** `Frequency values to plot sensitivity curve`, **type:** `Float`, **optional:** `False`}
+- {**name:** `y_quantity`, **description:** `Quantity to plot on y axis`, **default:** `None`, **type:** `{ "ASD", "h_c" }`, **optional:** `True`}
+
+
+*Outputs:*
+
+- {**name:** `fig`, **type:** `matplotlib Figure`, **description:** `Figure of distribution`}
+- {**name:** `ax`, **type:** `matplotlib Axis`, **description:** `Axis of distribution plot`}
+
+*Implementation*:
+
+
+```python
+import GravitationalWaves.visualization as vis
+import numpy as np
+import astropy.units as u
+
+fig, ax = sources.plot_source_variables(xstr = "f_orb", ystr = "snr", disttype = "kde", log_scale = (True, True), show=False, which_sources = sources.snr > 0)
+right_ax = ax.twinx()
+frequency_range = np.logspace(np.log10(2e-6), np.log10(2e-1), 1000) * u.Hz
+
+vis.plot_sensitivity_curve(frequency_range = frequency_range, fig = fig, ax = right_ax)
+```
+
+
+
+</div>
+
+
+
+
+----------------------------------------
+
+
+
+#### Module 6. wavesim.py
+
+
+<div class = "methods1">
+
+*Name:* wavesim
+
+*Description:* The gwsim module contains functions for simulating gravitational waves from binary black holes. The procedure includes parts for simulating the inspiral portions, pre-matching and post-matching parts for simulating the merger/ringdown portions, and parts for matching together the inspiral and merger/ringdown portions. 
+
+*Annotations:* 
+
+    """
+    Parts of the procedure for simulating the inspiral portions of gravitational waves, collected into modular functions.
+    """
+  
+*Inputs:*
+
+- {**name:** `logMc`, **description:** `log (Mc/Msun)`, **type:** `Float`, **optional:** `False`}
+- {**name:** `q`, **description:** `Eccentricity`, **type:** `Float`, **optional:** `False`}        
+- {**name:** `flow`, **description:** `Frequency flow`, **default:** `10.0`, **type:** `Float`, **optional:** `True`}    
+- {**name:** `merger_type`, **description:** `Binary black hole or neutron star merger`, **type:** `String`, **optional:** `False`}
+- {**name:** `D`, **description:** `Distance`, **default:** `100.0`, **type:** `Float`, **optional:** `True`}
+         
+*Outputs:*
+
+- {**name:** `i_m_amp`, **type:** `Float`, **description:** `Strain envelope amplitude`}
+- {**name:** `i_m_freq`, **type:** `Float`, **description:** `Frequency over time for whole waveform`}
+
+
+</div>
+
+
+
+----------------------------------------
+
+
+## Functional Specification
+
+### Usage Examples
+
+
+With this package, users can
+
+
+1. Simulate a gravitational wave signal from a binary merger of two black holes, and output the frequency and strain amplitude data for that signal.
+2. Create a random collection of possible LISA binary sources and calculate their strain amplitudes given any range of frequency harmonics.
+3. Calculate and plot the sensitivity curve of a gravitational wave detector
+4. Check  whether a binary source is eccentric/circular and evolving/stationary
+5. Compute the signal-to-noise ratio (SNR) of a single source binary system, as well as a collection of systems
+6. Plot either 1D or 2D parameter distributions for a collection of sources
+7. Determine the number of detectable binaries from a population of sources
+
+
+
+\ 
+
+
+### Demo 1. Single source SNR calculation
+
+
+The most basic use case for GravitationalWaves is to calculate the signal-to-noise ratio of a single stellar-mass binary system. We do this by using the package's source module to generate a Source class.  First we must import the package module. As soon as we use import statements, we can use modules, which can be built-in, installed third-party modules, or internal project modules. The best import statement is simply `import modu`. Using `from modu import func` is a way to pinpoint the function to import and put it in the local namespace.
+
+
+To import the file `source.py` in a directory, we use the statement `import GravitationalWaves.source`. This statement looks in the directory for `__init__.py` and then for `source.py`, executing all top-level statements in both files. Consequently, any variable, function, or class defined in `source.py` is available in the local namespace. 
+
+
+
+
+```python
+import GravitationalWaves
+import GravitationalWaves.source 
+import astropy.units as u
+
+source1 = source.Source(m_1 = 11 * u.Msun,
+                        m_2 = 11 * u.Msun,
+                        ecc = 0.3,
+                        f_orb = 1e-4 * u.Hz,
+                        dist = 9 * u.kpc,
+                        interpolate_g = False)
+                          
+source1.get_snr()
+```
+
+For this example, GravitationalWaves checks whether the source is eccentric/circular and evolving/stationary, and chooses the fastest method to accurately calculate the SNR. 
+
+
+----------------------------------------------
+
+
+### Demo 2. Multiple source SNR calculate
+
+In the next example, we use GravitationalWaves to calculate the detectability of a collection of sources. We first import the package, then create a random set of possible LISA sources.
+
+
+```python
+import legwork.source as source
+import numpy as np
+import astropy.units as u
+
+# create a random collection of sources
+nVals = 1800
+mass1 = np.random.uniform(0, 12, n_values) * u.Msun
+mass2 = np.random.uniform(0, 12, n_values) * u.Msun
+eccInit = 1 - np.random.power(6, n_values)
+lumDist = np.random.normal(9, 1.5, n_values) * u.kpc
+orbFreq = 12**(-6 * np.random.power(3, n_values)) * u.Hz
+```
+
+
+Using these random sources, we can instantiate a Source class.
+
+```python
+sources = source.Source(m_1 = mass1, m_2 = mass2, ecc = eccInit,  dist = lumDist, f_orb = orbFreq)
+```
+
+Now, we can calculate the SNR (signal-to-noise ratio) for these sources. This function splits the sources based on whether they are stationary/evolving and circular/eccentric.
+
+
+```python
+snr = sources.get_snr(verbose = True)
+```
+
+The SNR values are now stored in `sources.snr`, and we can mask any values that don’t meet some detectable threshold. In the following, we set the threshold to 7.
+
+
+```python
+detectableSources = sources.snr > 7
+print("{} out of the {} sources are detectable".format(
+    len(sources.snr[detectableSources]), nVals))
 ```
 
 
 
 
-The space-based gravitational wave detector LISA presents a new view of gravitational waves by focusing on lower frequencies $\left( 10^{−5} \lt f / \mathrm{Hz} \lt 10^{-1} \right)$ than ground-based detectors. This enables the study of many new source classes including mergers of supermassive black holes, extreme mass ratio inspirals, and cosmological GW backgrounds. The lower frequency level is also of interest for the detection of local stellar-mass binaries during their inspiral phase. LISA is expected to detect Galactic stellar-origin binaries containing combinations of white dwarfs, neutron stars, and black holes, ranging from the numerous double white dwarf population, to the rare but loud double black hole population. 
-
-Specifically, we implement the expressions for the *evolution* of binary orbits due to the emission of gravitational waves, equations for the strain amplitudes and signal-to-noise ratios of binaries, and approximations for the LISA *sensitivity* curves.
 
 
+----------------------------------------
 
-
-GravPy represents an implementation of gravitational wave tools, focusing on an optimized approach for specific spectrums and source classes. With this package, it's possible to evolve the orbits of binaries and calculate their *strain* amplitudes given any range of frequency harmonics. The package also provides a way to compute the sensitivity curve for gravitational wave detectors, and consequently use the curve to calculate the signal-to-noise ratio of a collection of sources. Furthermore, the package provides tools and plotting functions for visualizing all of the results.
-
-
-- Simulating the gravitational waveform signal from a binary merger of two black holes, two neutron stars or a black hole and a neutron star and outputting the data of this signal in terms of frequency and strain amplitude.
-- Using a gravitational wave output and given a detector noise spectrum (such spectra are made publicly available by LIGO), calculating the signal-to-noise ratio (SNR) of the signal at a given distance assuming optimal alignment.
-
-
-- Calculating the horizon distance (maximum distance at which an event could be observed) for a gravitational wave model and a given detector.
-- Given the optimal-alignment SNR of an event, evaluating its detectability, the probability that the event would be detected with a SNR above the commonly used threshold of 8, if the alignment would be arbitrary. These results could then be combined with population synthesis calculations to estimate how many of the predicted mergers would be detected.
-
-
-
-
-
-
-
-The gravitational waveform simulation of Riroriro is based on a computational implementation of an earlier theoretical gravitational waveform model, using post-Newtonian expansions and an approximation called the implicit rotating source to simplify the Einstein field equations and simulate gravitational waves. 
-
-Observations of gravitational waves from binary mergers can provide unique information about their progenitors and stellar populations, especially when combined with electromagnetic observations in the field called multi-messenger astronomy. A major factor in the successful detection and analysis of gravitational wave signals is the creation of simulations of such signals which observed data can be compared to. Because of this, multiple gravitational wave models have been created over the years. In particular, the gravitational wave observatories LIGO and Virgo have created their own models to use as templates in gravitational wave searches, with the main software for this being LALSuite (LIGO Scientific Collaboration, 2018). Various research groups have created waveform models, with some examples of recent sophisticated waveform models being IMRPhenomXPHM (Pratten et al., 2020) and SEOBNRv4PHM (Ossokine et al., 2020), which are both also available in LALSuite.
-
-
-
-
-
-------------------------------
-
-### Data Description
-
-What data did you use? How was it obtained? What are its limitations?
-
-------------------------------
-
-
-### Use Cases
-
-How users will interact with your system in a way that addresses the problem area.
-
-------------------------------
-
-
-### Demo
-
-Demonstrate your software.
-
-
-------------------------------
-
-
-## Design 
-
-Describe the components and how they interact to accomplish the use cases.
-
-------------------------------
-
-
-### Project Structure
-
-Show the structure of your github repository.
-
-
-------------------------------
 
 
 ## Discussion
 
+### Software Design Decisions
 
-### Lessons learned 
-
-
-
-
-------------------------------
+Overall, this project taught me how to structure a Python project. Structuring GravitationalWaves means making decisions about how the project can best achieve its goals: simulating, analyzing, and detecting gravitational waves. In other words, the structure requires writing clean code, with clear logic and dependencies, and organizing files and folders in the file system. Writing clean code with clear logic is part of the architectural task of building out the different components of a project and their interactions. Organizing a project requires making decisions, such as which features should go into a module, how data should flow through the project, and which features and functionality should be grouped together. 
 
 
 
-### Future work
+By structuring the Python project, I learned how to divide the code base into clean, efficient modules using packages. This step requires building modules as an abstraction layer to divide the code into sections containing related data and functionality. For example, this project separates the layers that deal with plotting results from the layers that deal with miscellaneous utility functions by grouping all plotting functions in the visualization module and all utility functions in the utils module. Overall, the straightforward module importing model and packaging system provided in Python makes it notably easier to structure a Python package. 
 
 
-Focus on software engineering lessons.
 
 
-------------------------------
+#### Design Considerations:
 
+- Simplifying the number of parameter given to a gravitational wave source model to provide easier use for users.
+- Making the analysis and calculations of gravitational wave properties more specific and targeted.
+- Combining the features of the `legwork` and `riroriro` package so that users can both simulate theoretical gravitational wave forms and analyze existing sources.
+
+
+
+
+\ 
+
+
+
+### Software Extensibility
+
+
+
+Overall, GravitationalWaves is designed to help calculate binary sources of gravitational waves, whether simulated or LISA-like. This package aims to provide a way to study and better understand the detectability of such compact object binaries. Future work includes adding more functions, equations, and modules to the package to implement and analyze gravitational-wave emission, gravitational wave strain, SNR, and visualization modules, and see these implementations' effect on orbital evolution. This will require adding more modules and functions to compute higher-level linear algebra-based equations and mathematical models.
+
+
+
+
+--------------------------------------------
 
 
 
 ## References 
-
 
 

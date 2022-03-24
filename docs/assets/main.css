@@ -1,140 +1,230 @@
-@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&display=swap");
 @import url("https://use.typekit.net/bbp6pmz.css");
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap");
 
 /** CUSTOM CSS **/
 
-
 h1.title {
-    font-family: proxima-nova, sans-serif;
-    color: #292929;
-    font-size: 24pt;
-    font-weight: 800;
-    margin-top: 5px !important;
-    margin-bottom: 5px !important;
-    border-bottom: 5px solid #d9edf7ba;
-    padding: 10px 0;
-    display: inline-flex;
-    padding-right: 14pt;
+  font-family: "roboto";
+  color: #292929 !important;
+  font-size: 24pt;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+  border-bottom: 5px solid #d9edf7ba;
+  padding: 10px 0;
+  display: inline-flex;
+  padding-right: 14pt;
+  text-shadow: 0.5px 0.5px 0.5px rgb(0 0 0 / 30%) !important;
 }
 
 h3.subtitle {
   font-family: roboto, sans-serif;
-    font-size: 14pt;
-    font-weight: 400;
-    margin-top: 8px !important;
-    margin-bottom: 5px !important;
-    color: #aaaaaa;
-    letter-spacing: 1.25px;
-    text-transform: none !important;
+  font-size: 14pt;
+  font-weight: 400;
+  margin-top: 8px !important;
+  margin-bottom: 5px !important;
+  color: #aaaaaa !important;
+  letter-spacing: 1.25px;
+  text-transform: none !important;
 }
 
 .author {
   font-family: roboto, sans-serif;
-    font-size: 14pt;
-    font-weight: 400;
-    margin-top: 8px !important;
-    margin-bottom: 5px !important;
-    color: #aaaaaa;
-    letter-spacing: 1.25px;
-    text-transform: none !important;
-}
-
-div#header {
-    padding-bottom: 15px;
-}
-
-hr {
-  margin-bottom: 40px;
-}
-
-h1 {
-  font-family: proxima-nova, sans-serif;
+  font-size: 14pt;
+  font-weight: 400;
+  margin-top: 8px !important;
+  margin-bottom: 5px !important;
+  color: #aaaaaa !important;
+  letter-spacing: 1.25px;
+  text-transform: none !important;
+  text-shadow: none !important;
 }
 
 h2 {
-  font-size: 24pt;
-  font-weight: 700;
-  font-family: proxima-nova, sans-serif;
+  font-family: "roboto";
+  font-size: 18pt;
   text-transform: uppercase;
+  color: hsl(0deg 0% 25%) !important;
   letter-spacing: 1px;
-  background: #999;
-  color: transparent;
-  text-shadow: 0px 1px 3px rgb(250 250 250 / 95%);
-  -webkit-background-clip: text;
+  font-weight: 700;
+  text-shadow: 0.35px 0.35px 0.75px hsl(0deg 0% 10% / 50%) !important;
 }
 
 h3 {
   font-family: proxima-nova, sans-serif;
   font-size: 16pt;
   text-transform: uppercase;
-  color: #808080;
+  color: hsl(200deg 2% 32%) !important;
   letter-spacing: 1px;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 h4 {
   font-family: proxima-nova, sans-serif;
-  font-size: 14pt;
-  color: #313132;
-  font-weight: 600;
+  font-size: 15pt;
+  font-family: "roboto";
+  color: #999 !important;
+  font-weight: 300;
   text-transform: uppercase;
-}
-
-h5 {
-  font-weight: 700;
-  font-size: 13pt;
-  font-family: proxima-nova, sans-serif;
-  color: #1cca59;
-  display: block;
-  margin-top: 8px;
-  margin-bottom: 4px;
+  text-shadow: 0.35px 0.35px 0.35px hsl(0deg 0% 0% / 50%) !important;
 }
 
 body {
-  font-family: 'Source Serif Pro', serif;
+  font-family: "Source Serif Pro", serif;
   margin: 30.6px;
   font-size: 12pt;
 }
 
 p {
-  font-family: 'Source Serif Pro', serif;
+  font-family: "Source Serif Pro", serif;
   font-size: 12pt;
   line-height: 1.5em;
   color: #292929;
 }
 
-code {
-  font-family: 'Roboto Condensed', sans-serif;
-  box-shadow: 1px 1px 1px 0px #ddd inset, -1px -1px 1px 0px #e6e6e6 inset;
+div#header {
+  padding-bottom: 15px;
 }
 
-pre {
-  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
-  border: none;
-  border-radius: 10px;
-  font-family: "Source Code Pro";
-  font-weight: 300;
-  background: #f9f9f9;
-  color: #333;
+/*hr {
+    margin-bottom: 40px;
+}*/
+
+img {
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%) !important;
 }
 
-pre code {
-  border: none !important;
-  box-shadow: none !important;
+b,
+strong {
+  font-weight: 700;
+  color: inherit !important;
 }
 
 a {
   color: #1055cc;
 }
 
+/* PRE CODE
+-------------------------------------------------------------- */
+
+code {
+  font-family: "Inconsolata" !important;
+  background-color: rgba(0, 0, 0, 0.04) !important;
+  box-shadow: 1px 1px 1px 0px #ddd inset, -1px -1px 1px 0px #e6e6e6 inset !important;
+}
+
+pre {
+  border: none;
+  border-radius: 10px;
+  font-weight: 300;
+  background: linear-gradient(
+    -45deg,
+    #fdfdfd,
+    hsl(240deg 9% 85% / 50%),
+    #fdfdfd
+  );
+  border: solid 1px rgba(44, 44, 44, 0.4);
+  box-shadow: inset 0px 0px 3px 1px rgb(206 206 206 / 49%),
+    inset 0px 0px 2px 1px rgb(172 172 172 / 50%),
+    inset 0px 0px 2px 1px rgb(172 172 172 / 50%) !important;
+}
+
+pre:not([class]) {
+  background-color: hsl(240deg 14% 95% / 70%);
+  border: none;
+  box-shadow: inset 0px 0px 3px 1px rgb(206 206 206 / 49%),
+    inset 0px 0px 2px 1px rgb(172 172 172 / 50%),
+    inset 0px 0px 2px 1px rgb(172 172 172 / 50%) !important;
+}
+
+pre code {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: none !important;
+  /*color: white !important;*/
+  background: none !important;
+  font-family: "Inconsolata", monospace !important;
+}
+
+pre.python code {
+  color: white !important;
+}
+
+.hljs-comment {
+  color: white;
+  opacity: 0.5;
+  font-weight: 200;
+}
+
+.hljs-keyword {
+  color: hsl(300deg 100% 60%);
+  font-weight: 500;
+  text-shadow: 0.5px 0.5px 1px black !important;
+}
+
+span.hljs-pkgs {
+  font-weight: 600;
+  text-shadow: 0.25px 0.25px 1px #111111, 0.25px 0.25px 0.5px black !important;
+  color: hsl(231deg 100% 74%);
+}
+
+span.hljs-pykey {
+  text-shadow: 0.25px 0.25px 1px #111111, 0.25px 0.25px 0.5px black !important;
+  color: #a1db89;
+  font-weight: 500;
+  color: hsl(205deg 40% 60%);
+}
+
+span.hljs-logc {
+  color: hsl(300deg 75% 80%);
+  font-weight: 400;
+  text-shadow: 0.25px 0.25px 1px #111111, 0.25px 0.25px 0.5px black !important;
+  color: palevioletred;
+  color: hsl(180deg 25% 45%);
+  color: deeppink;
+  color: #ffa987;
+}
+
+.hljs-string {
+  color: hsl(103deg 54% 70%);
+}
+
+.hljs-number {
+  font-weight: 500;
+  color: hsl(180deg 100% 50%);
+  text-shadow: 0.25px 0.25px 1px #111111, 0.25px 0.25px 0.5px black !important;
+}
+
+span.hljs-gravpy {
+  text-shadow: 0.25px 0.25px 1px #111111, 0.25px 0.25px 0.5px black,
+    1px 1px 1px hsl(300deg 100% 62% / 15%) !important;
+  font-weight: 600;
+  color: #a1db89;
+}
+
+pre.python {
+  background: #303030 !important;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 20%) !important;
+  border-radius: 0;
+  border: none;
+  border-left: 5px solid black;
+  color: white;
+}
+
+/* BLOCKQUOTE
+-------------------------------------------------------------- */
+
 blockquote {
-  border-left: 5px solid #1DB954;
+  border-left: 5px solid #1db954;
   margin: 14pt 0 10pt 0;
   background: #181818;
   color: white !important;
   font-size: 11pt;
   font-family: roboto, sans-serif;
-  box-shadow: 2.5px 1px 1px hsl(0deg 0% 50% / 70%), 29px 0px 9px 16px #ffffff, -1.5px 0px 2px -1px #1cca59, inset 1.5px 0px 2px -1px #1cca59;
+  box-shadow: 2.5px 1px 1px hsl(0deg 0% 50% / 70%), 29px 0px 9px 16px #ffffff,
+    -1.5px 0px 2px -1px #1cca59, inset 1.5px 0px 2px -1px #1cca59 !important;
 }
 
 blockquote::before {
@@ -142,25 +232,27 @@ blockquote::before {
   filter: blur(3px);
   content: "";
   width: 5px;
-  height: 88px;
   position: absolute;
   margin-left: -18.75pt;
-  margin-top: -10px;
+  margin-top: -11px;
+  height: 66px;
 }
 
 blockquote::after {
   background: linear-gradient(#00b2ff, #00ffbb, #6bff6b);
   content: "";
   width: 5px;
-  height: 85.8px;
   position: absolute;
   margin-left: -18.75pt;
-  margin-top: -76px;
+  margin-top: -54px;
+  height: 64px;
 }
 
 blockquote p {
   font-size: 11pt;
   color: white !important;
+  font-family: "roboto";
+  font-weight: 300;
 }
 
 blockquote ol {
@@ -177,175 +269,114 @@ blockquote ol li::marker {
   font-weight: 200;
 }
 
+/* ROUNDEDLIST
+-------------------------------------------------------------- */
 
-.inbox {
-    padding: 5px 5px;
-    border-radius: 20px;
-    background: hsl(0deg 0% 96%);
-    box-shadow: 4px 4px 4px 0px hsl(0deg 0% 86%) inset, -4px -4px 4px 0px hsl(0deg 0% 92%) inset;
-    border: 4pt solid hsl(213deg 2% 96%);
-    margin-top: 15pt;
-    margin-bottom: 15pt;
-}
-
-.inbox li::before {
-    font-family: roboto, sans-serif !important;
-    content: counter(index);
-    width: 26px;
-    height: 26px;
-    display: inline-flex;
-    margin-right: 6px;
-    font-weight: 500;
-    margin-left: -30px !important;
-    border-radius: 50%;
-    background: #3b5998;
-    justify-content: center;
-    align-items: center;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    -webkit-tap-highlight-color: transparent;
-    box-shadow: inset 2px 2px 2px 0px hsl(0deg 0% 100% / 30%), 2px 2px 10px 0px hsl(0deg 0% 40% / 15%), 2px 2px 5px 0px hsl(0deg 0% 40% / 7%), -4px -4px 8px 0px hsl(0deg 0% 100% / 50%), -2px -2px 5px 0px hsl(0deg 0% 100% / 70%), 0.25px 0.25px 0.5px 0px hsl(0deg 0% 0% / 95%), inset 0.5px 0.5px 1px 0 hsl(0deg 0% 0% / 33%), inset -0.25px -0.25px 1.5px 0px hsl(0deg 0% 0% / 50%);
-    font-size: 14px;
-    color: #fff;
-}
-
-.inbox ol {
-    list-style: none !important;
-    counter-reset: index;
-    margin-left: 10px;
-    padding-left: 20pt;
-    margin-top: 6pt;
-    margin-bottom: 6pt;
-}
-
-.inbox li {
-    counter-increment: index;
-    margin: 0.25rem;
-    font-family: roboto, sans-serif !important;
-    font-size: 11.5pt;
-    font-weight: 400;
-    margin-bottom: 12pt;
-}
-
-
-
-
-
-
-.roundedlist {
-    padding: 12px 22px;
-    border-radius: 15pt;
-    box-shadow: 0 1px 3px hsl(0deg 0% 5% / 12%), 0 1px 2px hsl(0deg 0% 5% / 24%), inset 0 0 8px hsl(0deg 0% 78%), 0 1px 0 hsl(0deg 0% 72%), 0 4px 0 hsl(0deg 0% 78%), 0 10px 30px hsl(0deg 0% 92%);
-    background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0.27, hsl(206deg 9% 94%)), color-stop(0.64, hsl(206deg 9% 94%)), color-stop(0.95, hsl(204deg 11% 98%)), color-stop(1, hsl(0deg 0% 84%)));
-}
-
-
-.roundedlist ol {
-    list-style: none !important;
-    counter-reset: index;
-    margin-left: 10px;
-    padding-left: 12px;
-}
-
-.roundedlist li {
-  counter-increment: index;
-  margin: 0.25rem;
-  font-family: roboto, sans-serif !important;
-  font-size: 11.5pt;
-  font-weight: 400;
-  margin-bottom: 12pt;
-}
-
-ol.roundedlist {
-  padding-left: 14pt;
-}
-
-b, strong {
-  font-weight: 700;
-  font-size: 11pt;
-  font-family: proxima-nova, sans-serif;
-  color: #1cca59;
-}
-
-.roundedlist li::before {
-    font-family: roboto, sans-serif !important;
-    content: counter(index);
-    width: 24px;
-    height: 24px;
-    display: inline-flex;
-    margin-right: 6px;
-    font-weight: 800;
-    margin-left: -30px !important;
-    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.3));
-    border-radius: 100%;
-    background: #eff0f2;
-    border-top: 1px solid #f5f5f5;
-    box-shadow: inset 0 0 25px #e8e8e8, 0 1px 0 #c3c3c3, 0 2px 0 #c9c9c9, 0 2px 3px #333;
-    justify-content: center;
-    align-items: center;
-    text-shadow: 0px 1px 0px #f5f5f5;
-    color: #aaa;
-}
-
-.roundedlist ul li::before {
-  content: none;
-}
-
-.roundedlist ul li {
-  counter-increment: none !important;
-}
-
-.roundedlist ol ol li {
-  font-family: roboto, sans-serif;
-  font-weight: 300 !important;
-  padding-left: 24pt;
-  font-size: 11pt;
-  margin-bottom: 6pt !important;
-}
-
-.roundedlist ol ol li::before {
+.roundedlist2 {
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0%, hsl(0deg 0% 98%)),
+    color-stop(95%, hsl(0deg 0% 100%)),
+    color-stop(100%, hsl(0deg 0% 96%))
+  );
   font-size: 10pt;
-  content: counter(index, lower-alpha) !important;
-  width: 14pt;
-  text-align: center;
-  height: 14pt;
-  align-content: center;
-  line-height: 14pt;
-  font-weight: 500;
+  padding: 6pt 12pt 0.5pt 10pt;
+  border-radius: 6pt;
+  box-shadow: rgb(0 0 0 / 15%) 0.5px 0.5px 2px, 0px 1px 0.5px rgb(0 0 0 / 12%) !important;
+  width: 98%;
+  margin: 10pt auto 10pt auto;
 }
+
+/* METHODS 1.
+-------------------------------------------------------------- */
 
 .methods1 {
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,hsl(0deg 0% 96%)), color-stop(95%,hsl(0deg 0% 94%)), color-stop(100%,hsl(0deg 0% 91%)));
-    font-size: 10pt;
-    padding: 12pt;
-    border-radius: 6pt;
-    margin-bottom: 12pt;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0%, hsl(0deg 0% 96%)),
+    color-stop(95%, hsl(0deg 0% 94%)),
+    color-stop(100%, hsl(0deg 0% 91%))
+  );
+  font-size: 10pt;
+  padding: 12pt;
+  border-radius: 6pt;
+  margin-bottom: 12pt;
+  box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px, 0 1px 3px rgb(0 0 0 / 12%),
+    0 1px 2px rgb(0 0 0 / 24%) !important;
+  /* box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);*/
 }
 
-.methods2 {
-    background: #eeeeee;
-    padding: 6pt;
-    box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9, 7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001, inset 0px 0px 0px 0px #fff9, inset 0px 0px 0px 0px #0001, inset 0px 0px 0px 0px #fff9, inset 0px 0px 0px 0px #0001;
-    border-radius: 4pt;
+.methods1 em {
+  font-style: normal;
+  font-weight: 500;
+  font-family: "roboto";
+  text-transform: uppercase;
+  font-size: 9pt;
+  letter-spacing: 0.7px;
+  text-shadow: 0.25px 0.25px 0.7px hsl(0deg 0% 0% / 60%) !important;
 }
 
+.methods1 strong {
+  color: hsl(231deg 36% 30%);
+  font-family: "proxima-nova";
+  font-family: "roboto";
+  font-size: 8.25pt;
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: 0.4px;
+  text-shadow: 0.2px 0.2px 0.25px hsl(0deg 0% 0% / 50%) !important;
+}
 
+.methods1 li code {
+  font-family: "Inconsolata" !important;
+  background: #f4f4f5;
+  font-weight: 400;
+  text-shadow: 0.25px 0.25px 0.25px hsl(232deg 40% 40% / 50%) !important;
+  box-shadow: 1px 1px 1px 0px #ddd inset, -1px -1px 1px 0px #e6e6e6 inset !important;
+}
+
+.methods1 p {
+  font-family: "Source Serif Pro", serif;
+  font-size: 10.5pt;
+  line-height: 14.5pt;
+}
+
+/* TABLE
+-------------------------------------------------------------- */
+
+table.table {
+  margin-bottom: 15pt;
+  margin-top: 15pt;
+}
+
+.table td,
+.table th {
+  background-color: transparent !important;
+}
 
 table.table.table-hover.table-striped {
-  box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px, rgb(0 0 0 / 30%) 0px 1px 3px -1px;
+  box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px,
+    rgb(0 0 0 / 30%) 0px 1px 3px -1px !important;
 }
 
 td strong {
-    color: black !important;
-    font-size: inherit !important;
+  /*color: black !important;*/
+  font-size: inherit !important;
 }
 
 .small.table.table.table-hover.table-striped {
-  box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9, 7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001, inset 0px 0px 0px 0px #fff9, inset 0px 0px 0px 0px #0001, inset 0px 0px 0px 0px #fff9, inset 0px 0px 0px 0px #0001;
+  box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9,
+    7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001, inset 0px 0px 0px 0px #fff9,
+    inset 0px 0px 0px 0px #0001, inset 0px 0px 0px 0px #fff9,
+    inset 0px 0px 0px 0px #0001 !important;
 }
 
-img {
-  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
-}
+/* NAVBAR
+-------------------------------------------------------------- */
 
 .navbar-brand {
   font-family: source-sans-pro, sans-serif;
@@ -358,57 +389,319 @@ img {
 
 .navbar-default {
   background-color: white;
-  box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 11%);
+  box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 11%) !important;
 }
 
+/* The list style
+-------------------------------------------------------------- */
 
-.tocify-header {
-  padding: 5pt 10pt 5pt 10pt !important;
-    
+.directory-list ul {
+  margin-left: 10px;
+  padding-left: 20px;
+  border-left: 1px dashed #ddd;
 }
 
-.tocify ul, .tocify li {
-    line-height: 16px;
-    margin: 0;
-    border: none;
+.directory-list li {
+  list-style: none;
+  font-weight: 300;
+  color: #111111;
+  font-family: "roboto";
+  font-size: 9.25pt;
+  text-transform: lowercase;
+  letter-spacing: 0.4px;
 }
 
-
-#TOC {
-    margin: 25px 0px 20px 0px;
-    box-shadow: inset -7px -7px 20px 0px hsl(0deg 0% 100% / 60%), inset -4px -4px 5px 0px hsl(0deg 0% 100% / 60%), inset 3px 3px 8px 0px hsl(0deg 0% 15% / 13%), 2px 2px 5px 0px hsl(0deg 0% 0% / 7%), 0px 0px 0px 0px hsl(0deg 0% 100% / 60%), 0px 0px 0px 0px hsl(0deg 0% 0% / 7%), 0px 0px 0px 0px hsl(0deg 0% 100% / 60%), 0px 0px 0px 0px hsl(0deg 0% 0% / 7%);
-    border: 2px solid hsl(0deg 0% 94%);
-    padding-top: 6pt;
-    padding-bottom: 6pt;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,hsl(0deg 0% 98%)), color-stop(95%,hsl(0deg 0% 96%)), color-stop(100%,hsl(0deg 0% 93%)));
+.directory-list a {
+  border-bottom: 1px solid transparent;
+  color: #111111 !important;
+  text-decoration: none;
+  transition: all 0.2s ease;
 }
 
-
-.treeview {
-    line-height: 28px;
-    font-weight: 500;
-    font-size: 15px;
-    width: 100%;
-    float: left;
+.directory-list a:hover {
+  border-color: #eee;
+  color: #000;
 }
 
-
-.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
-    color: #09bcf7 !important;
-    background-color: #337ab7;
-    border-color: #337ab7;
-    font-weight: 600;
+.directory-list .folder,
+.directory-list .folder > a {
+  color: #111111 !important;
+  font-weight: 500;
 }
 
+/* The icons
+-------------------------------------------------------------- */
 
-li.tocify-item.list-group-item {
-    background: transparent;
-    padding: 3pt;
-    text-indent: 0;
-    font-size: 9pt !important;
-    letter-spacing: 1.35px;
-    text-transform: uppercase;
-    font-family: 'roboto';
-    color: #535556;
+.directory-list li:before {
+  margin-right: 10px;
+  content: "";
+  height: 20px;
+  vertical-align: middle;
+  width: 20px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path fill='lightgrey' d='M85.714,42.857V87.5c0,1.487-0.521,2.752-1.562,3.794c-1.042,1.041-2.308,1.562-3.795,1.562H19.643 c-1.488,0-2.753-0.521-3.794-1.562c-1.042-1.042-1.562-2.307-1.562-3.794v-75c0-1.487,0.521-2.752,1.562-3.794 c1.041-1.041,2.306-1.562,3.794-1.562H50V37.5c0,1.488,0.521,2.753,1.562,3.795s2.307,1.562,3.795,1.562H85.714z M85.546,35.714 H57.143V7.311c3.05,0.558,5.505,1.767,7.366,3.627l17.41,17.411C83.78,30.209,84.989,32.665,85.546,35.714z' /></svg>");
+  background-position: center 0;
+  background-size: 80% auto;
+  filter: drop-shadow(0.35px 0.35px 0.2px hsl(0deg 0% 0% / 40%));
+}
+
+.directory-list li.folder:before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path fill='lightblue' d='M96.429,37.5v39.286c0,3.423-1.228,6.361-3.684,8.817c-2.455,2.455-5.395,3.683-8.816,3.683H16.071 c-3.423,0-6.362-1.228-8.817-3.683c-2.456-2.456-3.683-5.395-3.683-8.817V23.214c0-3.422,1.228-6.362,3.683-8.817 c2.455-2.456,5.394-3.683,8.817-3.683h17.857c3.422,0,6.362,1.228,8.817,3.683c2.455,2.455,3.683,5.395,3.683,8.817V25h37.5 c3.422,0,6.361,1.228,8.816,3.683C95.201,31.138,96.429,34.078,96.429,37.5z' /></svg>");
+  background-position: center top;
+  background-size: 75% auto;
+}
+
+li.folder::before {
+  background-position: center top;
+  margin-right: 10px;
+  content: "";
+  height: 20px;
+  vertical-align: middle;
+  width: 20px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path fill='lightblue' d='M96.429,37.5v39.286c0,3.423-1.228,6.361-3.684,8.817c-2.455,2.455-5.395,3.683-8.816,3.683H16.071 c-3.423,0-6.362-1.228-8.817-3.683c-2.456-2.456-3.683-5.395-3.683-8.817V23.214c0-3.422,1.228-6.362,3.683-8.817 c2.455-2.456,5.394-3.683,8.817-3.683h17.857c3.422,0,6.362,1.228,8.817,3.683c2.455,2.455,3.683,5.395,3.683,8.817V25h37.5 c3.422,0,6.361,1.228,8.816,3.683C95.201,31.138,96.429,34.078,96.429,37.5z' /></svg>");
+  filter: drop-shadow(0.35px 0.35px 0.35px hsl(0deg 0% 0% / 75%));
+  background-size: 85% auto !important;
+}
+
+li.folder::marker {
+  content: none;
+}
+
+span.infolder {
+  opacity: 0.5;
+  font-weight: 200;
+  font-family: "roboto";
+  font-size: 8.75pt;
+  text-transform: lowercase;
+  letter-spacing: 0.4px;
+  color: #000000;
+}
+
+li.folder a {
+  color: #111111;
+  font-family: "roboto";
+  font-size: 9.25pt;
+  font-weight: 500;
+  text-transform: lowercase;
+  letter-spacing: 0.4px;
+  margin-left: -2pt;
+}
+
+@media print {
+  blockquote {
+    border-left: 5px solid #1db954 !important;
+    background: #181818 !important;
+    color: white !important;
+    box-shadow: 2.5px 1px 1px hsl(0deg 0% 50% / 70%), 29px 0px 9px 16px #ffffff,
+      -1.5px 0px 2px -1px #1cca59, inset 1.5px 0px 2px -1px #1cca59 !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  blockquote::before {
+    background: linear-gradient(#00b2ff, #00ffbb, #6bff6b) !important;
+    filter: blur(3px) !important;
+    content: "";
+    -webkit-print-color-adjust: exact;
+  }
+
+  blockquote::after {
+    background: linear-gradient(#00b2ff, #00ffbb, #6bff6b) !important;
+    content: "";
+    -webkit-print-color-adjust: exact;
+  }
+
+  blockquote a {
+    color: white !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  blockquote ol li::marker {
+    color: #aaaaaa !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .roundedlist2 {
+    background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      color-stop(0%, hsl(0deg 0% 98%)),
+      color-stop(95%, hsl(0deg 0% 100%)),
+      color-stop(100%, hsl(0deg 0% 96%))
+    ) !important;
+    box-shadow: rgb(0 0 0 / 15%) 0.5px 0.5px 2px, 0px 1px 0.5px rgb(0 0 0 / 12%) !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .methods1 {
+    background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      color-stop(0%, hsl(0deg 0% 96%)),
+      color-stop(95%, hsl(0deg 0% 94%)),
+      color-stop(100%, hsl(0deg 0% 91%))
+    ) !important;
+    box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px, 0 1px 3px rgb(0 0 0 / 12%),
+      0 1px 2px rgb(0 0 0 / 24%) !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .methods1 em {
+    text-shadow: 0.25px 0.25px 0.7px hsl(0deg 0% 0% / 60%) !important;
+  }
+
+  .methods1 strong {
+    color: hsl(231deg 36% 30%) !important;
+    text-shadow: 0.2px 0.2px 0.25px hsl(0deg 0% 0% / 50%) !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .methods1 li code {
+    background: #f4f4f5 !important;
+    text-shadow: 0.25px 0.25px 0.25px hsl(232deg 40% 40% / 50%) !important;
+    box-shadow: 1px 1px 1px 0px #ddd inset, -1px -1px 1px 0px #e6e6e6 inset !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  table.table.table-hover.table-striped {
+    box-shadow: rgb(50 50 93 / 25%) 0px 2px 5px -1px,
+      rgb(0 0 0 / 30%) 0px 1px 3px -1px !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  td strong {
+    /*color: black !important;*/
+    -webkit-print-color-adjust: exact;
+  }
+
+  .small.table.table.table-hover.table-striped {
+    box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9,
+      7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001, inset 0px 0px 0px 0px #fff9,
+      inset 0px 0px 0px 0px #0001, inset 0px 0px 0px 0px #fff9,
+      inset 0px 0px 0px 0px #0001 !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  code {
+    box-shadow: 1px 1px 1px 0px #ddd inset, -1px -1px 1px 0px #e6e6e6 inset !important;
+    background-color: rgba(0, 0, 0, 0.04) !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  pre {
+    background: linear-gradient(
+      -45deg,
+      #fdfdfd,
+      hsl(240deg 9% 85% / 50%),
+      #fdfdfd
+    ) !important;
+    border: solid 1px rgba(44, 44, 44, 0.4) !important;
+    box-shadow: inset 0px 0px 3px 1px rgb(206 206 206 / 49%),
+      inset 0px 0px 2px 1px rgb(172 172 172 / 50%),
+      inset 0px 0px 2px 1px rgb(172 172 172 / 50%) !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  pre:not([class]) {
+    background-color: hsl(240deg 14% 95% / 70%) !important;
+    box-shadow: inset 0px 0px 3px 1px rgb(206 206 206 / 49%),
+      inset 0px 0px 2px 1px rgb(172 172 172 / 50%),
+      inset 0px 0px 2px 1px rgb(172 172 172 / 50%) !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .hljs-comment {
+    color: white !important;
+    opacity: 0.5 !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .hljs-keyword {
+    color: hsl(300deg 100% 60%) !important;
+    text-shadow: 0.5px 0.5px 1px black !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  span.hljs-pkgs {
+    text-shadow: 0.25px 0.25px 1px #111111, 0.25px 0.25px 0.5px black !important;
+    color: hsl(231deg 100% 74%) !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  span.hljs-pykey {
+    text-shadow: 0.25px 0.25px 1px #111111, 0.25px 0.25px 0.5px black !important;
+    color: #a1db89;
+    color: hsl(205deg 40% 60%) !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  span.hljs-logc {
+    text-shadow: 0.25px 0.25px 1px #111111, 0.25px 0.25px 0.5px black !important;
+    color: #ffa987 !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .hljs-string {
+    color: hsl(103deg 54% 70%) !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .hljs-number {
+    color: hsl(180deg 100% 50%) !important;
+    text-shadow: 0.25px 0.25px 1px #111111, 0.25px 0.25px 0.5px black !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  span.hljs-gravpy {
+    text-shadow: 0.25px 0.25px 1px #111111, 0.25px 0.25px 0.5px black,
+      1px 1px 1px hsl(300deg 100% 62% / 15%) !important;
+    color: #a1db89 !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  pre.python {
+    background: #303030 !important;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 20%) !important;
+    border-left: 5px solid black !important;
+    color: white !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .table td,
+  .table th {
+    background-color: transparent !important;
+  }
+
+  .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #f9f9f9 !important;
+  }
+
+  li.folder::before {
+    content: url("data:image/svg+xml;utf8,<svg xmlns= 'http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path fill='lightblue' d='M96.429,37.5v39.286c0,3.423-1.228,6.361-3.684,8.817c-2.455,2.455-5.395,3.683-8.816,3.683H16.071 c-3.423,0-6.362-1.228-8.817-3.683c-2.456-2.456-3.683-5.395-3.683-8.817V23.214c0-3.422,1.228-6.362,3.683-8.817 c2.455-2.456,5.394-3.683,8.817-3.683h17.857c3.422,0,6.362,1.228,8.817,3.683c2.455,2.455,3.683,5.395,3.683,8.817V25h37.5 c3.422,0,6.361,1.228,8.816,3.683C95.201,31.138,96.429,34.078,96.429,37.5z' /></svg>") !important;
+    filter: drop-shadow(0.35px 0.35px 0.35px hsl(0deg 0% 0% / 75%)) !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .directory-list li:before {
+    content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path fill='lightgrey' d='M85.714,42.857V87.5c0,1.487-0.521,2.752-1.562,3.794c-1.042,1.041-2.308,1.562-3.795,1.562H19.643 c-1.488,0-2.753-0.521-3.794-1.562c-1.042-1.042-1.562-2.307-1.562-3.794v-75c0-1.487,0.521-2.752,1.562-3.794 c1.041-1.041,2.306-1.562,3.794-1.562H50V37.5c0,1.488,0.521,2.753,1.562,3.795s2.307,1.562,3.795,1.562H85.714z M85.546,35.714 H57.143V7.311c3.05,0.558,5.505,1.767,7.366,3.627l17.41,17.411C83.78,30.209,84.989,32.665,85.546,35.714z' /></svg>");
+    background-size: 70% auto !important;
+    height: 20px !important;
+    width: 16px !important;
+    filter: drop-shadow(0.35px 0.35px 0.35px hsl(0deg 0% 0% / 75%)) !important;
+    -webkit-print-color-adjust: exact;
+  }
+
+  body {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  hr {
+    margin-bottom: 5px !important;
+  }
 }
 

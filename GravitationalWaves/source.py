@@ -37,7 +37,7 @@ class Source():
             f_orb (`float/array`): Orbital frequency (either a or f_orb must be supplied).
             a (`float/array`): Semi-major axis.
             position (`SkyCoord/array`, optional): Sky position of source. Defaults to None.
-            polarisation (`float/array`, optional): GW polarisation angle of source. Defaults to None.
+            polarisation (`float/array`, optional): GW popularization angle of source. Defaults to None.
             inclination (`float/array`, optional): Inclination of source. Defaults to None.
             weights (`float/array`, optional): Statistic weights for each sample. Defaults to None.
             gw_lum_tol (`float`, optional): Allowed error on GW luminosity. Defaults to 0.05.
